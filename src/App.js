@@ -5,12 +5,12 @@ import './App.css';
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
 
-import Home from "./componentsHome/home.component";
+import Home from "./components/home.component";
 
 
 
 // import components chamath
-import InsertProduct from "./components/stock/form/InsertProduct.component";
+//import InsertProduct from "./components/stock/form/InsertProduct.component";
 // end import
 
 
@@ -26,7 +26,7 @@ function App() {
       @author chamath */}
 
       <Router>
-        <Route path="/a" component={InsertProduct}/>
+        
       </Router>
       {/* end chamath */}
 
