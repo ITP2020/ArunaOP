@@ -5,6 +5,8 @@ import './App.css';
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
 
+import Home from "./componentsHome/home.component";
+
 
 
 // import components chamath
@@ -17,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <LeftSideBar />
+      <Home/>
       
 
       {/* Routes

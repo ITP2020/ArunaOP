@@ -28,7 +28,7 @@ $left-sidebar-width: 15em;
     padding: 0;
 
     li {
-      margin-bottom: 1em;
+      margin-bottom: 0em;
       
       a {
         font-size: 11pt;
@@ -39,9 +39,9 @@ $left-sidebar-width: 15em;
       }
     }
     button{
-      padding: 10pt;
-      margin-bottom: 50pt;
-      margin-left: 20pt;
+      padding: 0pt;
+      margin-bottom: 0pt;
+      margin-left: 0pt;
     }
   }
 }
@@ -52,4 +52,33 @@ $left-sidebar-width: 15em;
 
 .LeftSideBar__LeftSection--hide {
   transform: translateX(-$left-sidebar-width);
+}
+.drawer{
+  width : 200px;
+  height: 50px;
+  padding : 0;
+  margin-right : 10px;
+  font-size: medium;
+
+}
+.drawer:hover{
+  transition-duration: 1s;
+  border-color: red;
+}
+.logout{
+  width : 150px;
+  height: 40px;
+  padding : 0;
+  border-radius: 3px;
+  border-color: red;
+  background-color: red;
+  font-size: medium;
+  color : white
+}
+.logout:hover{
+  border-color: red;
+  background-color: transparent;
+  color: red;
+  transition-duration: 0.5s;
+
 }

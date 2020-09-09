@@ -1,0 +1,36 @@
+.root{
+
+    Width: '345px';
+    Height : '450px';
+}
+
+.root:hover{
+    background-color: blue;
+}
+
+.edit{
+    width : 70px;
+    height: 30px;
+    background-image: linear-gradient(to right, #f71008 0%, #e0817d 50%, #f5ecec 100%);
+    border-radius: 5px;
+    border-color: red;
+
+}
+.edit.link{
+    color : white;
+}
+.delete{
+    width : 70px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: red;
+
+}
+.delete:hover{
+    background-color:red;
+    border-color: red;
+    color: white;
+    transition-duration: 0.5s;
+}
+
