@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   root1: {
     flexGrow: 1,
     padding : '50px',
-    backgroundColor: '#f409090d',
+    
     
   },
   paper: {

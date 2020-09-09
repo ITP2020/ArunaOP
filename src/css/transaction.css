@@ -1,0 +1,25 @@
+.tbtransaction{
+
+    width : 100%;
+    background-color: #f3f3f3;
+    border-radius: '3px';
+    
+}
+.tbhead{
+    width : 2%;
+    padding : 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 3px;
+    align-items: center;
+    background-color: #eb2020ed;
+    color: white;
+}
+
+td{
+    width : 2%;
+    padding : 2px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}

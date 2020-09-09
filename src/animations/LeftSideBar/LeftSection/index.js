@@ -7,6 +7,7 @@ import { Menu } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 //import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+//import {Link} from 'react-router-dom';
 
 
 const LeftSection = () => {
@@ -17,9 +18,15 @@ const LeftSection = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const elec = (event) => {
+    setAnchorEl(null);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  
 
   return (
     <center>
@@ -165,9 +172,9 @@ const LeftSection = () => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Add</MenuItem>
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+            <MenuItem><a href = "/electricity" className = "homeLink">Electricity Expenses</a></MenuItem>
+        <MenuItem><a href = "/water" className = "homeLink">Water Expenses</a></MenuItem>
+        <MenuItem><a href = "/transaction" className = "homeLink">Money Transactions</a></MenuItem>
 
           </Menu>
         </li>

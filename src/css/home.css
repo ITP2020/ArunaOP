@@ -1,0 +1,137 @@
+.root{
+
+    Width: '345px';
+    Height : '450px';
+}
+
+.root:hover{
+    background-color:#ed0a0a30;
+}
+
+.edit{
+    width : 70px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 5px;
+    border-color:#eb2020ed;
+    
+
+}
+.edit:hover{
+    background-color:#eb2020ed;
+    border-color: #eb2020ed;
+    transition-duration: 0.5s;
+}
+.link{
+    color : black;
+}
+.link:hover{
+    color : white;
+    text-decoration: none;
+    
+}
+
+.delete{
+    width : 70px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: #eb2020ed;
+    
+
+}
+.delete:hover{
+    background-color:#eb2020ed;
+    border-color: #eb2020ed;
+    color: white;
+    transition-duration: 0.5s;
+}
+.formcard{
+    background-color:#ff000033 ;
+}
+.formdiv{
+    border : 2px solid;
+    border-color: #ff000033;
+    
+    
+    margin: 15px;
+}
+.form-control{
+    border : 2px solid;
+    border-color: #ff000033;
+}
+.btn-bill{
+    align-self: center;
+    margin-left : 40%;
+    width : 170px;
+    height : 50px;
+    padding : 3px;
+    background-color: #eb2020ed;
+    color : white;
+    border-color: #eb2020ed;
+    border-radius: 5px;
+}
+.btn-bill:hover{
+    background-color:transparent;
+    border-color: #eb2020ed;
+    color: #eb2020ed;
+    transition-duration: 0.5s;
+}
+.billheading{
+    text-align: center;
+}
+.add{
+    width : 200px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: #eb2020ed;
+    background-color:#eb2020ed;
+    margin-top : 10px;
+   margin-left: 20px;
+    color : white;
+    
+    
+
+}
+.add:hover{
+    background-color:transparent;
+    border-color: #eb2020ed;
+    transition-duration: 0.5s;
+    color : black;
+}
+.linkaddE{
+    color : white;
+}
+.linkaddE:hover{
+    color : #eb2020ed;
+    text-decoration: none;
+}
+.topic{
+    width: 100%;
+    
+    border-radius: '3px';
+}
+.topic,th{
+    padding: 20px;
+    width : 95%;
+}
+.list{
+    width : 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+.addcard{
+    width : 80%;
+    margin-left: 10%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+    
+}
+
+
+
+

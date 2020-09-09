@@ -1,0 +1,45 @@
+body{
+    background-color: #dc354517;
+  }
+  .table-fixed{
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: '3px';
+
+    tbody{
+      height:320px;
+      overflow-y:auto;
+      width: 100%;
+      }
+      th,td{
+          width : 25%;
+        
+        
+      }
+      
+      thead{
+          background-color: #eb2020ed;
+          color : white;
+          
+      }
+      
+      
+    thead,tbody,tr,td,th{
+      display:block;
+    }
+    tbody{
+      td{
+        float:left;
+      }
+    }
+    thead {
+      tr{
+        th{
+        
+          float:left;
+         background-color: #eb2020ed;
+         border-color:#eb2020ed;
+        }
+      }
+    }
+  }

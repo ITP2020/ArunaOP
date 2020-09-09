@@ -3,6 +3,7 @@ import BurgerButton  from '../BurgerButton';
 import { LeftSideBarContext } from '../index';
 import './style.scss';
 
+
 const TopSection = () => {
   const { setIsShowSidebar } = useContext(LeftSideBarContext);
   return (
@@ -10,7 +11,8 @@ const TopSection = () => {
       <BurgerButton
         onClick={() => setIsShowSidebar(true)}
       />
-      <h2>Aruna Offset Printers</h2>
+      <h2 className = "company">Aruna Offset Printers</h2>
+      
     </div>
   );
 };
