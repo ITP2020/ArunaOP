@@ -11,7 +11,7 @@ const electricityExpensesSchema = new Schema({
         timestamps : true,
     
 });
-//utilityBillSchema.index({ year: 1, month: 1 }, { unique: true })
+
 
 const Electricity = mongoose.model('Electricity', electricityExpensesSchema);
 
