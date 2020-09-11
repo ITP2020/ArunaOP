@@ -45,6 +45,7 @@ import OrderManagement from "./components/order-management.component";
 
 
 
+
 // import components chamath
 //import InsertProduct from "./components/stock/form/InsertProduct.component";
 // end import
@@ -55,6 +56,8 @@ function App() {
   return (
     <Router>
     <div className="App">
+
+      
       <LeftSideBar />
       <Home/>
       
@@ -93,6 +96,8 @@ function App() {
       <Route path = "/leavemanagement" component = {LeaveManagement}/>
       <Route path = "/employeemanagement" component = {EmployeeManagement}/>
       <Route path = "/ordermanagement" component = {OrderManagement}/>
+
+      
 
       </div>
       </Router>

@@ -1,13 +1,7 @@
 const router = require('express').Router();
 let Order = require('../models/order.model');
 
-router.route('/').get((req,res) => {
-    Order.find()
-        .then(order => res.json(order))
-        .catch(err => res.status(400).json('Error : ' +err));
-});
-
-router.route('/add').post((req,res) => {
+router.post('/add', async(req, res) => {
     const orderNumber = Number(req.body.orderNumber);
     const customerName = req.body.customerName;
     const design = req.body.design;
@@ -18,23 +12,27 @@ router.route('/add').post((req,res) => {
     const specialNotes = req.body.specialNotes;
     const orderStatus = req.body.orderSatatus;
 
+    const order = {
+        orderNumber: orderNumber,
+        customerName: customerName,
+        design: design,
+        length: length,
+        height: height,
+        quantity: quantity,
+        printingMaterials: printingMaterials,
+        specialNotes: specialNotes,
+        orderStatus: orderStatus
+    }
 
-    const newOrder = new Order({
-        orderNumber,
-        customerName,
-        design,
-        length,
-        height,
-        quantity,
-        printingMaterials,
-        specialNotes,
-        orderStatus,
-
-    });
-    newOrder.save()
+    const newOrder = new Order(order);
+    await newOrder.save()
         .then(() => res.json('New Order added!'))
-        .catch(err => res.status(400).json('Error : ' +err));
-});
+        .catch((error) => {
+            console.log(error.message)
+        });
+}) 
+
+
 router.route('/:id').get((req,res) => {
     Order.findById(req.params.id)
         .then(order => res.json(order))
@@ -67,4 +65,12 @@ router.route('/update/:id').post((req,res) => {
 
         .catch(err => res.status(400).json('Error : ' +err));
 });
+
+router.route('/').get((req,res) => {
+    Order.find()
+        .then(order => res.json(order))
+        .catch(err => res.status(400).json('Error : ' +err));
+});
+
+
 module.exports = router;

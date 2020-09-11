@@ -31,7 +31,7 @@ export default class OrderList extends Component {
 
 
     componentDidMount() {
-        axios.get('http://localhost:5000/order/')
+        axios.get('http://localhost:5000/order')
         .then(response => {
             this.setState({ order : response.data })
         })

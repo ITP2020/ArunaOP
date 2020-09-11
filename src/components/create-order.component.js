@@ -89,7 +89,7 @@ export default class CreateOrder extends Component {
             });
         }
 
-        onSubmit(e){
+        async onSubmit(e){
             e.preventDefault();
 
             const order = {
@@ -101,13 +101,15 @@ export default class CreateOrder extends Component {
                 quantity : this.state.quantity,
                 printingMaterials : this.state.printingMaterials,
                 specialNotes : this.state.specialNotes,
-                orderStatus : this.state.orderStatus,
+                orderSatatus : this.state.orderStatus,
             }
 
             console.log(order);
 
-            axios.post('http://localhost:5000/order/add', order)
-            .then(res => console.log(res.data));
+            await axios.post('http://localhost:5000/order/add', order)
+            .then(res => console.log(res.data)).catch((error) => {
+                console.log(error.message)
+            })
 
             window.location = '/order';
         }

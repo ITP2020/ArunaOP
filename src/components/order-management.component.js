@@ -6,7 +6,7 @@ import { CardContent } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 //import './home.css'
 
-export default class FinanceManagement extends Component {
+export default class OrderManagement extends Component {
 
     
     
