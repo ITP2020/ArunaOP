@@ -18,6 +18,31 @@ import CreateTransaction from "./components/create-transaction.component";
 import EditTransaction from "./components/edit-transaction.component";
 import TransactionExpensesList from "./components/transaction-list.component";
 
+import LeaveList from "./components/leave-list.component";
+import EditLeave from "./components/edit-leave.component";
+import CreateLeave from "./components/create-leave.component";
+
+import CreateSalary from "./components/create-salary.component";
+import SalaryList from "./components/salary-list.component";
+import EditSalary from './components/edit-salary.component';
+
+import EmployeeList from "./components/employee-list.component";
+import EditEmployee from "./components/edit-employee.component";
+import CreateEmployee from "./components/add-employee.component";
+
+import OrderList from "./components/order-list.component";
+import EditOrder from "./components/edit-order.component";
+import CreateOrder from "./components/create-order.component";
+
+
+
+import FinanceManagement from "./components/finance-management.component";
+import LeaveManagement from "./components/leave-management.component";
+import EmployeeManagement from "./components/employee-management.component";
+import OrderManagement from "./components/order-management.component";
+
+
+
 
 
 // import components chamath
@@ -47,6 +72,27 @@ function App() {
       <Route path = "/transaction" exact component = {TransactionExpensesList}/>
       <Route path = "/edittransaction/:id" component = {EditTransaction}/>
       <Route path = "/createtransaction" component = {CreateTransaction}/>
+
+      <Route path="/leaves" exact component={LeaveList} />
+      <Route path="/edit/:id" component={EditLeave} />
+      <Route path="/create" component={CreateLeave} />
+    
+      <Route path="/createSalary" component={CreateSalary} />
+      <Route path="/salary"exact component={SalaryList} />
+      <Route path="/update/:id" component={EditSalary} />
+
+      <Route path = "/employee" exact component = {EmployeeList}/>
+      <Route path = "/editemployee/:id" component = {EditEmployee}/>
+      <Route path = "/createEmployee" component = {CreateEmployee}/>
+
+      <Route path = "/order" exact component = {OrderList}/>
+      <Route path = "/editorder/:id" component = {EditOrder}/>
+      <Route path = "/createorder" component = {CreateOrder}/>
+
+      <Route path = "/financemanagement" component = {FinanceManagement}/>
+      <Route path = "/leavemanagement" component = {LeaveManagement}/>
+      <Route path = "/employeemanagement" component = {EmployeeManagement}/>
+      <Route path = "/ordermanagement" component = {OrderManagement}/>
 
       </div>
       </Router>

@@ -66,13 +66,13 @@ $left-sidebar-width: 15em;
   border-color: red;
 }
 .logout{
-  width : 150px;
-  height: 40px;
+  width : 100px;
+  height: 25px;
   padding : 0;
-  border-radius: 3px;
+  border-radius: 10px;
   border-color: red;
   background-color: red;
-  font-size: medium;
+  font-size: 14px;
   color : white
 }
 .logout:hover{
@@ -89,5 +89,15 @@ $left-sidebar-width: 15em;
   text-decoration: none;
   color :black;
 }
-
+.menulist{
+  width : 100%;
+  height : 60px;
+  font-size: 14px;
+  background-color: transparent;
+  border : none;
+  
+}
+.menulist,a{
+  color:black;
+}
 

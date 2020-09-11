@@ -22,10 +22,21 @@ connection.once('open', () => {
 const electricityExpensesRouter = require('./routes/electricityExpenses');
 const waterExpensesRouter = require('./routes/waterExpenses');
 const transactionExpensesRouter = require('./routes/transactionExpenses');
+const leaveRouter = require('./routes/leave');
+const salaryRouter = require('./routes/salary');
+const employeeRouter = require('./routes/employee');
+const orderRouter = require('./routes/order');
+
+
 
 app.use('/electricityExpenses', electricityExpensesRouter);
 app.use('/waterExpenses', waterExpensesRouter);
 app.use('/transactionExpenses', transactionExpensesRouter);
+app.use('/leave' , leaveRouter);
+app.use('/salary' , salaryRouter);
+app.use('/employee', employeeRouter);
+app.use('/order', orderRouter);
+
 
 app.listen(port, () => {
     console.log(`Server is running on port:-${port}`);
