@@ -4,11 +4,15 @@ import { LeftSideBarContext } from '../index';
 import './style.scss';
 import Menu from '@material-ui/core/Menu'
 
+import {Link} from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Dropdown, MenuItem, DropdownButton } from "react-bootstrap";
 
 
 import Button from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
-import {Link} from 'react-router-dom';
+//import MenuItem from '@material-ui/core/MenuItem';
+
 
 
 const LeftSection = () => {
@@ -36,54 +40,117 @@ const LeftSection = () => {
         <BurgerButton
           onClick={() => setIsShowSidebar(false)}
         />
+
+        
       </div>
 
       
-  
-      <button className = "menulist"><Link to = {"/ordermanagement" }>
-        ORDER MANAGEMENT</Link>
       
-      </button>
-
-      <button className = "menulist"><Link to = {"/financemanagement" }>
-        DELIVERY MANAGEMENT</Link>
       
-      </button>
 
-      <button className = "menulist"><Link to = {"/financemanagement" }>
-        STOCK MANAGEMENT</Link>
+      <Dropdown>
+  <Dropdown.Toggle variant="danger" className = "menulist">
+    Order Management
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu className = "ditem">
+    <Dropdown.Item href="/order"  >Order Details</Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Customer Details</Dropdown.Item>
+    
+  </Dropdown.Menu>
+</Dropdown>
+
+<Dropdown>
+  <Dropdown.Toggle variant="danger" className = "menulist">
+    Delivery Management
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
+<Dropdown>
+  <Dropdown.Toggle variant="danger" className = "menulist">
+    Stock Management
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
+<Dropdown>
+  <Dropdown.Toggle variant="danger" className = "menulist">
+    Equipment Management
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
+<Dropdown>
+  <Dropdown.Toggle variant="danger" className = "menulist">
+    Supply Management
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
+<Dropdown>
+  <Dropdown.Toggle variant="danger" className = "menulist">
+    Employee Management
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="/createEmployee">New Employee</Dropdown.Item>
+    <Dropdown.Item href="/employee">Employee Details</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
+<Dropdown>
+  <Dropdown.Toggle variant="danger" className = "menulist">
+    Leave & Salary Management
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="/leaves">Leave Management</Dropdown.Item>
+    <Dropdown.Item href="/salary">Salary Management</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
       
-      </button>
+      <Dropdown>
+  <Dropdown.Toggle variant="danger" className = "menulist">
+    Finance Management
+  </Dropdown.Toggle>
 
-      <button className = "menulist"><Link to = {"/financemanagement" }>
-        EQUIPMENT MANAGEMENT</Link>
-      
-      </button>
-
-      <button className = "menulist"><Link to = {"/financemanagement" }>
-        SUPPLY MANAGEMENT</Link>
-      
-      </button>
-
-      <button className = "menulist"><Link to = {"/employeemanagement" }>
-        EMPLOYEE MANAGEMENT</Link>
-      
-      </button>
-
-      <button className = "menulist"><Link to = {"/leavemanagement" }>
-        LEAVE & SALARY MANAGEMENT</Link>
-      
-      </button>
-
-      <button className = "menulist"><Link to = {"/financemanagement" }>FINANCE MANAGEMENT</Link>
+  <Dropdown.Menu>
+    <Dropdown.Item href="/electricity">Electricity Expenses</Dropdown.Item>
+    <Dropdown.Item href="/water">Water Expenses</Dropdown.Item>
+    <Dropdown.Item href="/transaction">Money Transactions</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
         
       
-      </button>
+      
 
 
       
 
       <button className = "logout">Log Out</button>
+      
     </div>
     </center>
   );

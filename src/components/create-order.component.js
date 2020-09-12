@@ -124,7 +124,7 @@ export default class CreateOrder extends Component {
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">
                         <label>Order Number : </label>
-                        <input type = "number"
+                        <input type = "text"
                         required
                         className = "form-control"
                         value = {this.state.orderNumber}

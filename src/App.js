@@ -46,6 +46,8 @@ import OrderManagement from "./components/order-management.component";
 
 
 
+
+
 // import components chamath
 //import InsertProduct from "./components/stock/form/InsertProduct.component";
 // end import
@@ -58,11 +60,12 @@ function App() {
     <div className="App">
 
       
-      <LeftSideBar />
-      <Home/>
+    <LeftSideBar/>
+<Home/>
+
       
-      
-      
+   
+    
   
       <Route path = "/electricity" exact component = {ElectricityExpensesList}/>
       <Route path = "/editelectricity/:id" component = {EditElectricity}/>

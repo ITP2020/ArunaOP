@@ -40,7 +40,7 @@ export default class EditOrder extends Component {
         axios.get('http://localhost:5000/order/' +this.props.match.params.id)
         .then(response => {
             this.setState({
-            orderNumber : response.data.orderNumber,
+            orderNumber : Number(response.data.orderNumber),
             customerName : response.data.customerName,
             design : response.data.design,
             length : response.data.length,
@@ -159,7 +159,7 @@ export default class EditOrder extends Component {
                         <input type = "text"
                         required
                         className = "form-control"
-                        value = {this.state.customerNumber}
+                        value = {this.state.customerName}
                         onChange = {this.onChangeCustomerName}
                         />
                     </div>
@@ -235,7 +235,7 @@ export default class EditOrder extends Component {
                     </div>
 
                     <div className = "form-group">
-                        <input type = "submit" value = "Update" className = "btn btn-primary" />
+                        <input type = "submit" value = "Update" className = "btn-bill" />
                     </div>
                 </form>
                 </CardContent>

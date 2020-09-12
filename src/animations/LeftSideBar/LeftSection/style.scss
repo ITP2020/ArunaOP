@@ -66,19 +66,21 @@ $left-sidebar-width: 15em;
   border-color: red;
 }
 .logout{
-  width : 100px;
-  height: 25px;
+  width : 80%;
+  height: 35px;
   padding : 0;
+  margin : 5px;
   border-radius: 10px;
-  border-color: red;
-  background-color: red;
+  border-color:#Dc3545;
+  background-color:transparent;
   font-size: 14px;
-  color : white
+  color : #Dc3545;
+  
 }
 .logout:hover{
-  border-color: red;
-  background-color: transparent;
-  color: red;
+  border-color: #Dc3545;
+  background-color:#Dc3545;
+  color: white;
   transition-duration: 0.5s;
 
 }
@@ -90,14 +92,29 @@ $left-sidebar-width: 15em;
   color :black;
 }
 .menulist{
-  width : 100%;
-  height : 60px;
+  width : 95%;
+  height : 55px;
   font-size: 14px;
-  background-color: transparent;
-  border : none;
+  margin-top: 3px;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color:transparent;
+  border : 2px solid;
+  border-color: white;
+  
   
 }
 .menulist,a{
   color:black;
+}
+.Secondary{
+  background-color: blue;
+}
+.Dropdown.Toggle{
+  width : 200%;
+  height : 60px;
+  font-size: 14px;
+  background-color: white;
+  border : none;
 }
 

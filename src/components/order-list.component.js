@@ -9,7 +9,7 @@ import { Card } from '@material-ui/core';
 
 const Order = props => (
     <tr>
-        <td>{props.order.orderId}</td>
+        <td>{props.order.orderNumber}</td>
         <td>{props.order.customerName}</td>
         <td>{props.order.orderStatus}</td>
         <td>

@@ -34,7 +34,7 @@ export default class EditEmployee extends Component {
             designation : '',
             section : '',
             address : '',
-            contact : 0,
+            contactNo : 0,
             emergency : 0
             
         }
@@ -51,8 +51,8 @@ export default class EditEmployee extends Component {
             designation : response.data.designation,
             section : response.data.section,
             address : response.data.address,
-            contact : Number(response.data.contact),
-            emergency : Number(response.data.emergency),
+            contactNo : response.data.contactNo,
+            emergency : response.data.emergency,
                 })
             })
             .catch(function(error) {
@@ -105,7 +105,7 @@ export default class EditEmployee extends Component {
     
         onChangecontact(e){
             this.setState({
-                contact : e.target.value
+                contactNo : e.target.value
             });
         }
     
@@ -125,7 +125,7 @@ export default class EditEmployee extends Component {
             designation : this.state.designation,
             section : this.state.section,
             address : this.state.address,
-            contact : this.state.contact,
+            contactNo : this.state.contactNo,
             emergency : this.state.emergency,
         }
 
@@ -217,7 +217,7 @@ export default class EditEmployee extends Component {
                         <input type = "text"
                         required
                         className = "form-control"
-                        value = {this.state.contact}
+                        value = {this.state.contactNo}
                         onChange = {this.onChangecontact}
                         />
                     </div>

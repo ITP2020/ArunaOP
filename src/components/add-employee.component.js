@@ -203,7 +203,7 @@ export default class CreateEmployee extends Component {
                         <input type = "text"
                         required
                         className = "form-control"
-                        value = {this.state.contact}
+                        value = {this.state.contactNo}
                         onChange = {this.onChangecontact}
                         />
                     </div>

@@ -20,7 +20,7 @@ const Employee = props => (
         <td>{props.employee.designation}</td>
         <td>{props.employee.section}</td>
         <td>{props.employee.address}</td>
-        <td>{props.employee.contact}</td>
+        <td>{props.employee.contactNo}</td>
         <td>{props.employee.emergency}</td>
         <td>
             <button className = 'edit'><Link to = {"/editemployee/"+props.employee._id } className="link">Edit</Link></button><button className = 'delete' onClick ={() => {props.deleteEmployee(props.employee._id)}}>Delete</button>
