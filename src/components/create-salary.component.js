@@ -16,8 +16,11 @@ export default class CreateSalary extends Component {
 
     this.state = {
       empId: '',
-      basicSalary: 0,
-      otRate: 0
+      basicSalary: '',
+      otRate: '',
+      empIdError:'',
+      basicSalaryError: '',
+      otRateError:''
     }
   }
 
@@ -51,10 +54,33 @@ export default class CreateSalary extends Component {
 
     console.log(salary);
 
-    axios.post('http://localhost:5000/salary/add', salary)
+    if(this.state.empId.length < 10 ){
+      this.setState({empIdError : "Invalid Employee ID."})
+    }
+    
+    else if(this.state.empId.length > 10){
+      this.setState({empIdError : "Format of the Employee ID should be 'IT********'"})
+    }
+    else if(this.state.basicSalary === "0"){
+      this.setState({basicSalaryError : "Basic salary can not be 0."})
+    }
+    else if(this.state.basicSalary < "0"){
+      this.setState({basicSalaryError : "Basic salary can not be negative."})
+    }
+    else if(this.state.otRate === "0"){
+      this.setState({otRateError : "OT Rate can not be 0."})
+    }
+    else if(this.state.otRate < "0"){
+      this.setState({otRateError : "OT Rate can not be negative."})
+    }
+    else if(this.state.empId.length === 10 && this.state.basicSalary !== "0" && this.state.otRate !== "0"){
+
+      axios.post('http://localhost:5000/salary/add', salary)
       .then(res => console.log(res.data));
 
     window.location = '/salary';
+    }
+   
   }
 
   render() {
@@ -74,29 +100,34 @@ export default class CreateSalary extends Component {
               value={this.state.empId}
               onChange={this.onChangeEmpId}
               />
+              <p className = "validateMsg">{this.state.empIdError}</p>
         </div>
         <div className="form-group">
           <label>basic Salary : </label>
           <input 
-              type="text" 
+              type="text"
+              required 
               className="form-control"
               value={this.state.basicSalary}
               onChange={this.onChangeBasicSalary}
               />
+              <p className = "validateMsg">{this.state.basicSalaryError}</p>
         </div>
 
         <div className="form-group">
           <label>OT Rate : </label>
           <input 
               type="text" 
+              required
               className="form-control"
               value={this.state.otRate}
               onChange={this.onChangeOtRate}
               />
+              <p className = "validateMsg">{this.state.otRateError}</p>
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Insert salary detail" className="btn-bill" />
+          <input type="submit" required value="Insert salary detail" className="btn-bill" />
         </div>
       </form>
       </CardContent>

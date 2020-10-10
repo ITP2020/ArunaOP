@@ -19,10 +19,13 @@ export default class CreateLeave extends Component {
 
     this.state = {
       leaveType: '',
-      numOfDays: 0,
+      numOfDays: '',
       startDate: new Date(),
       endDate: new Date(),
-      description: ''
+      description: '',
+      leaveError : '',
+      numOfDaysError: '',
+      descriptionError: ''
     }
   }
 
@@ -70,10 +73,22 @@ export default class CreateLeave extends Component {
 
     console.log(leave);
 
-    axios.post('http://localhost:5000/leave/add', leave)
+    if(this.state.leaveType.length < 8 ){
+      this.setState({leaveError : "Leave type should 'Single day' or 'Multiple days'."})
+    }
+    else if(this.state.numOfDays === "0"){
+      this.setState({numOfDaysError : "Number of days can not be 0."})
+    }
+    else if(this.state.description.length < 10){
+      this.setState({descriptionError : "Describe the reason using atleast in 10 characters."})
+    }
+    else if(this.state.leaveType.length >= 8 && this.state.numOfDays !== "0" && this.state.description.length >= 10){
+      axios.post('http://localhost:5000/leave/add', leave)
       .then(res => console.log(res.data));
 
     window.location = '/leaves';
+    }
+    
   }
 
   render() {
@@ -95,20 +110,24 @@ export default class CreateLeave extends Component {
               value={this.state.leaveType}
               onChange={this.onChangeLeaveType}
               />
+              <p className = "validateMsg">{this.state.leaveError}</p>
         </div>
         <div className="form-group">
           <label>Num Of Date: </label>
           <input 
               type="text" 
+              required
               className="form-control"
               value={this.state.numOfDays}
               onChange={this.onChangeNumOfDays}
               />
+              <p className = "validateMsg">{this.state.numOfDaysError}</p>
         </div>
         <div className="form-group">
           <label>Starting Date: </label>
           <div>
             <DatePicker
+              required
               selected={this.state.startDate}
               onChange={this.onChangeStartDate}
             />
@@ -119,6 +138,7 @@ export default class CreateLeave extends Component {
           <label>Ending Date: </label>
           <div>
             <DatePicker
+              required
               selected={this.state.endDate}
               onChange={this.onChangeEndDate}
             />
@@ -129,10 +149,12 @@ export default class CreateLeave extends Component {
           <label>Description: </label>
           <input 
               type="text" 
+              required
               className="form-control"
               value={this.state.description}
               onChange={this.onChangeDescription}
               />
+              <p className = "validateMsg">{this.state.descriptionError}</p>
         </div>
 
         <div className="form-group">
