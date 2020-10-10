@@ -42,6 +42,14 @@ export default class CreateSalary extends Component {
     })
   }
 
+  demoClicked(){
+    this.setState({
+      empId: "IT19202600",
+      basicSalary: "35000",
+      otRate: "250"
+    })
+}
+
 
   onSubmit(e) {
     e.preventDefault();
@@ -129,7 +137,14 @@ export default class CreateSalary extends Component {
         <div className="form-group">
           <input type="submit" required value="Insert salary detail" className="btn-bill" />
         </div>
+
+                
+
       </form>
+
+      <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
+                    </div>
       </CardContent>
       </div>
       </Card>

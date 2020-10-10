@@ -7,6 +7,8 @@ import axios from 'axios';
 import '../css/transaction.css'
 import { CardContent } from '@material-ui/core';
 import { Card } from '@material-ui/core';
+import jsPDF from 'jspdf'; 
+import 'jspdf-autotable';
 
 const Leave = props => (
   <tr>
@@ -56,6 +58,41 @@ export default class LeaveList extends Component {
     })
   }
 
+  exportLeave = () => {
+    console.log( "SSSSSSSSSS" )
+
+
+    const unit = "pt";
+    const size = "A3"; 
+    const orientation = "portrait"; 
+    const marginLeft = 40;
+    const doc = new jsPDF( orientation, unit, size );
+
+    const title = "Employee Leave Report ";
+    const headers = [["Leave Type", "Number of Days", "Starting Date", "Ending Date","Leave Description"]];
+
+    const lea = this.state.leave.map(
+        Leave=>[
+            Leave.leaveType,
+            Leave.numOfDays,
+            Leave.startDate.substring(0,10),
+            Leave.endDate.substring(0,10),
+            Leave.description
+        ]
+    );
+
+    let content = {
+        startY: 50,
+        head: headers,
+        body:lea
+    };
+    doc.setFontSize( 20 );
+    doc.text( title, marginLeft, 40 );
+    require('jspdf-autotable');
+    doc.autoTable( content );
+    doc.save( "EmployeeLeaves.pdf" )
+}
+
   render() {
     return (
       <div>
@@ -63,7 +100,8 @@ export default class LeaveList extends Component {
             <table className = "topic">
                     <tr>
                         <th><h3>Leave Details</h3></th>
-                        <td><button className = "add" ><Link to = {"/create" } className = "linkaddE">Add Leave Request</Link></button></td>
+                        <td><button className = "add" ><Link to = {"/create" } className = "linkaddE">Add Leave Request</Link></button>
+                        <button className = "download" onClick={() => this.exportLeave()}>Download Report Here</button></td>
                     </tr>
                 </table>
             

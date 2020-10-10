@@ -60,6 +60,16 @@ export default class CreateLeave extends Component {
     })
   }
 
+  demoClicked(){
+    this.setState({
+      leaveType: "Single Day",
+      numOfDays: 1,
+      startDate: new Date(),
+      endDate: new Date(),
+      description: "Due to high fever",
+    })
+}
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -160,7 +170,14 @@ export default class CreateLeave extends Component {
         <div className="form-group">
           <input type="submit" value="Request Leave" className="btn-bill" />
         </div>
+
+                  
+
       </form>
+
+      <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
+                    </div>
       </CardContent>
       </div>
       </Card>
