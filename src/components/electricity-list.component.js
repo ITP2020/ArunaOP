@@ -6,6 +6,8 @@ import '../css/table.scss'
 import { CardContent } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 //import { res } from 'express';
+import jsPDF from 'jspdf'; 
+import 'jspdf-autotable';
 
 
 const Electricity = props => (
@@ -56,6 +58,39 @@ export default class ElectricityExpensesList extends Component {
             })
         }
 
+        exportElectricity = () => {
+            console.log( "SSSSSSSSSS" )
+    
+    
+            const unit = "pt";
+            const size = "A3"; 
+            const orientation = "portrait"; 
+            const marginLeft = 40;
+            const doc = new jsPDF( orientation, unit, size );
+    
+            const title = "Electricity Expenses Report ";
+            const headers = [["Year","Month","Amount"]];
+    
+            const elec = this.state.electricityExpenses.map(
+                Electricity=>[
+                    Electricity.year,
+                    Electricity.month,
+                    Electricity.amount
+                ]
+            );
+    
+            let content = {
+                startY: 50,
+                head: headers,
+                body:elec
+            };
+            doc.setFontSize( 20 );
+            doc.text( title, marginLeft, 40 );
+            require('jspdf-autotable');
+            doc.autoTable( content );
+            doc.save( "ElectricityExpenses.pdf" )
+        }
+
         filterContent(electricityExpenses, searchTerm){
             const result = electricityExpenses.filter((electricityExpense) => electricityExpense.title.includes(searchTerm));
             this.setState({electricityExpenses : result})
@@ -74,6 +109,8 @@ export default class ElectricityExpensesList extends Component {
     })
         }
 
+       
+
     render() {
         return (
             <div >
@@ -83,7 +120,8 @@ export default class ElectricityExpensesList extends Component {
                 <table className = "topic">
                     <tr>
                         <th><h3>Electricity Expenses</h3></th>
-                        <td><button className = "add" ><Link to = {"/createelectricity" } className = "linkaddE">Add Electricity Bill</Link></button></td>
+                        <td><button className = "add" ><Link to = {"/createelectricity" } className = "linkaddE">Add Electricity Bill</Link></button>
+                        <button className = "download" onClick={() => this.exportElectricity()}>Download Report Here</button></td>
                     </tr>
                     
                             <div className = "searchBar">
@@ -114,6 +152,9 @@ export default class ElectricityExpensesList extends Component {
                     { this.electricityList() }
                 </tbody>
             </table>
+
+            
+            
             </CardContent>
             </Card>
         </div>

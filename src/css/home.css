@@ -100,6 +100,44 @@
     transition-duration: 0.5s;
     color : black;
 }
+.download{
+    width : 200px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: #2d29e1;
+    background-color: #2d29e1;
+    margin-top : 10px;
+   margin-left: 20px;
+    color : white;
+}
+.download:hover{
+    background-color:transparent;
+    border-color: #2d29e1;
+    background-color: white;
+    transition-duration: 0.5s;
+    color : #2d29e1;
+}
+.demo{
+    align-self: center;
+    margin-left : 40%;
+    width : 170px;
+    height : 45px;
+    padding : 3px;
+    background-color: white;
+    color : #2d29e1;
+    border-color: #2d29e1;
+    border-radius: 5px;
+
+}
+.demo:hover{
+    background-color:transparent;
+    border-color: #2d29e1;
+    color: white;
+    background-color: #2d29e1;
+    transition-duration: 0.5s;
+}
+
 .linkaddE{
     color : white;
 }

@@ -46,6 +46,14 @@ export default class CreateWater extends Component {
         });
     }
 
+    demoClicked(){
+        this.setState({
+            year : 20200,
+            month : 11,
+            amount : 25000
+        })
+    }
+
     onSubmit2(e){
         e.preventDefault();
 
@@ -75,6 +83,9 @@ export default class CreateWater extends Component {
         }
         else if(this.state.month > "12"){
                 this.setState({monthError : "Month can only have values from 01 to 12."})          
+        }
+        else if(this.state.month === "0"){
+            this.setState({monthError : "Month can only have values from 01 to 12."})
         }
         else if(this.state.amount === "0"){
             this.setState({amountError : "Amount can not be 0."})
@@ -139,6 +150,11 @@ export default class CreateWater extends Component {
                     <div className = "form-group">
                         <input type = "submit" value = "Add Water Bill" className = "btn-bill" />
                     </div>
+
+                    <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
+                    </div>
+
                 </form>
 
 </CardContent>

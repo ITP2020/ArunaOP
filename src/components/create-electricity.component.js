@@ -67,6 +67,14 @@ export default class CreateElectricity extends Component {
         
     }*/
 
+    demoClicked(){
+        this.setState({
+            year : 20200,
+            month : 11,
+            amount : 25000
+        })
+    }
+
     onSubmit1(e){
         
             e.preventDefault();
@@ -91,12 +99,14 @@ export default class CreateElectricity extends Component {
             else if (this.state.month > "12" && this.state.amount === "0"){
                 this.setState({monthError : "Month can only have values from 01 to 12.", amountError : "Amount can not be 0."})
             }
-            
             else if(this.state.year.length !== 4){
                 this.setState({yearError : "Year can only have four digits."})
             }
-            else if(this.state.month > "12"){
+            else if(this.state.month > "12" ){
                     this.setState({monthError : "Month can only have values from 01 to 12."})          
+            }
+            else if(this.state.month === "0"){
+                this.setState({monthError : "Month can only have values from 01 to 12."})
             }
             else if(this.state.amount === "0"){
                 this.setState({amountError : "Amount can not be 0."})
@@ -124,20 +134,16 @@ export default class CreateElectricity extends Component {
            
     }
 
-    
-
-    
-
-    
-
     render() {
         return (
         <div >
             <Card className = "addcard" >
+            
                 <div className = "formdiv">
                 <CardContent >
             <h3 className = "billheading">Add Electricity Bill</h3>
-        
+            
+            
                 <form onSubmit = {this.onSubmit1}>
                     <div className = "form-group">
                         <label>Year : </label>
@@ -172,10 +178,19 @@ export default class CreateElectricity extends Component {
                         <p className = "validateMsg">{this.state.amountError}</p>
                     </div>
 
+                    
+
                     <div className = "form-group">
                         <input type = "submit" value = "Add Electricity Bill" className = "btn-bill"  />
                     </div>
+
+                    <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
+                    </div>
+                    
                 </form>
+
+                
 
 </CardContent>
 </div>

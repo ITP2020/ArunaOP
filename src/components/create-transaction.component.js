@@ -74,6 +74,17 @@ export default class CreateTransaction extends Component {
         });
     }
 
+    demoClicked(){
+        this.setState({
+            year : 20200,
+            month : 11,
+            day : 12,
+            reason : "Buying color ink",
+            amount : 25000,
+            issuedPerson : "Dewapura"
+        })
+    }
+
     onSubmit1(e){
         e.preventDefault();
 
@@ -233,6 +244,11 @@ export default class CreateTransaction extends Component {
                     <div className = "form-group">
                         <input type = "submit" value = "Add Transaction" className = "btn-bill" />
                     </div>
+
+                    <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
+                    </div>
+
                 </form>
 
 </CardContent>

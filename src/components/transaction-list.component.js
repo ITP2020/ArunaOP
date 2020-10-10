@@ -4,6 +4,8 @@ import axios from 'axios';
 import '../css/transaction.css'
 import { CardContent } from '@material-ui/core';
 import { Card } from '@material-ui/core';
+import jsPDF from 'jspdf'; 
+import 'jspdf-autotable';
 
 
 
@@ -64,6 +66,43 @@ export default class TransactionExpensesList extends Component {
             })
         }
 
+        exportTransaction = () => {
+            console.log( "SSSSSSSSSS" )
+    
+    
+            const unit = "pt";
+            const size = "A3"; 
+            const orientation = "portrait"; 
+            const marginLeft = 40;
+            const doc = new jsPDF( orientation, unit, size );
+    
+            const title = "Money Transactions Report ";
+            const headers = [["Year","Month","Date","Reason","Amount","Issued Person"]];
+    
+            const trans = this.state.transactionExpenses.map(
+                Transaction =>[
+                    Transaction.year,
+                    Transaction.month,
+                    Transaction.day,
+                    Transaction.reason,
+                    Transaction.amount,
+                    Transaction.issuedPerson
+                    
+                ]
+            );
+    
+            let content = {
+                startY: 50,
+                head: headers,
+                body:trans
+            };
+            doc.setFontSize( 24 );
+            doc.text( title, marginLeft, 40 );
+            require('jspdf-autotable');
+            doc.autoTable( content );
+            doc.save( "MoneyTransactions.pdf" )
+        }
+
         handleTextSearch = e => {
             this.setState ({ search : e.target.value});
 
@@ -81,8 +120,9 @@ export default class TransactionExpensesList extends Component {
             <Card className = "list">
             <table className = "topic">
                     <tr>
-                        <th><h3>Transactions</h3></th>
-                        <td><button className = "add" ><Link to = {"/createtransaction" } className = "linkaddE">Add New Transaction</Link></button></td>
+                        <th><h3>Money Transactions</h3></th>
+                        <td><button className = "add" ><Link to = {"/createtransaction" } className = "linkaddE">Add New Transaction</Link></button>
+                        <button className = "download" onClick={() => this.exportTransaction()}>Download Report Here</button></td>
                     </tr>
 
                    

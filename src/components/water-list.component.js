@@ -5,6 +5,8 @@ import axios from 'axios';
 import '../css/table.scss'
 import { CardContent } from '@material-ui/core';
 import { Card } from '@material-ui/core';
+import jsPDF from 'jspdf'; 
+import 'jspdf-autotable';
 
 
 
@@ -55,6 +57,39 @@ export default class WaterExpensesList extends Component {
             })
         }
 
+        exportWater = () => {
+            console.log( "SSSSSSSSSS" )
+    
+    
+            const unit = "pt";
+            const size = "A3"; 
+            const orientation = "portrait"; 
+            const marginLeft = 40;
+            const doc = new jsPDF( orientation, unit, size );
+    
+            const title = "Water Expenses Report ";
+            const headers = [["Year","Month","Amount"]];
+    
+            const wat = this.state.waterExpenses.map(
+                Water=>[
+                    Water.year,
+                    Water.month,
+                    Water.amount
+                ]
+            );
+    
+            let content = {
+                startY: 50,
+                head: headers,
+                body:wat
+            };
+            doc.setFontSize( 24 );
+            doc.text( title, marginLeft, 40 );
+            require('jspdf-autotable');
+            doc.autoTable( content );
+            doc.save( "WaterExpenses.pdf" )
+        }
+
     render() {
         return (
             <div>
@@ -64,8 +99,11 @@ export default class WaterExpensesList extends Component {
                 <table className = "topic">
                     <tr>
                         <th><h3>Water Expenses</h3></th>
-                        <td><button className = "add" ><Link to = {"/createwater" } className = "linkaddE">Add Water Bill</Link></button></td>
+                        <td><button className = "add" ><Link to = {"/createwater" } className = "linkaddE">Add Water Bill</Link></button>
+                        <button className = "download" onClick={() => this.exportWater()}>Download Report Here</button></td>
                     </tr>
+
+                    
                 </table>
             
             
