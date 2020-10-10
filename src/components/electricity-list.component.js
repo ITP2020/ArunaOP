@@ -5,9 +5,7 @@ import '../css/home.css'
 import '../css/table.scss'
 import { CardContent } from '@material-ui/core';
 import { Card } from '@material-ui/core';
-
-
-
+//import { res } from 'express';
 
 
 const Electricity = props => (
@@ -51,10 +49,29 @@ export default class ElectricityExpensesList extends Component {
             })
         }
 
+
         electricityList(){
             return this.state.electricityExpenses.map(currentelectricity => {
                 return <Electricity electricityExpenses = {currentelectricity} deleteElectricity = {this.deleteElectricity} key = {currentelectricity._id}/>;
             })
+        }
+
+        filterContent(electricityExpenses, searchTerm){
+            const result = electricityExpenses.filter((electricityExpense) => electricityExpense.title.includes(searchTerm));
+            this.setState({electricityExpenses : result})
+        }
+
+        handleTextSearch = (e) =>{
+            console.log(e.currentTarget.value);
+            const searchTerm = e.currentTarget.value;
+
+            axios.get('http://localhost:5000/electricityExpenses/')
+        .then(res => {
+            if(res.data.success){
+                this.filterContent(res.data,searchTerm)
+            }
+        
+    })
         }
 
     render() {
@@ -68,7 +85,19 @@ export default class ElectricityExpensesList extends Component {
                         <th><h3>Electricity Expenses</h3></th>
                         <td><button className = "add" ><Link to = {"/createelectricity" } className = "linkaddE">Add Electricity Bill</Link></button></td>
                     </tr>
+                    
+                            <div className = "searchBar">
+                            <input
+                            className = "form-control"
+                            type = "search"
+                            placeholder = "Search"
+                            name = "searchTerm"
+                            onChange = {this.handleTextSearch}>
+                            </input></div>
+                    
                 </table>
+
+
             
             
                 <CardContent>

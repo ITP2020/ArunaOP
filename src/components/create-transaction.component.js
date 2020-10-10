@@ -22,12 +22,19 @@ export default class CreateTransaction extends Component {
        
 
         this.state = {
-            year : 0,
-            month : 0,
-            day : 0,
+            year : '',
+            month : '',
+            day : '',
             reason : '',
-            amount : 0,
-            issuedPerson : ''
+            amount : '',
+            issuedPerson : '',
+            yearError : '',
+            monthError : '',
+            dayError : '',
+            reasonError : '',
+            amountError : '',
+            personError : ''
+
             
         }
     }
@@ -79,12 +86,66 @@ export default class CreateTransaction extends Component {
             issuedPerson : this.state.issuedPerson,
         }
 
+    
         console.log(transactionExpenses);
-
+        if(this.state.year.length !== 4 && this.state.month > "12" && this.state.day > "31" && this.state.reason.length < 10 && this.state.amount === "0" && this.state.issuedPerson.length < 5){
+            this.setState({yearError : "Year can only have four digits.", monthError : "Month can only have values from 01 to 12.",
+            dayError : "Day can only have values from 01 to 31.",reasonError : "Reason should be atleast 10 digits long.",
+             amountError : "Amount can not be 0.", personError : "Issued person should atlesat 5 characters long."})
+        }
+        else if(this.state.year.length !== 4 && this.state.month > "12" && this.state.day > "31" && this.state.reason.length < 10 && this.state.amount === "0"){
+            this.setState({yearError : "Year can only have four digits.", monthError : "Month can only have values from 01 to 12.",
+            dayError : "Day can only have values from 01 to 31.",reasonError : "Reason should be atleast 10 digits long.",
+             amountError : "Amount can not be 0."})
+        }
+        else if(this.state.year.length !== 4 && this.state.month > "12" && this.state.day > "31" && this.state.reason.length < 10 && this.state.issuedPerson.length < 5){
+            this.setState({yearError : "Year can only have four digits.", monthError : "Month can only have values from 01 to 12.",
+            dayError : "Day can only have values from 01 to 31.",reasonError : "Reason should be atleast 10 digits long.", personError : "Issued person should atlesat 5 characters long."})
+        }
+        else if(this.state.year.length !== 4 && this.state.month > "12" && this.state.day > "31" && this.state.amount === "0" && this.state.issuedPerson.length < 5){
+            this.setState({yearError : "Year can only have four digits.", monthError : "Month can only have values from 01 to 12.",
+            dayError : "Day can only have values from 01 to 31.",amountError : "Amount can not be 0.", personError : "Issued person should atlesat 5 characters long."})
+        }
+        else if(this.state.year.length !== 4 && this.state.month > "12" && this.state.reason.length < 10 && this.state.amount === "0" && this.state.issuedPerson.length < 5){
+            this.setState({yearError : "Year can only have four digits.", monthError : "Month can only have values from 01 to 12.",
+            reasonError : "Reason should be atleast 10 digits long.",amountError : "Amount can not be 0.", personError : "Issued person should atlesat 5 characters long."})
+        }
+        else if(this.state.year.length !== 4 && this.state.day > "31" && this.state.reason.length < 10 && this.state.amount === "0" && this.state.issuedPerson.length < 5){
+            this.setState({yearError : "Year can only have four digits.", dayError : "Day can only have values from 01 to 31.",reasonError : "Reason should be atleast 10 digits long.",
+             amountError : "Amount can not be 0.", personError : "Issued person should atlesat 5 characters long."})
+        }
+       else if(this.state.year.length !== 4){
+        this.setState({yearError : "Year can only have four digits."})
+       }
+       else if(this.state.month > "12"){
+        this.setState({monthError : "Month can only have values from 01 to 12."})
+       }
+       else if(this.state.day > "31"){
+        this.setState({dayError : "Day can only have values from 01 to 31."})
+       }
+       else if(this.state.reason.length < 10){
+        this.setState({reasonError : "Reason should be atleast 10 digits long."})
+       }
+       else if(this.state.amount === "0"){
+        this.setState({amountError : "Amount can not be 0."})
+       }
+       else if(this.state.issuedPerson.length < 5){
+        this.setState({personError : "Issued person should atlesat 5 characters long."})
+       }
+       else if(this.state.year.length === 4 && this.state.month <= "12" && this.state.day <= "31" && this.state.reason.length >= 10 && this.state.amount !== "0" && this.state.issuedPerson.length >= 5){
+        
         axios.post('http://localhost:5000/transactionExpenses/add', transactionExpenses)
         .then(res => console.log(res.data));
+        alert("Form is submitted successfully")
 
         window.location = '/transaction';
+       }
+       else{
+           alert("Form can not be submitted")
+       }
+            
+        
+        
     }
 
     
@@ -110,6 +171,7 @@ export default class CreateTransaction extends Component {
                         value = {this.state.year}
                         onChange = {this.onChangeYear}
                         />
+                        <p className = "validateMsg">{this.state.yearError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -120,6 +182,7 @@ export default class CreateTransaction extends Component {
                         value = {this.state.month}
                         onChange = {this.onChangeMonth}
                         />
+                        <p className = "validateMsg">{this.state.monthError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -130,6 +193,7 @@ export default class CreateTransaction extends Component {
                         value = {this.state.day}
                         onChange = {this.onChangeDay}
                         />
+                        <p className = "validateMsg">{this.state.dayError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -140,6 +204,7 @@ export default class CreateTransaction extends Component {
                         value = {this.state.reason}
                         onChange = {this.onChangeReason}
                         />
+                        <p className = "validateMsg">{this.state.reasonError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -150,6 +215,7 @@ export default class CreateTransaction extends Component {
                         value = {this.state.amount}
                         onChange = {this.onChangeAmount}
                         />
+                        <p className = "validateMsg">{this.state.amountError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -160,6 +226,7 @@ export default class CreateTransaction extends Component {
                         value = {this.state.issuedPerson}
                         onChange = {this.onChangeIssuedPerson}
                         />
+                        <p className = "validateMsg">{this.state.personError}</p>
                     </div>
                     
 

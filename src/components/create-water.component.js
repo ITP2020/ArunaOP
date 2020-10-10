@@ -18,9 +18,12 @@ export default class CreateWater extends Component {
        
 
         this.state = {
-            year : 0,
-            month : 0,
-            amount : 0
+            year : '',
+            month : '',
+            amount : '',
+            yearError : '',
+            monthError : '',
+            amountError : ''
             
         }
     }
@@ -54,10 +57,39 @@ export default class CreateWater extends Component {
 
         console.log(waterExpenses);
 
-        axios.post('http://localhost:5000/waterExpenses/add', waterExpenses)
-        .then(res => console.log(res.data));
+        if (this.state.year.length !== 4 && this.state.month > "12" && this.state.amount === "0"){
+            this.setState({yearError : "Year can only have four digits.", monthError : "Month can only have values from 01 to 12.", amountError :"Amount can not be 0."})
+        }
+        else if(this.state.year.length !== 4 && this.state.month > "12"){
+            this.setState({yearError : "Year can only have four digits.", monthError : "Month can only have values from 01 to 12."})
+        }
+        else if(this.state.year.length !== 4 && this.state.amount === "0"){
+            this.setState({yearError : "Year can only have four digits.", amountError : "Amount can not be 0."})
+        }
+        else if (this.state.month > "12" && this.state.amount === "0"){
+            this.setState({monthError : "Month can only have values from 01 to 12.", amountError : "Amount can not be 0."})
+        }
+        
+        else if(this.state.year.length !== 4){
+            this.setState({yearError : "Year can only have four digits."})
+        }
+        else if(this.state.month > "12"){
+                this.setState({monthError : "Month can only have values from 01 to 12."})          
+        }
+        else if(this.state.amount === "0"){
+            this.setState({amountError : "Amount can not be 0."})
+        }
+        else if(this.state.year.length === 4  && this.state.month < "12"  && this.state.amount !== "0"){
+        
+            axios.post('http://localhost:5000/waterExpenses/add', waterExpenses)
+            .then(res => console.log(res.data));
+            alert("Form is submitted successfully")
 
         window.location = '/water';
+        }
+        else{
+            alert("Can not submit the form")
+        }
     }
 
     
@@ -79,6 +111,7 @@ export default class CreateWater extends Component {
                         value = {this.state.year}
                         onChange = {this.onChangeYear}
                         />
+                        <p className = "validateMsg">{this.state.yearError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -89,6 +122,7 @@ export default class CreateWater extends Component {
                         value = {this.state.month}
                         onChange = {this.onChangeMonth}
                         />
+                        <p className = "validateMsg">{this.state.monthError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -99,6 +133,7 @@ export default class CreateWater extends Component {
                         value = {this.state.amount}
                         onChange = {this.onChangeAmount}
                         />
+                        <p className = "validateMsg">{this.state.amountError}</p>
                     </div>
 
                     <div className = "form-group">

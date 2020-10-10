@@ -22,7 +22,10 @@ const Transaction = props => (
 )
 
 
+
 export default class TransactionExpensesList extends Component {
+
+   
 
     constructor(props){
         super(props);
@@ -30,7 +33,11 @@ export default class TransactionExpensesList extends Component {
         this.deleteTransaction = this.deleteTransaction.bind(this);
 
         this.state = {transactionExpenses : []};
+
+        
     }
+
+    
 
 
     componentDidMount() {
@@ -57,8 +64,17 @@ export default class TransactionExpensesList extends Component {
             })
         }
 
+        handleTextSearch = e => {
+            this.setState ({ search : e.target.value});
+
+        }
+
+        
+
     render() {
         return (
+
+           
             <div >
             
             
@@ -68,6 +84,16 @@ export default class TransactionExpensesList extends Component {
                         <th><h3>Transactions</h3></th>
                         <td><button className = "add" ><Link to = {"/createtransaction" } className = "linkaddE">Add New Transaction</Link></button></td>
                     </tr>
+
+                   
+                    <div className = "searchBar">
+                            <input
+                            className = "form-control"
+                            type = "search"
+                            placeholder = "Search"
+                            name = "searchTerm"
+                            onChange = {this.handleTextSearch}>
+                            </input></div>
                 </table>
             
             

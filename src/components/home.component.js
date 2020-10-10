@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -54,13 +55,14 @@ export default function ImgMediaCard() {
         <Grid item xs={3}>
           
           <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
+          <Link to ="/order"><CardActionArea>
+      <CardMedia
           component="img"
           alt="Order Management System"
           height="240px"
           image="https://cdn.richtabor.com/wp-content/uploads/2017/09/designing-868x621.jpg"
-          title="Order Management System" 
+          title="Order Management System"
+           
         />
 
         <Button>
@@ -73,7 +75,7 @@ export default function ImgMediaCard() {
         </CardContent>
         </Button>
 
-      </CardActionArea>
+      </CardActionArea></Link>
     </Card>
         </Grid>
 
@@ -177,7 +179,7 @@ export default function ImgMediaCard() {
 
         <Grid item xs={3}>
         <Card className={classes.root}>
-      <CardActionArea>
+        <Link to ="/employee"><CardActionArea>
         <CardMedia
           component="img"
           alt="Employee Management System"
@@ -196,7 +198,7 @@ export default function ImgMediaCard() {
         </CardContent>
         </Button>
 
-      </CardActionArea>
+      </CardActionArea></Link>
     </Card>
         </Grid>
 

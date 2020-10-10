@@ -42,6 +42,9 @@ import EmployeeManagement from "./components/employee-management.component";
 import OrderManagement from "./components/order-management.component";
 
 
+//import Home from "./components/home.component";
+
+
 
 
 
@@ -61,7 +64,7 @@ function App() {
 
       
     <LeftSideBar/>
-<Home/>
+      <Home/>
 
       
    
@@ -99,6 +102,8 @@ function App() {
       <Route path = "/leavemanagement" component = {LeaveManagement}/>
       <Route path = "/employeemanagement" component = {EmployeeManagement}/>
       <Route path = "/ordermanagement" component = {OrderManagement}/>
+
+     
 
       
 

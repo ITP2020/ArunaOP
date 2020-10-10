@@ -3,6 +3,8 @@ import TopSection from './TopSection';
 import LeftSection from './LeftSection';
 import './style.scss';
 
+
+
 export const LeftSideBarContext = React.createContext({})
 
 const LeftSideBar = () => {
@@ -20,7 +22,10 @@ const LeftSideBar = () => {
         <TopSection />      
         <LeftSection />
       </div>
+    
     </LeftSideBarContext.Provider>
+    
+    
   );
 };
 

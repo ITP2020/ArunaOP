@@ -155,7 +155,16 @@
     font-size: 18px;
     text-decoration: none;
 }
+.searchBar{
 
+    margin-left: 20px;
+    width: 300px;
+}
+.validateMsg{
+    color: red;
+    font-size: 14px;
+    font-style: italic;
+}
 
 
 
