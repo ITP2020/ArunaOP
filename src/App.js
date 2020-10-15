@@ -41,19 +41,19 @@ import LeaveManagement from "./components/leave-management.component";
 import EmployeeManagement from "./components/employee-management.component";
 import OrderManagement from "./components/order-management.component";
 
+//Delivery Management
+import DeliveryQueueTable from "./components/DeliveryQueueTable.component";
+import UpcomingDeliveriesTable from "./components/UpcomingDeliveriesTable.component";
+import CompletedDeliveriesTable from "./components/CompletedDeliveriesTable.component";
+import OngoingDeliveryTable from "./components/OngoingDeliveryTable.component";
+import AssignDriverForm from "./components/AssignDriverForm.component";
 
-//import Home from "./components/home.component";
-
-
-
-
-
-
-
-
-// import components chamath
-//import InsertProduct from "./components/stock/form/InsertProduct.component";
-// end import
+//Vehicle Management
+import InsertVehicleForm from "./components/InsertVehicleForm.component"
+import UpdateVehicleForm from "./components/UpdateVehicleForm.component"
+import VehicleManagementTable from "./components/VehicleManagementTable.component";
+import RepairVehicleForm from "./components/VehicleRepairForm.component";
+import VehicleDeleteForm from "./components/VehicleDeleteForm.component";
 
 
 
@@ -66,10 +66,6 @@ function App() {
     <LeftSideBar/>
       <Home/>
 
-      
-   
-    
-  
       <Route path = "/electricity" exact component = {ElectricityExpensesList}/>
       <Route path = "/editelectricity/:id" component = {EditElectricity}/>
       <Route path = "/createelectricity" component = {CreateElectricity}/>
@@ -103,8 +99,19 @@ function App() {
       <Route path = "/employeemanagement" component = {EmployeeManagement}/>
       <Route path = "/ordermanagement" component = {OrderManagement}/>
 
-     
+      
+      <Route path="/Deliveries" exact component={DeliveryQueueTable} />
+      <Route path="/Upcoming" exact component={UpcomingDeliveriesTable} />
+      <Route path="/Completed" exact component={CompletedDeliveriesTable} />
+      <Route path="/Ongoing" exact component={OngoingDeliveryTable} />
+      <Route path="/AssignDriver" exact component={AssignDriverForm} />
 
+
+      <Route path="/InsertVehicle"  component={InsertVehicleForm} />
+      <Route path="/UpdateVehicle"  component={UpdateVehicleForm} />
+      <Route path="/VehicleManagement" exact component={VehicleManagementTable} />
+      <Route path="/VehicleRepair" exact component={RepairVehicleForm} />
+      <Route path="/VehicleDelete" exact component={VehicleDeleteForm} />
       
 
       </div>

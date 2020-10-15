@@ -66,9 +66,25 @@ const LeftSection = () => {
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+    <Dropdown.Item href="/Deliveries">Delivery Queue</Dropdown.Item>
+    <Dropdown.Item href="/Upcoming">Upcoming Deliveries</Dropdown.Item>
+    <Dropdown.Item href="/Ongoing">Ongoing Deliveries</Dropdown.Item>
+    <Dropdown.Item href="/Completed">Completed Deliveries</Dropdown.Item>
+    <Dropdown.Item href="/AssignDriver">Assign Driver</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
+<Dropdown>
+  <Dropdown.Toggle variant="danger" className = "menulist">
+    Vehicle Management
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="VehicleManagement">Vehicle Management</Dropdown.Item>
+    <Dropdown.Item href="InsertVehicle">Insert Vehicle</Dropdown.Item>
+    <Dropdown.Item href="UpdateVehicle">Update Vehicle</Dropdown.Item>
+    <Dropdown.Item href="/VehicleRepair">Vehicle Repair</Dropdown.Item>
+    <Dropdown.Item href="/VehicleDelete">Delete Vehicle</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
 
