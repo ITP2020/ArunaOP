@@ -55,6 +55,16 @@ import VehicleManagementTable from "./components/VehicleManagementTable.componen
 import RepairVehicleForm from "./components/VehicleRepairForm.component";
 import VehicleDeleteForm from "./components/VehicleDeleteForm.component";
 
+import EquipmentList from "./components/equipment-list.component";
+import EditEquipment from "./components/edit-equipment.component";
+import CreateEquipment from "./components/create-equipment.component";
+import Createuser from "./components/create-user.component";
+import CreateRepair from './components/create-repair.component';
+import RepairList from './components/repair-list.component';
+import EditRepair from './components/edit-repair.component';
+//import LeftSideBar from './animations/LeftSideBar';
+import Reports from './components/reports.component';
+
 
 
 function App() {
@@ -112,6 +122,16 @@ function App() {
       <Route path="/VehicleManagement" exact component={VehicleManagementTable} />
       <Route path="/VehicleRepair" exact component={RepairVehicleForm} />
       <Route path="/VehicleDelete" exact component={VehicleDeleteForm} />
+
+
+      <Route path="/equipment" exact component ={EquipmentList}/>
+    <Route path="/editEquipment/:id" component ={EditEquipment}/>
+    <Route path="/repedit/:id" component={EditRepair}/>
+    <Route path="/create" component={CreateEquipment}/>
+    <Route path="/user" component={Createuser}/>
+    <Route path="/repair" component={CreateRepair}/>
+    <Route path="/replist" component={RepairList}/>
+    <Route path="/report" component={Reports}/>
       
 
       </div>

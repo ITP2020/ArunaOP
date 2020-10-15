@@ -30,6 +30,12 @@ const vehicleRouter = require('./routes/vehicle');
 const vehiclerepair = require('./routes/vehiclerepair')
 
 
+const usersRouter = require('./routes/users');
+const equipmentRouter = require('./routes/equipments');
+const repairRouter = require('./routes/repairs');
+const reportRouter = require('./routes/reports');
+
+
 
 app.use('/electricityExpenses', electricityExpensesRouter);
 app.use('/waterExpenses', waterExpensesRouter);
@@ -40,6 +46,11 @@ app.use('/employee', employeeRouter);
 app.use('/order', orderRouter);
 app.use('/vehicle', vehicleRouter);
 app.use('/vehiclerepair', vehiclerepair);
+
+app.use('/users',usersRouter);
+app.use('/equipments',equipmentRouter);
+app.use('/repairs',repairRouter);
+app.use('/reports',reportRouter);
 
 
 
