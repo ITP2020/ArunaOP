@@ -26,6 +26,8 @@ const leaveRouter = require('./routes/leave');
 const salaryRouter = require('./routes/salary');
 const employeeRouter = require('./routes/employee');
 const orderRouter = require('./routes/order');
+const vehicleRouter = require('./routes/vehicle');
+const vehiclerepair = require('./routes/vehiclerepair')
 
 
 
@@ -36,6 +38,8 @@ app.use('/leave' , leaveRouter);
 app.use('/salary' , salaryRouter);
 app.use('/employee', employeeRouter);
 app.use('/order', orderRouter);
+app.use('/vehicle', vehicleRouter);
+app.use('/vehiclerepair', vehiclerepair);
 
 
 
