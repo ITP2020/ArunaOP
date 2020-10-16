@@ -8,17 +8,17 @@ import { Card } from '@material-ui/core';
 import React, { useState, useEffect, Component } from 'react'
 
 
-const VehicleListComponent = props => (
-    <tr>
-        <td style={{width:"12.5%"}}>{props.vehiclelistDetails.plateNo}</td>
-        <td style={{width:"12.5%"}}>{props.vehiclelistDetails.brand}</td>
-        <td style={{width:"12.5%"}}>{props.vehiclelistDetails.vehicle}</td>
-        <td style={{width:"12.5%"}}>{props.vehiclelistDetails.year}</td>
-        <td style={{width:"12.5%"}}>{props.vehiclelistDetails.type}</td>
-        <td style={{width:"17.5%"}}>{props.vehiclelistDetails.purchaseDate.substring(0, 10)}</td>
-<td style={{width:"20%"}}>{<button className = 'edit'><Link to = {"/UpdateVehicle/"+props.vehiclelistDetails.plateNo} className="link">Edit</Link></button>}{" | "}{<button className = 'delete'><Link to = {"/VehicleDelete/"+props.vehiclelistDetails.plateNo} className="link">Delete</Link></button>}</td>
-    </tr>
-)
+// const VehicleListComponent = props => (
+//     <tr>
+//         <td style={{width:"12.5%"}}>{props.vehiclelistDetails.plateNo}</td>
+//         <td style={{width:"12.5%"}}>{props.vehiclelistDetails.brand}</td>
+//         <td style={{width:"12.5%"}}>{props.vehiclelistDetails.vehicle}</td>
+//         <td style={{width:"12.5%"}}>{props.vehiclelistDetails.year}</td>
+//         <td style={{width:"12.5%"}}>{props.vehiclelistDetails.type}</td>
+//         <td style={{width:"17.5%"}}>{props.vehiclelistDetails.purchaseDate.substring(0, 10)}</td>
+// <td style={{width:"20%"}}>{<button className = 'edit'><Link to = {"/UpdateVehicle/"+props.vehiclelistDetails.plateNo} className="link">Edit</Link></button>}{" | "}{<button className = 'delete'><Link to = {"/VehicleDelete/"+props.vehiclelistDetails.plateNo} className="link">Delete</Link></button>}</td>
+//     </tr>
+// )
 
 
 export default class VehicleManagement extends Component {
@@ -44,19 +44,47 @@ export default class VehicleManagement extends Component {
 
 
 
+
     vehicleList() {
 
         return this.state.vehicle.map((currentvehicle) => {
             return (
-                <VehicleListComponent
+                <tr>
+                <td style={{width:"12.5%"}}>{currentvehicle.plateNo}</td>
+                <td style={{width:"12.5%"}}>{currentvehicle.brand}</td>
+                <td style={{width:"12.5%"}}>{currentvehicle.vehicle}</td>
+                <td style={{width:"12.5%"}}>{currentvehicle.year}</td>
+                <td style={{width:"12.5%"}}>{currentvehicle.type}</td>
+                <td style={{width:"17.5%"}}>{currentvehicle.purchaseDate.substring(0, 10)}</td>
+                 <td style={{width:"20%"}}>
+            {<button className = 'edit'>
+            <Link to = {"/UpdateVehicle/"+currentvehicle._id} className="link">Edit</Link>
+            </button>}{" | "}
+            {<button className = 'delete' onClick={()=>{
 
-                    vehiclelistDetails={currentvehicle}
-                    key={currentvehicle._id}
+                axios.delete("http://localhost:5000/vehicle/" +currentvehicle._id ).then(()=>{
+                 alert("Delete Success")
 
-                />
+                //get data again after delete
+                 axios.get("http://localhost:5000/vehicle").then((res) => {
+                    console.log(res.data)
+                    this.setState({
+                        vehicle: res.data
+                    })
+        
+                }).catch((err) => console.log(err))
+
+
+
+                }).catch((err)=>{
+                alert(err)
+                })
+
+            }}>Delete</button>}
+            </td>
+            </tr>
             )
         })
-
     };
 
 
@@ -81,6 +109,7 @@ export default class VehicleManagement extends Component {
                     <th style={{width:"12.5%"}}>Type</th>
                     <th style={{width:"17.5%"}}>Purchase Date</th>
                     <th style={{width:"20%"}}>Manage</th>
+                   
                     </tr>
                 </thead>
                 <tbody>
