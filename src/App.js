@@ -65,6 +65,8 @@ import EditRepair from './components/edit-repair.component';
 //import LeftSideBar from './animations/LeftSideBar';
 import Reports from './components/reports.component';
 
+//Supply Management
+import AddSupply from './components/add-supply.component'
 
 
 function App() {
@@ -132,6 +134,8 @@ function App() {
     <Route path="/repair" component={CreateRepair}/>
     <Route path="/replist" component={RepairList}/>
     <Route path="/report" component={Reports}/>
+
+    <Route path="/addSupply" component={AddSupply}/>
       
 
       </div>
