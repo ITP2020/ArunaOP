@@ -38,7 +38,7 @@ export default function UpdateVehicleForm(props) {
         e.preventDefault();
 
         const VehicleDetails = {
-           
+            
             plateNo,
             vehicle,
             brand,
