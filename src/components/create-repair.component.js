@@ -3,6 +3,9 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios'
 
+import { CardContent } from '@material-ui/core';
+import { Card } from '@material-ui/core';
+
 export default class CreateRepair extends Component {
 
     constructor(props){
@@ -90,8 +93,14 @@ export default class CreateRepair extends Component {
     render() {
         return (
             <div>
-    <h1><b>Add To Repair</b></h1>
-    <h3><i>You can add repairs from here</i></h3>
+            
+            <Card className = "addcard" >
+            
+                <div className = "formdiv">
+                <CardContent>
+            
+    <h2 className = "billheading"><b>Add To Repair</b></h2>
+    <h5><i>You can add repairs from here</i></h5>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Supervisor: </label>
@@ -139,9 +148,12 @@ export default class CreateRepair extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Add to repair equipment" className="btn btn-primary" />
+          <input type="submit" value="Add Repair Details" className="btn-bill" />
         </div>
       </form>
+      </CardContent>
+      </div>
+      </Card>
             </div>
         )
     }

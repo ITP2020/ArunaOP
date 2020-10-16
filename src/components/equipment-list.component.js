@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import { CardContent } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 
 
 const Equipment = props => (
@@ -10,7 +12,7 @@ const Equipment = props => (
       <td>{props.equipments.country}</td>
       <td>{props.equipments.date.substring(0,10)}</td>
       <td>
-        <Link to={"/editEquipment/"+props.equipments._id}>edit</Link> || <a href="#" onClick={() => { props.deleteEquipment(props.equipments._id) }}>delete</a>
+      <button className = 'edit'><Link to={"/editEquipment/"+props.equipments._id } className="link">Edit</Link></button>  <button className = 'delete' onClick={() => { props.deleteEquipment(props.equipments._id) }}>Delete</button>
       </td>
     </tr>
   )
@@ -58,16 +60,25 @@ export default class EquipmentList extends Component {
     render() {
         return (
             <div>
-            <h1><b>Equipment List</b></h1>
-            <h3><i>You can edit or delete equipmets from here</i></h3>
-            <table className="table">
-              <thead className="thead-light">
+
+    <Card className = "list">
+            <table className = "topic">
+                    <tr>
+                        <th><h1><b>Equipment List</b></h1>
+            <h3><i>You can edit or delete equipmets from here</i></h3></th>
+                        <td><button className = "add" ><Link to = {"/createEquipment" } className = "linkaddE">Add Equipment</Link></button>
+                        </td>
+                    </tr>
+</table>
+<CardContent>
+            <table className="tbtransaction">
+              <thead>
                 <tr>
-                  <th><b>Supervisor</b></th>
-                  <th><b>Model</b></th>
-                  <th><b>Country</b></th>
-                  <th><b>Date</b></th>
-                  <th><b>Edit or Delete</b></th>
+                  <th className = "tbhead">Supervisor</th>
+                  <th className = "tbhead">Model</th>
+                  <th className = "tbhead">Country</th>
+                  <th className = "tbhead">Date</th>
+                  <th className = "tbhead">Edit or Delete</th>
                 
                 </tr>
               </thead>
@@ -75,6 +86,8 @@ export default class EquipmentList extends Component {
                 { this.equipmentList() }
               </tbody>
             </table>
+            </CardContent>
+            </Card>
           </div>
         )
     }
