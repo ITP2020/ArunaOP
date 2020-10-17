@@ -83,6 +83,8 @@ const LeftSection = () => {
     <Dropdown.Item href="VehicleManagement">Vehicle Management</Dropdown.Item>
     <Dropdown.Item href="InsertVehicle">Insert Vehicle</Dropdown.Item>
     <Dropdown.Item href="UpdateVehicle">Update Vehicle</Dropdown.Item>
+    <Dropdown.Item href="/VehicleRepair">Vehicle Repair</Dropdown.Item>
+    <Dropdown.Item href="/VehicleDelete">Delete Vehicle</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
 
