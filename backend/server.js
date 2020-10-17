@@ -54,7 +54,7 @@ app.use('/equipments',equipmentRouter);
 app.use('/repairs',repairRouter);
 app.use('/reports',reportRouter);
 
-app.use('./supply',supplyRouter)
+app.use('./supply',supplyRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port:-${port}`);
