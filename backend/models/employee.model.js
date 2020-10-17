@@ -10,8 +10,8 @@ const employeeSchema = new Schema({
     designation : {type : String, required : true},
     section : {type : String, required : true},
     address : {type : String, required : true},
-    contactNo : {type : Number, required : true},
-    emergency : {type : Number, required : true},
+    contactNo : {type : String, required : true},
+    emergency : {type : String, required : true},
      
 },{
         timestamps : true,

@@ -15,8 +15,8 @@ router.route('/add').post((req,res) => {
     const designation = req.body.designation;
     const section = req.body.section;
     const address = req.body.address;
-    const contactNo = Number(req.body.contactNo);
-    const emergency = Number(req.body.emergency);
+    const contactNo = req.body.contactNo;
+    const emergency = req.body.emergency;
     
 
     const newEmployee = new Employee({
@@ -57,8 +57,8 @@ router.route('/update/:id').post((req,res) => {
             employee.designation = req.body.designation;
             employee.section = req.body.section;
             employee.address = req.body.address;
-            employee.contact = Number(req.body.contact);
-            employee.emergency =  Number(req.body.emergency);
+            employee.contact = req.body.contact;
+            employee.emergency = req.body.emergency;
 
             employee.save()
                 .then(() => res.json('Employee updated'))
