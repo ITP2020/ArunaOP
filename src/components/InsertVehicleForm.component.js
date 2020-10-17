@@ -31,53 +31,95 @@ export default function InsertVehicleForm() {
             console.log(err);
         })
     }
+
     return (
-        <div className="container" style={{ marginTop: "20px" }}>
-            <div class="card" style={{ boxShadow: "14px 10px 22px 0px rgba(0,0,0,0.75)" }}>
-
-                <div class="card-body">
-                    <h5 class="card-title">Vehicle Information</h5>
-                    <form onSubmit={onFormSubmit}>
-
-                        <div class="form-group">
-                            <label for="plateNo">Plate No</label>
-                            <input type="text" class="form-control" id="plateNo" aria-describedby="emailHelp" placeholder="Enter Plate No" onChange={(e) => setPlateNo(e.target.value)} />
-
-                        </div>
-                        <div class="form-group">
-                            <label for="vehicle">Model</label>
-                            <input type="text" class="form-control" id="vehicle" placeholder="Enter Model" onChange={(e) => setVehicle(e.target.value)} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">Brand</label>
-                            <input type="text" class="form-control" id="vehicle" placeholder="Enter Brand" onChange={(e) => setBrand(e.target.value)} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">Year</label>
-                            <input type="number" class="form-control" id="vehicle" placeholder="Enter Year" onChange={(e) => setYear(e.target.value)} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">Type</label>
-                            <select class="form-control" onChange={(e) => setType(e.target.value)}>
-                                <option value="Car">Car</option>
-                                <option value="Van">Van</option>
-                                <option value="Truck">Truck</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">Purchase Date</label>
-                            <input type="date" class="form-control" id="vehicle" placeholder="Enter Purchase Date" onChange={(e) => setPurchaseDate(e.target.value)} />
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-
-                    </form>
-                </div>
+    <div className="container" style={{ marginTop: "20px" }}>
+        <div
+        class="card"
+        style={{ boxShadow: "14px 10px 22px 0px rgba(0,0,0,0.75)" }}
+        >
+        <div class="card-body">
+            <h5 class="card-title">Vehicle Information</h5>
+            <form onSubmit={onFormSubmit}>
+            <div class="form-group">
+                <label for="plateNo">Plate No</label>
+                <input
+                type="text"
+                class="form-control"
+                id="plateNo"
+                aria-describedby="emailHelp"
+                placeholder="Enter Plate No"
+                onChange={(e) => setPlateNo(e.target.value)}
+                />
             </div>
+            <div class="form-group">
+                <label for="vehicle">Model</label>
+                <input
+                type="text"
+                class="form-control"
+                id="vehicle"
+                placeholder="Enter Model"
+                onChange={(e) => setVehicle(e.target.value)}
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <input
+                type="text"
+                class="form-control"
+                id="vehicle"
+                placeholder="Enter Brand"
+                onChange={(e) => setBrand(e.target.value)}
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Year</label>
+                <input
+                type="number"
+                class="form-control"
+                id="vehicle"
+                placeholder="Enter Year"
+                onChange={(e) => setYear(e.target.value)}
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Type</label>
+                <select
+                class="form-control"
+                onChange={(e) => setType(e.target.value)}
+                >
+                <option value="Car">Car</option>
+                <option value="Van">Van</option>
+                <option value="Truck">Truck</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Purchase Date</label>
+                <input
+                type="date"
+                class="form-control"
+                id="vehicle"
+                placeholder="Enter Purchase Date"
+                onChange={(e) => setPurchaseDate(e.target.value)}
+                />
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Submit
+            </button>
+
+            <div className="form-group">
+                <button className="demo" onClick={() => this.demoClicked()}>
+                Demo
+                </button>
+            </div>
+            </form>
         </div>
-    )
+        </div>
+    </div>
+    );
 }
