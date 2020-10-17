@@ -156,8 +156,6 @@ export default class AddSupply extends Component {
       description: this.state.description,
     };
 
-    console.log(this.state.supplierName);
-
     this.validateItemName();
     this.validateSupplier();
     this.validatePrice();
@@ -174,7 +172,7 @@ export default class AddSupply extends Component {
     } else {
       axios
         .post("http://localhost:5000/supply/add", supply)
-        .then((res) => console.log(res.data));
+        .then(res => console.log("sucess")).catch(err=>console.log(err));
     }
   }
 
