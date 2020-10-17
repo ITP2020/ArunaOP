@@ -69,13 +69,6 @@ export default class CreateEquipment extends Component {
         });
     }
 
-    demoClicked(){
-      this.setState({
-          model : "Ca",
-          country : "Ru"
-      })
-  }
-
     onSubmit(e){
 
         e.preventDefault();
@@ -90,22 +83,10 @@ export default class CreateEquipment extends Component {
 
         console.log(equipment);
 
-        if (this.state.model.length <= 2 ){
-          this.setState({modelError : "Model must longer than 2 characters"})
-        }
-        else if (this.state.country.length <= 3 ){
-          this.setState({countryError : "Country must longer than 3 characters"})
-        }
-        else if(this.state.model.length > 2 && this.state.country.length > 3){
-
         axios.post('http://localhost:5000/equipments/add',equipment)
         .then(res => console.log(res.data));
 
-
-        window.location ='/equipment'
-        }
-      
-        
+        window.location ='/'
     }
     
     render() {
@@ -145,19 +126,15 @@ export default class CreateEquipment extends Component {
               value={this.state.model}
               onChange={this.onChangeModel}
               />
-              <p className = "validateMsg">{this.state.modelError}</p>
         </div>
         <div className="form-group">
           <label>Country:</label>
           <input 
               type="text" 
-              required
               className="form-control"
               value={this.state.country}
               onChange={this.onChangeCountry}
               />
-              <p className = "validateMsg">{this.state.countryError}</p>
-        
         </div>
         <div className="form-group">
           <label>Date: </label>
@@ -171,10 +148,6 @@ export default class CreateEquipment extends Component {
 
         <div className="form-group">
           <input type="submit" value="Add this equipment" className="btn-bill" />
-        </div>
-
-        <div className = "form-group">
-                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
         </div>
       </form>
       </CardContent>
