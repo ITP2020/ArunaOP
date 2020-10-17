@@ -71,11 +71,12 @@ export default class AddSupply extends Component {
   }
 
   validateItemName() {
-    if (this.state.itemName == "") {
+    if (this.state.itemName == "" ) {
       this.setState({
         validItemName: false,
       });
-    } else {
+    }
+    else {
       this.setState({
         validItemName: true,
       });
@@ -83,11 +84,12 @@ export default class AddSupply extends Component {
   }
 
   validateSupplier() {
-    if (this.state.supplierName == "") {
+    if (this.state.supplierName == "" ) {
       this.setState({
         validSupplierName: false,
       });
-    } else {
+    }
+    else {
       this.setState({
         validSupplierName: true,
       });
@@ -95,11 +97,12 @@ export default class AddSupply extends Component {
   }
 
   validatePrice() {
-    if (this.state.price == "") {
+    if (this.state.price == "" ) {
       this.setState({
         validPrice: false,
       });
-    } else {
+    }
+    else {
       this.setState({
         validPrice: true,
       });
@@ -107,11 +110,12 @@ export default class AddSupply extends Component {
   }
 
   validateDate() {
-    if (this.state.supplierName == "") {
+    if (this.state.supplierName == "" ) {
       this.setState({
         validSupplierName: false,
       });
-    } else {
+    }
+    else {
       this.setState({
         validSupplierName: true,
       });
@@ -135,6 +139,7 @@ export default class AddSupply extends Component {
     this.validateSupplier();
     this.validatePrice();
 
+    
     /*axios
         .post("http://localhost:5000/supply/add", supply)
         .then((res) => console.log(res.data));
@@ -159,11 +164,7 @@ export default class AddSupply extends Component {
                     value={this.state.itemName}
                     onChange={this.onChangeItemName}
                   />
-                  <p className="validateMsg">
-                    {this.state.validItemName
-                      ? ""
-                      : "Please fill out this with item name"}
-                  </p>
+                  <p className="validateMsg">{this.state.validItemName ? "" : "Please fill out this with item name"}</p>
                 </div>
                 <div className="form-group">
                   <label>Supplier Name</label>
@@ -174,11 +175,7 @@ export default class AddSupply extends Component {
                     value={this.state.supplierName}
                     onChange={this.onChangeSupplierName}
                   />
-                  <p className="validateMsg">
-                    {this.state.validSupplierName
-                      ? ""
-                      : "Please fill out this with supplier name"}
-                  </p>
+                  <p className="validateMsg">{this.state.validSupplierName ? "" : "Please fill out this with supplier name"}</p>
                 </div>
                 <div className="form-group">
                   <label>Date</label>
@@ -189,11 +186,7 @@ export default class AddSupply extends Component {
                     value={this.state.date}
                     onChange={this.onChangeDate}
                   />
-                  <p className="validateMsg">
-                    {this.state.validSupplierName
-                      ? ""
-                      : "Please put a date in this"}
-                  </p>
+                  <p className="validateMsg">{this.state.validSupplierName ? "" : "Please put a date in this"}</p>
                 </div>
 
                 <div className="form-group">
@@ -205,11 +198,7 @@ export default class AddSupply extends Component {
                     value={this.state.price}
                     onChange={this.onChangePrice}
                   />
-                  <p className="validateMsg">
-                    {this.state.validPrice
-                      ? ""
-                      : "Please fill out this this with supplier name"}
-                  </p>
+                  <p className="validateMsg">{this.state.validPrice ? "" : "Please fill out this this with supplier name"}</p>
                 </div>
 
                 <div className="form-group">
