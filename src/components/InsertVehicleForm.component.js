@@ -22,22 +22,15 @@ export default function InsertVehicleForm() {
             year,
             type,
             purchaseDate
-
         }
-
 
         await axios.post("http://localhost:5000/vehicle/add", VehicleDetails).then((res) => {
             alert("Insert Success");
+            window.location = "/VehicleManagement"
         }).catch((err) => {
             console.log(err);
         })
-
-
-
-
     }
-
-
     return (
         <div className="container" style={{ marginTop: "20px" }}>
             <div class="card" style={{ boxShadow: "14px 10px 22px 0px rgba(0,0,0,0.75)" }}>
@@ -63,12 +56,16 @@ export default function InsertVehicleForm() {
 
                         <div class="form-group">
                             <label for="brand">Year</label>
-                            <input type="text" class="form-control" id="vehicle" placeholder="Enter Year" onChange={(e) => setYear(e.target.value)} />
+                            <input type="number" class="form-control" id="vehicle" placeholder="Enter Year" onChange={(e) => setYear(e.target.value)} />
                         </div>
 
                         <div class="form-group">
                             <label for="brand">Type</label>
-                            <input type="text" class="form-control" id="vehicle" placeholder="Enter Type" onChange={(e) => setType(e.target.value)} />
+                            <select class="form-control" onChange={(e) => setType(e.target.value)}>
+                                <option value="Car">Car</option>
+                                <option value="Van">Van</option>
+                                <option value="Truck">Truck</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -82,6 +79,5 @@ export default function InsertVehicleForm() {
                 </div>
             </div>
         </div>
-
     )
 }

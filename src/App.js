@@ -124,7 +124,7 @@ function App() {
 
 
       <Route path="/InsertVehicle"  component={InsertVehicleForm} />
-      <Route path="/UpdateVehicle"  component={UpdateVehicleForm} />
+      <Route path="/UpdateVehicle/:id"  component={UpdateVehicleForm} />
       <Route path="/VehicleManagement" exact component={VehicleManagementTable} />
       <Route path="/VehicleRepair" exact component={RepairVehicleForm} />
       <Route path="/VehicleDelete" exact component={VehicleDeleteForm} />
