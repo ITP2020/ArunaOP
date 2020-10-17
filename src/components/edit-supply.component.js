@@ -27,20 +27,6 @@ export default class EditSupply extends Component {
       validPrice: true,
       validDescrption: true,
     };
-
-    this.supplyReset = {
-      itemName: this.state.itemName,
-      
-    }
-
-  }
-
-  supplyReset = {
-    itemName: "",
-      supplierName: "",
-      date: "",
-      price: "",
-      description: ""
   }
 
   onChangeItemName(e) {
