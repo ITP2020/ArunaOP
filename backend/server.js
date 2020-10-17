@@ -35,6 +35,8 @@ const equipmentRouter = require('./routes/equipments');
 const repairRouter = require('./routes/repairs');
 const reportRouter = require('./routes/reports');
 
+const supplyRouter = require('./routes/supply')
+
 
 
 app.use('/electricityExpenses', electricityExpensesRouter);
@@ -52,6 +54,7 @@ app.use('/equipments',equipmentRouter);
 app.use('/repairs',repairRouter);
 app.use('/reports',reportRouter);
 
+app.use('./supply',supplyRouter)
 
 
 app.listen(port, () => {

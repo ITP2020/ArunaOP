@@ -14,34 +14,35 @@ export default class EditSupply extends Component {
     this.onChangePrice = this.onChangePrice.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeQuantity = this.onChangeQuantity.bind(this);
 
     this.state = {
       itemName: "",
       supplierName: "",
       date: "",
       price: "",
+      quantity: "",
       description: "",
       validItemName: true,
       validSupplierName: true,
       validDate: true,
       validPrice: true,
+      validQuantity: true,
       validDescrption: true,
     };
 
     this.supplyReset = {
       itemName: this.state.itemName,
-      
-    }
-
+    };
   }
 
   supplyReset = {
     itemName: "",
-      supplierName: "",
-      date: "",
-      price: "",
-      description: ""
-  }
+    supplierName: "",
+    date: "",
+    price: "",
+    description: "",
+  };
 
   onChangeItemName(e) {
     this.setState({
@@ -65,6 +66,12 @@ export default class EditSupply extends Component {
   onChangePrice(e) {
     this.setState({
       price: e.target.value,
+    });
+  }
+
+  onChangeQuantity(e) {
+    this.setState({
+      quantity: e.target.value,
     });
   }
 
@@ -120,6 +127,18 @@ export default class EditSupply extends Component {
     }
   }
 
+  validateQuantity() {
+    if (this.state.quantity == "") {
+      this.setState({
+        validQuantity: false,
+      });
+    } else {
+      this.setState({
+        validQuantity: true,
+      });
+    }
+  }
+
   validateDate() {
     if (this.state.supplierName == "") {
       this.setState({
@@ -134,7 +153,6 @@ export default class EditSupply extends Component {
 
   onClickReset(e) {
     e.preventDefault();
-
   }
 
   onClickDelete(e) {
@@ -151,18 +169,28 @@ export default class EditSupply extends Component {
       supplierName: this.state.supplierName,
       date: this.state.date,
       price: this.state.price,
+      quantity: this.state.quantity,
       description: this.state.description,
     };
 
     this.validateItemName();
     this.validateSupplier();
     this.validatePrice();
+    this.validateQuantity();
 
     /*axios
-        .post("http://localhost:5000/supply/add", supply)
-        .then((res) => console.log(res.data));
+        .post("http://localhost:5000/supply/edit:id", supply)
+        .then((res) => console.log(res.data));*/
 
-      window.location = "/supplyView";*/
+    if (
+      this.state.validPrice == true &&
+      this.state.validDate == true &&
+      this.state.validDescrption == true &&
+      this.state.validItemName == true &&
+      this.state.validSupplierName == true
+    ) {
+      window.alert("hello");
+    }
   }
 
   render() {
@@ -191,15 +219,15 @@ export default class EditSupply extends Component {
                 <div className="form-group">
                   <label>Supplier Name</label>
                   <select
-                      class="form-control form-control-lg"
-                      value={this.state.supplierName}
-                      onChange={this.onChangeSupplierName}
-                    >
-                      <option value=""></option>
-                      <option value="hello">Hello</option>
-                      <option value="2">1</option>
-                      <option value="1">1</option>
-                    </select>
+                    class="form-control form-control-lg"
+                    value={this.state.supplierName}
+                    onChange={this.onChangeSupplierName}
+                  >
+                    <option value=""></option>
+                    <option value="hello">Hello</option>
+                    <option value="2">1</option>
+                    <option value="1">1</option>
+                  </select>
                   <p className="validateMsg">
                     {this.state.validSupplierName
                       ? ""
@@ -239,6 +267,22 @@ export default class EditSupply extends Component {
                 </div>
 
                 <div className="form-group">
+                  <label>Quantity</label>
+                  <input
+                    type="text"
+                    required
+                    className="form-control"
+                    value={this.state.quantity}
+                    onChange={this.onChangeQuantity}
+                  />
+                  <p className="validateMsg">
+                    {this.state.validQuantity
+                      ? ""
+                      : "Please fill out this this with supplier name"}
+                  </p>
+                </div>
+
+                <div className="form-group">
                   <label>Description: </label>
                   <input
                     type="text"
@@ -250,9 +294,20 @@ export default class EditSupply extends Component {
                   <p className="validateMsg">{this.state.descriptionError}</p>
                 </div>
 
-                <div style={{ display: "block", margin: "0px auto",width:"fit-content" }} className="Row">
+                <div
+                  style={{
+                    display: "block",
+                    margin: "0px auto",
+                    width: "fit-content",
+                  }}
+                  className="Row"
+                >
                   <button
-                    style={{ display: "inline-block", margin: "10px",float:"left"}}
+                    style={{
+                      display: "inline-block",
+                      margin: "10px",
+                      float: "left",
+                    }}
                     type="button"
                     className="btn btn-primary"
                     onClick={this.onSubmit}

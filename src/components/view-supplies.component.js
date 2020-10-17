@@ -103,17 +103,6 @@ export default class ViewSupplies extends Component {
                 </tr>
               </thead>
               <tbody>
-              <tr>
-                      <td scope="row">supply.itemName</td>
-                      <td>supply.supplierName</td>
-                      <td>supply.price</td>
-                      <td>supply.date</td>
-                      <td>supply.description</td>
-                      <td>
-                          <button style={{display:"inline-block"}} className="btn btn-secondary btn-sm">Edit</button>
-                          <button style={{display:"inline-block"}} className="btn btn-danger btn-sm">Delete</button>
-                      </td>
-                    </tr>
                 {this.state.supplies.map((supply) => {
                   return (
                     <tr>
@@ -124,7 +113,7 @@ export default class ViewSupplies extends Component {
                       <td>{supply.description}</td>
                       <td>
                           <button style={{display:"inline-block"}} className="btn btn-secondary btn-sm">Edit</button>
-                          <button style={{display:"inline-block"}} className="btn btn-danger btn-sm">Delete</button>
+                          <button style={{display:"inline-block"}} className="btn btn-danger btn-sm" onClick={this.deleteSupply(supply.id)}>Delete</button>
                       </td>
                     </tr>
                   );

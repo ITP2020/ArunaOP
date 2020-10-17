@@ -14,17 +14,20 @@ export default class AddSupply extends Component {
     this.onChangePrice = this.onChangePrice.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeQuantity = this.onChangeQuantity.bind(this);
 
     this.state = {
       itemName: "",
       supplierName: "",
       date: "",
       price: "",
+      quantity: "",
       description: "",
       validItemName: true,
       validSupplierName: true,
       validDate: true,
       validPrice: true,
+      validQuantity: true,
       validDescrption: true,
     };
   }
@@ -54,6 +57,12 @@ export default class AddSupply extends Component {
     });
   }
 
+  onChangeQuantity(e) {
+    this.setState({
+      quantity: e.target.value,
+    });
+  }
+
   onChangeDescription(e) {
     this.setState({
       description: e.target.value,
@@ -65,6 +74,7 @@ export default class AddSupply extends Component {
       itemName: "Paper",
       supplierName: "Supplier",
       date: "2020-01-01",
+      quantity: "3 bundles",
       price: "1000.00",
       description: "paper resupply",
     });
@@ -94,6 +104,18 @@ export default class AddSupply extends Component {
     }
   }
 
+  validateQuantity() {
+    if (this.state.quantity == "") {
+      this.setState({
+        validQuantity: false,
+      });
+    } else {
+      this.setState({
+        validQuantity: true,
+      });
+    }
+  }
+
   validatePrice() {
     if (this.state.price == "") {
       this.setState({
@@ -119,7 +141,7 @@ export default class AddSupply extends Component {
   }
 
   onAddNewSupplier() {
-    window.location = "./addSupplier"
+    window.location = "./addSupplier";
   }
 
   onSubmit(e) {
@@ -130,6 +152,7 @@ export default class AddSupply extends Component {
       supplierName: this.state.supplierName,
       date: this.state.date,
       price: this.state.price,
+      quantity: this.state.quantity,
       description: this.state.description,
     };
 
@@ -138,14 +161,21 @@ export default class AddSupply extends Component {
     this.validateItemName();
     this.validateSupplier();
     this.validatePrice();
+    this.validateQuantity();
 
-    /*axios
+    if (
+      this.state.validPrice == true &&
+      this.state.validDate == true &&
+      this.state.validDescrption == true &&
+      this.state.validItemName == true &&
+      this.state.validSupplierName == true
+    ) {
+      window.alert("hello");
+    } else {
+      axios
         .post("http://localhost:5000/supply/add", supply)
         .then((res) => console.log(res.data));
-
-      window.location = "/supplyView";*/
-
-      window.location = "/viewSupply"
+    }
   }
 
   render() {
@@ -181,10 +211,13 @@ export default class AddSupply extends Component {
                     >
                       <option value=""></option>
                       <option value="hello">Hello</option>
-                      <option value="2">1</option>
+                      <option value="Supplier">Supplier</option>
                       <option value="1">1</option>
                     </select>
-                    <button className="btn btn-primary" onClick={this.onAddNewSupplier}>
+                    <button
+                      className="btn btn-primary"
+                      onClick={this.onAddNewSupplier}
+                    >
                       Add a new supplier
                     </button>
                   </div>
@@ -207,6 +240,22 @@ export default class AddSupply extends Component {
                     {this.state.validSupplierName
                       ? ""
                       : "Please put a date in this"}
+                  </p>
+                </div>
+
+                <div className="form-group">
+                  <label>Quantity</label>
+                  <input
+                    type="text"
+                    required
+                    className="form-control"
+                    value={this.state.quantity}
+                    onChange={this.onChangeQuantity}
+                  />
+                  <p className="validateMsg">
+                    {this.state.validQuantity
+                      ? ""
+                      : "Please fill out this this with supplier name"}
                   </p>
                 </div>
 
