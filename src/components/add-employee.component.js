@@ -142,14 +142,14 @@ export default class CreateEmployee extends Component {
         if(this.state.empID.length != 10){
             this.setState({empIDError : "Employee ID length is invalid."})
         }
-        if(this.state.contactNo.length != 10){
-            this.setState({contactNoError : "Contact number length is invalid."})
-        }
-        if(this.state.emergency.length != 10){
-            this.setState({emergencyError : "Invalid Emergency."})
-        }
+        //if(this.state.contactNo.length != 10){
+            //this.setState({contactNoError : "Contact number length is invalid."})
+        //}
+        //if(this.state.emergency.length != 10){
+            //this.setState({emergencyError : "Invalid Emergency."})
+        //}
        
-        else if(this.state.fullName.length >= 10 && this.state.nic.length == 10 && this.state.empID.length == 10 && this.state.contactNoError.length == 10 && this.state.emergency.length == 10)
+        else if(this.state.fullName.length >= 10 && this.state.nic.length == 10 && this.state.empID.length == 10)
         {
             axios.post('http://localhost:5000/employee/add', employee)
         .then(res => console.log("sucess")).catch(err=>console.log(err));
