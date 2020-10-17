@@ -68,6 +68,10 @@ import Reports from './components/reports.component';
 //Supply Management
 import AddSupply from './components/add-supply.component'
 import EditSupply from './components/edit-supply.component'
+import ViewSupplies from './components/view-supplies.component'
+import AddSupplier from './components/add-supplier.component'
+import EditSupplier from './components/edit-supplier.component'
+import ViewSuppliers from './components/view-suppliers.component'
 
 
 function App() {
@@ -138,8 +142,10 @@ function App() {
 
     <Route path="/addSupply" component={AddSupply}/>
     <Route path="/editSupply" component={EditSupply}/>
-      
-
+    <Route path="/viewSupply" component={ViewSupplies}/>
+    <Route path="/addSupplier" component={AddSupplier}/>
+    <Route path="/editSupplier" component={EditSupplier}/>
+    <Route path="/viewSuppliers" component={ViewSuppliers}/>
       </div>
       </Router>
       

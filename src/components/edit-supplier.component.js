@@ -4,46 +4,29 @@ import { CardContent } from "@material-ui/core";
 import { Card } from "@material-ui/core";
 import "../css/home.css";
 
-export default class EditSupply extends Component {
+export default class EditSupplier extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeItemName = this.onChangeItemName.bind(this);
+    this.onChangeAddress = this.onChangeAddress.bind(this);
     this.onChangeSupplierName = this.onChangeSupplierName.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
-    this.onChangePrice = this.onChangePrice.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeContact = this.onChangeContact.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      itemName: "",
       supplierName: "",
-      date: "",
-      price: "",
-      description: "",
-      validItemName: true,
+      address: "",
+      contactNumber: "",
+      email: "",
+      validAddress: true,
       validSupplierName: true,
-      validDate: true,
-      validPrice: true,
-      validDescrption: true,
+      validContact: true,
+      validEmail: true,
     };
-
-    this.supplyReset = {
-      itemName: this.state.itemName,
-      
-    }
-
   }
 
-  supplyReset = {
-    itemName: "",
-      supplierName: "",
-      date: "",
-      price: "",
-      description: ""
-  }
-
-  onChangeItemName(e) {
+  onChangeAddress(e) {
     this.setState({
       itemName: e.target.value,
     });
@@ -55,9 +38,9 @@ export default class EditSupply extends Component {
     });
   }
 
-  onChangeDate(e) {
+  onChangeContact(e) {
     this.setState({
-      date: e.target.value,
+      contactNumber: e.target.value,
     });
     console.log(e.target.value);
   }
@@ -68,30 +51,29 @@ export default class EditSupply extends Component {
     });
   }
 
-  onChangeDescription(e) {
+  onChangeEmail(e) {
     this.setState({
-      description: e.target.value,
+      email: e.target.value,
     });
   }
 
   onClickDemo() {
     this.setState({
-      itemName: "Paper",
-      supplierName: "Supplier",
-      date: "2020-01-01",
-      price: "1000.00",
-      description: "paper resupply",
+      supplierName: "Paper",
+      address: "No 100,Demo road,Demo,Sri Lanka",
+      contactNumber: "0701234567",
+      email: "mail@demo.com",
     });
   }
 
-  validateItemName() {
-    if (this.state.itemName == "") {
+  validateAddress() {
+    if (this.state.address == "") {
       this.setState({
-        validItemName: false,
+        validAddress: false,
       });
     } else {
       this.setState({
-        validItemName: true,
+        validAddress: true,
       });
     }
   }
@@ -108,26 +90,26 @@ export default class EditSupply extends Component {
     }
   }
 
-  validatePrice() {
-    if (this.state.price == "") {
+  validateContact() {
+    if (this.state.contactNumber == "") {
       this.setState({
-        validPrice: false,
+        validContact: false,
       });
     } else {
       this.setState({
-        validPrice: true,
+        validContact: true,
       });
     }
   }
 
-  validateDate() {
-    if (this.state.supplierName == "") {
+  validateEmail() {
+    if (this.state.email == "") {
       this.setState({
-        validSupplierName: false,
+        validEmail: false,
       });
     } else {
       this.setState({
-        validSupplierName: true,
+        validEmail: true,
       });
     }
   }
@@ -146,17 +128,25 @@ export default class EditSupply extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const supply = {
-      itemName: this.state.itemName,
+    const supplier = {
+      address: this.state.address,
       supplierName: this.state.supplierName,
-      date: this.state.date,
-      price: this.state.price,
-      description: this.state.description,
+      contactNumber: this.state.contactNumber,
+      email: this.state.email,
     };
 
-    this.validateItemName();
+    console.log(this.state.supplierName);
+
+    this.validateAddress();
     this.validateSupplier();
-    this.validatePrice();
+    this.validateContact();
+    this.validateEmail();
+
+    if (!this.state.validEmail || !this.state.validContact) {
+      window.confirm(
+        "Are you sure to submit the for without filling all the fields"
+      );
+    }
 
     /*axios
         .post("http://localhost:5000/supply/add", supply)
@@ -171,35 +161,17 @@ export default class EditSupply extends Component {
         <Card className="addcard">
           <div className="formdiv">
             <CardContent>
-              <h3>Edit Supply</h3>
+              <h3>Add Supplier</h3>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <label>Item name</label>
+                  <label>Supplier name</label>
                   <input
                     type="text"
                     required
                     className="form-control"
-                    value={this.state.itemName}
-                    onChange={this.onChangeItemName}
+                    value={this.state.supplierName}
+                    onChange={this.onChangeSupplierName}
                   />
-                  <p className="validateMsg">
-                    {this.state.validItemName
-                      ? ""
-                      : "Please fill out this with item name"}
-                  </p>
-                </div>
-                <div className="form-group">
-                  <label>Supplier Name</label>
-                  <select
-                      class="form-control form-control-lg"
-                      value={this.state.supplierName}
-                      onChange={this.onChangeSupplierName}
-                    >
-                      <option value=""></option>
-                      <option value="hello">Hello</option>
-                      <option value="2">1</option>
-                      <option value="1">1</option>
-                    </select>
                   <p className="validateMsg">
                     {this.state.validSupplierName
                       ? ""
@@ -207,47 +179,50 @@ export default class EditSupply extends Component {
                   </p>
                 </div>
                 <div className="form-group">
-                  <label>Date</label>
-                  <input
-                    type="date"
-                    required
-                    className="form-control"
-                    value={this.state.date}
-                    onChange={this.onChangeDate}
-                  />
-                  <p className="validateMsg">
-                    {this.state.validSupplierName
-                      ? ""
-                      : "Please put a date in this"}
-                  </p>
-                </div>
-
-                <div className="form-group">
-                  <label>Price</label>
-                  <input
-                    type="number"
-                    required
-                    className="form-control"
-                    value={this.state.price}
-                    onChange={this.onChangePrice}
-                  />
-                  <p className="validateMsg">
-                    {this.state.validPrice
-                      ? ""
-                      : "Please fill out this this with supplier name"}
-                  </p>
-                </div>
-
-                <div className="form-group">
-                  <label>Description: </label>
+                  <label>Address</label>
                   <input
                     type="text"
                     required
                     className="form-control"
-                    value={this.state.description}
-                    onChange={this.onChangeDescription}
+                    value={this.state.address}
+                    onChange={this.onChangeAddress}
                   />
-                  <p className="validateMsg">{this.state.descriptionError}</p>
+                  <p className="validateMsg">
+                    {this.state.validAddress
+                      ? ""
+                      : "Please fill out this with address"}
+                  </p>
+                </div>
+                <div className="form-group">
+                  <label>Contact Number</label>
+                  <input
+                    type="text"
+                    required
+                    className="form-control"
+                    value={this.state.contactNumber}
+                    onChange={this.onChangeContact}
+                  />
+                  <p className="validateMsg">
+                    {this.state.validContact
+                      ? ""
+                      : "Please fill out this with contact number"}
+                  </p>
+                </div>
+
+                <div className="form-group">
+                  <label>E mail</label>
+                  <input
+                    type="text"
+                    required
+                    className="form-control"
+                    value={this.state.email}
+                    onChange={this.onChangeEmail}
+                  />
+                  <p className="validateMsg">
+                    {this.state.validEmail
+                      ? ""
+                      : "Please fill out this this with e-mail"}
+                  </p>
                 </div>
 
                 <div style={{ display: "block", margin: "0px auto",width:"fit-content" }} className="Row">
@@ -280,7 +255,7 @@ export default class EditSupply extends Component {
 
               <div className="form-group">
                 <button
-                  style={{ display: "block", margin: "0px auto" }}
+                  style={{ display: "block", margin: "20px auto" }}
                   className="btn btn-secondary"
                   onClick={() => this.onClickDemo()}
                 >
