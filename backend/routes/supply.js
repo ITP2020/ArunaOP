@@ -9,12 +9,12 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
-  const itemName = String(req.body.itemName);
-  const supplierName = String(req.body.supplierName);
-  const price = String(req.body.price);
-  const quantity = String(req.body.quantity);
-  const date = String(req.body.date);
-  const description = String(req.body.description);
+  const itemName = (req.body.itemName);
+  const supplierName = (req.body.supplierName);
+  const price = (req.body.price);
+  const quantity = (req.body.quantity);
+  const date = (req.body.date);
+  const description = (req.body.description);
 
   const newSupplies = new supply({
     itemName,
