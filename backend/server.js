@@ -35,7 +35,7 @@ const equipmentRouter = require('./routes/equipments');
 const repairRouter = require('./routes/repairs');
 const reportRouter = require('./routes/reports');
 
-const supplyRouter = require('./routes/supply')
+const supplyRouter = require('./routes/supply');
 
 
 
@@ -55,7 +55,6 @@ app.use('/repairs',repairRouter);
 app.use('/reports',reportRouter);
 
 app.use('./supply',supplyRouter)
-
 
 app.listen(port, () => {
     console.log(`Server is running on port:-${port}`);

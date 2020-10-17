@@ -160,19 +160,22 @@ export default class AddSupply extends Component {
     this.validateSupplier();
     this.validatePrice();
     this.validateQuantity();
+    this.validateDate();
 
     if (
-      this.state.validPrice == true &&
-      this.state.validDate == true &&
-      this.state.validDescrption == true &&
-      this.state.validItemName == true &&
-      this.state.validSupplierName == true
-    ) {
+      this.state.validPrice == true && this.state.validDate == true && this.state.validDescrption == true && this.state.validItemName == true && this.state.validSupplierName == true) {
       window.alert("hello");
+      console.log(this.state.validDate,this.state.validItemName);
     } else {
       axios
         .post("http://localhost:5000/supply/add", supply)
-        .then(res => console.log("sucess")).catch(err=>console.log(err));
+        .then((res) => {
+          alert("Insert Success");
+          window.location = "/viewSupply";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 

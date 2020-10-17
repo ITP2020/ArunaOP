@@ -7,14 +7,14 @@ const supplySchema = new Schema({
     supplierName : { type : String, required : true},
     price : {type : String, required : true},
     date: {type: String, required: true },
+    quantity: {type: String, required: true},
     description: {type: String, required: false}
      
 },{
         timestamps : true,
     
 });
-//utilityBillSchema.index({ year: 1, month: 1 }, { unique: true })
 
-const supply = mongoose.model('Supply', supplySchema);
+const supply = mongoose.model('supply', supplySchema);
 
 module.exports = supply;
