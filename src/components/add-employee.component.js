@@ -109,8 +109,8 @@ export default class CreateEmployee extends Component {
             designation : "Labour",
             section : "Equipment",
             address : "Gampaha",
-            contactNo : "0775642134",
-            emergency : "0761243212",
+            contactNo : 77564213,
+            emergency : 76124321,
     
             
         })
@@ -142,12 +142,12 @@ export default class CreateEmployee extends Component {
         if(this.state.empID.length != 10){
             this.setState({empIDError : "Employee ID length is invalid."})
         }
-        //if(this.state.contactNo.length != 10){
-            //this.setState({contactNoError : "Contact number length is invalid."})
-        //}
-        //if(this.state.emergency.length != 10){
-            //this.setState({emergencyError : "Invalid Emergency."})
-        //}
+        if(this.state.contactNo.length != 10){
+            this.setState({contactNoError : "Contact number length is invalid."})
+        }
+        if(this.state.emergency.length != 10){
+            this.setState({emergencyError : "Invalid Emergency."})
+        }
        
         else if(this.state.fullName.length >= 10 && this.state.nic.length == 10 && this.state.empID.length == 10)
         {
@@ -182,6 +182,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.fullName}
                         onChange = {this.onChangefullName}
                         />
+                        <p className = "validateMsg">{this.state.nameError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -192,6 +193,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.nic}
                         onChange = {this.onChangenic}
                         />
+                        <p className = "validateMsg">{this.state.nicError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -202,6 +204,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.empID}
                         onChange = {this.onChangeempID}
                         />
+                        <p className = "validateMsg">{this.state.empIDError}</p>
                     </div>
                     <div className = "form-group">
                         <label>DOB : </label>
@@ -247,6 +250,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.contactNo}
                         onChange = {this.onChangecontact}
                         />
+                        <p className = "validateMsg">{this.state.contactNoError}</p>
                     </div>
                     <div className = "form-group">
                         <label>Emeregency : </label>
@@ -256,6 +260,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.emergency}
                         onChange = {this.onChangeemergency}
                         />
+                        <p className = "validateMsg">{this.state.emergencyError}</p>
                     </div>
 
 
@@ -263,6 +268,7 @@ export default class CreateEmployee extends Component {
                         <input type = "submit" value = "Add Employee" className = "btn-bill" />
                     </div>
                 </form>
+
                 <div className = "form-group">
                     <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
                     </div>
