@@ -16,7 +16,7 @@ router.route("/add").post((req, res) => {
   const date = String(req.body.date);
   const description = String(req.body.description);
 
-  const newSupplies = new Water({
+  const newSupplies = new supply({
     itemName,
     supplierName,
     price,
