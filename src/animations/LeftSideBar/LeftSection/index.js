@@ -122,9 +122,10 @@ const LeftSection = () => {
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+    <Dropdown.Item href="/addSupply">Add Supply</Dropdown.Item>
+    <Dropdown.Item href="/viewSupply">View Supplies</Dropdown.Item>
+    <Dropdown.Item href="/addSupplier">Add Supplier</Dropdown.Item>
+    <Dropdown.Item href="/viewSuppliers">View Supplier</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
 
