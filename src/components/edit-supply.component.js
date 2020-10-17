@@ -176,16 +176,13 @@ export default class EditSupply extends Component {
                 </div>
                 <div className="form-group">
                   <label>Supplier Name</label>
-                  <select
-                      class="form-control form-control-lg"
-                      value={this.state.supplierName}
-                      onChange={this.onChangeSupplierName}
-                    >
-                      <option value=""></option>
-                      <option value="hello">Hello</option>
-                      <option value="2">1</option>
-                      <option value="1">1</option>
-                    </select>
+                  <input
+                    type="text"
+                    required
+                    className="form-control"
+                    value={this.state.supplierName}
+                    onChange={this.onChangeSupplierName}
+                  />
                   <p className="validateMsg">
                     {this.state.validSupplierName
                       ? ""
