@@ -6,7 +6,8 @@ import '../css/table.scss'
 import '../css/transaction.css'
 import { CardContent } from '@material-ui/core';
 import { Card } from '@material-ui/core';
-
+import jsPDF from 'jspdf'; 
+import 'jspdf-autotable';
 
 
 
@@ -64,6 +65,46 @@ export default class EmployeeList extends Component {
             })
         }
 
+        exportEmployee = () => {
+            console.log( "Export PDF" )
+    
+    
+            const unit = "pt";
+            const size = "A3"; 
+            const orientation = "landscape"; 
+            const marginLeft = 40;
+            const doc = new jsPDF( orientation, unit, size );
+    
+            const title = "Employee List Report ";
+            const headers = [["Full Name","NIC","EMP ID","Date of Birth","Designation","Section","Address","Contact No","Emergancy No"]];
+    
+            const emp = this.state.employee.map(
+                Employee=>[
+                    Employee.fullName,
+                    Employee.nic,
+                    Employee.empID,
+                    Employee.dob.substring(0,10),
+                    Employee.designation,
+                    Employee.section,
+                    Employee.address,
+                    Employee.contactNo,
+                    Employee.emergency,
+                ]
+            );
+    
+            let content = {
+                startY: 50,
+                head: headers,
+                body:emp
+            };
+            doc.setFontSize( 20 );
+            doc.text( title, marginLeft, 40 );
+            require('jspdf-autotable');
+            doc.autoTable( content );
+            doc.save( "Employee-list.pdf" )
+        }
+
+
     render() {
         return (
             <div >
@@ -73,7 +114,8 @@ export default class EmployeeList extends Component {
                 <table className = "topic">
                     <tr>
                         <th><h3>Employee Details</h3></th>
-                        <td><button className = "add" ><Link to = {"/createemployee" } className = "linkaddE">Add Employee</Link></button></td>
+                        <td><button className = "add" ><Link to = {"/createemployee" } className = "linkaddE">Add Employee</Link></button>
+                        <button className = "download" onClick={() => this.exportEmployee()}>Download Report Here</button></td>
                     </tr>
                 </table>
             

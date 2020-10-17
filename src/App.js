@@ -25,7 +25,7 @@ import CreateLeave from "./components/create-leave.component";
 import CreateSalary from "./components/create-salary.component";
 import SalaryList from "./components/salary-list.component";
 import EditSalary from './components/edit-salary.component';
-
+//Employee Managemnt
 import EmployeeList from "./components/employee-list.component";
 import EditEmployee from "./components/edit-employee.component";
 import CreateEmployee from "./components/add-employee.component";

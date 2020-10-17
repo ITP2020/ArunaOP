@@ -36,7 +36,12 @@ export default class CreateEmployee extends Component {
             section : '',
             address : '',
             contactNo : 0,
-            emergency : 0
+            emergency : 0,
+            nameError : '',
+            nicError : '',
+            empIDError : '',
+            contactNoError : '',
+            emergencyError : ''
             
         }
     }
@@ -95,6 +100,22 @@ export default class CreateEmployee extends Component {
         });
     }
 
+    demoClicked(){
+        this.setState({
+            fullName : "Gihan Perera",
+            nic : "931524475V",
+            empID : 32984,
+            dob : new Date(),
+            designation : "Labour",
+            section : "Equipment",
+            address : "Gampaha",
+            contactNo : 77564213,
+            emergency : 76124321,
+    
+            
+        })
+    }
+
     onSubmit(e){
         e.preventDefault();
 
@@ -112,10 +133,30 @@ export default class CreateEmployee extends Component {
 
         console.log(employee);
 
-        axios.post('http://localhost:5000/employee/add', employee)
+        if(this.state.fullName.length < 6){
+            this.setState({nameError : "Name should be longer than 6 characters."})
+        }
+        if(this.state.nic.length != 10){
+            this.setState({nicError : "NIC length is invalid."})
+        }
+        if(this.state.empID.length != 10){
+            this.setState({empIDError : "Employee ID length is invalid."})
+        }
+        if(this.state.contactNo.length != 10){
+            this.setState({contactNoError : "Contact number length is invalid."})
+        }
+        if(this.state.emergency.length != 10){
+            this.setState({emergencyError : "Invalid Emergency."})
+        }
+       
+        else if(this.state.fullName.length >= 10 && this.state.nic.length == 10 && this.state.empID.length == 10 && this.state.contactNoError.length == 10 && this.state.emergency.length == 10)
+        {
+            axios.post('http://localhost:5000/employee/add', employee)
         .then(res => console.log("sucess")).catch(err=>console.log(err));
 
         window.location = '/employee';
+        }
+        
     }
 
     
@@ -141,6 +182,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.fullName}
                         onChange = {this.onChangefullName}
                         />
+                        <p className = "validateMsg">{this.state.nameError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -151,6 +193,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.nic}
                         onChange = {this.onChangenic}
                         />
+                        <p className = "validateMsg">{this.state.nicError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -161,6 +204,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.empID}
                         onChange = {this.onChangeempID}
                         />
+                        <p className = "validateMsg">{this.state.empIDError}</p>
                     </div>
                     <div className = "form-group">
                         <label>DOB : </label>
@@ -206,6 +250,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.contactNo}
                         onChange = {this.onChangecontact}
                         />
+                        <p className = "validateMsg">{this.state.contactNoError}</p>
                     </div>
                     <div className = "form-group">
                         <label>Emeregency : </label>
@@ -215,6 +260,7 @@ export default class CreateEmployee extends Component {
                         value = {this.state.emergency}
                         onChange = {this.onChangeemergency}
                         />
+                        <p className = "validateMsg">{this.state.emergencyError}</p>
                     </div>
 
 
@@ -222,6 +268,10 @@ export default class CreateEmployee extends Component {
                         <input type = "submit" value = "Add Employee" className = "btn-bill" />
                     </div>
                 </form>
+
+                <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
+                    </div>
 
 </CardContent>
 </div>
