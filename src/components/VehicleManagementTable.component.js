@@ -6,6 +6,8 @@ import { Button, CardContent } from "@material-ui/core";
 import { Card } from "@material-ui/core";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {  Component } from "react";
+import jsPDF from 'jspdf'; 
+import 'jspdf-autotable';
 
 
 
@@ -40,7 +42,7 @@ searchVehicleList(){
             return (
                 <tr>
                 <td style={{ width: "12.5%" }}>{currentvehicle.plateNo}</td>
-                <td style={{ width: "12.5%" }}>{currentvehicle.brand}</td>
+                <td style={{ width: "12.5%" }}>{currentvehicle.plateNo}</td>
                 <td style={{ width: "12.5%" }}>{currentvehicle.vehicle}</td>
                 <td style={{ width: "12.5%" }}>{currentvehicle.year}</td>
                 <td style={{ width: "12.5%" }}>{currentvehicle.type}</td>
@@ -156,6 +158,58 @@ vehicleList() {
     });
 }
 
+exportVehicle = () => {
+    console.log( "SSSSSSSSSS" )
+
+
+    const unit = "pt";
+    const size = "A3"; 
+    const orientation = "portrait"; 
+    const marginLeft = 40;
+    const doc = new jsPDF( orientation, unit, size );
+
+    const title = "Vehicle Report ";
+    const headers = [["Plate No.","Brand","Model","Year","Type","Purchase Date"]];
+
+    const elec = this.state.vehicle.map(
+        Vehicle=>[
+            Vehicle.plateNo,
+            Vehicle.brand,
+            Vehicle.vehicle,
+            Vehicle.year,
+            Vehicle.type,
+            Vehicle.purchaseDate.substring(0, 10)
+        ]
+    );
+
+    let content = {
+        startY: 50,
+        head: headers,
+        body:elec
+    };
+    doc.setFontSize( 20 );
+    doc.text( title, marginLeft, 40 );
+    require('jspdf-autotable');
+    doc.autoTable( content );
+    doc.save( "Vehicle Report.pdf" )
+}
+
+filterContent(vehicle, searchTerm){
+    const result = vehicle.filter((vehicle) => vehicle.title.includes(searchTerm));
+    this.setState({vehicle : result})
+}
+
+handleTextSearch = (e) =>{
+    console.log(e.currentTarget.value);
+    const searchTerm = e.currentTarget.value;
+
+    axios.get('http://localhost:5000/vehicle/')
+.then(res => {
+    if(res.data.success){
+        this.filterContent(res.data,searchTerm)
+    }
+})}
+
 render() {
     return (
 
@@ -174,9 +228,11 @@ render() {
                     Add Vehicle
                 </Link>
                 </button>
-             {/* <!-- search Vehicle modal --> */}
-            <div className="col-md-9">
-                    <input style={{ width: "200px", marginTop:"10px"}}
+                <button className = "download" onClick={() => this.exportVehicle()}>Download Report Here</button>
+            </td>
+            </tr>
+            <div className="searchBar">
+                    <input
                     class="form-control"
                     type="text"
                     placeholder="Search by Vehicle Brand"
@@ -188,8 +244,6 @@ render() {
                     }}
                     />
             </div>
-            </td>
-            </tr>
         </table>
         <CardContent>
             <table className="table table-fixed">
