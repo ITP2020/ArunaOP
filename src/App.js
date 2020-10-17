@@ -92,7 +92,7 @@ function App() {
 
       <Route path="/leaves" exact component={LeaveList} />
       <Route path="/edit/:id" component={EditLeave} />
-      <Route path="/createLeave" component={CreateLeave} />
+      <Route path="/create" component={CreateLeave} />
     
       <Route path="/createSalary" component={CreateSalary} />
       <Route path="/salary"exact component={SalaryList} />
@@ -129,7 +129,7 @@ function App() {
       <Route path="/equipment" exact component ={EquipmentList}/>
     <Route path="/editEquipment/:id" component ={EditEquipment}/>
     <Route path="/repedit/:id" component={EditRepair}/>
-    <Route path="/createEquipment" component={CreateEquipment}/>
+    <Route path="/create" component={CreateEquipment}/>
     <Route path="/user" component={Createuser}/>
     <Route path="/repair" component={CreateRepair}/>
     <Route path="/replist" component={RepairList}/>

@@ -108,9 +108,9 @@ const LeftSection = () => {
   <Dropdown.Menu>
     <Dropdown.Item href="/user">Add User</Dropdown.Item>
     <Dropdown.Item href="/equipment">Equipment Details</Dropdown.Item>
-    
+    <Dropdown.Item href="/create">Add Equipments</Dropdown.Item>
     <Dropdown.Item href="/replist">Repair Details</Dropdown.Item>
-    
+    <Dropdown.Item href="/repair">Add Repair</Dropdown.Item>
     <Dropdown.Item href="/report">Generate Report</Dropdown.Item>
     
   </Dropdown.Menu>

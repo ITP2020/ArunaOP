@@ -100,7 +100,7 @@ export default class LeaveList extends Component {
             <table className = "topic">
                     <tr>
                         <th><h3>Leave Details</h3></th>
-                        <td><button className = "add" ><Link to = {"/createLeave" } className = "linkaddE">Add Leave Request</Link></button>
+                        <td><button className = "add" ><Link to = {"/create" } className = "linkaddE">Add Leave Request</Link></button>
                         <button className = "download" onClick={() => this.exportLeave()}>Download Report Here</button></td>
                     </tr>
                 </table>

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
-import { CardContent } from '@material-ui/core';
-import { Card } from '@material-ui/core';
 
 export default class CreateEquipment extends Component {
 
@@ -92,14 +90,8 @@ export default class CreateEquipment extends Component {
     render() {
         return (
             <div>
-              <Card className = "addcard" >
-            
-            <div className = "formdiv">
-            <CardContent >
-
-    <h2 className = "billheading"><b>Add New Equipment</b></h2>
-    <h5><i>You can add equipments from here</i></h5>
-
+    <h1><b>Add New Equipment</b></h1>
+    <h3><i>You can add equipments from here</i></h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Supervisor: </label>
@@ -147,12 +139,9 @@ export default class CreateEquipment extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Add this equipment" className="btn-bill" />
+          <input type="submit" value="Add this equipment" className="btn btn-primary" />
         </div>
       </form>
-      </CardContent>
-      </div>
-      </Card>
             </div>
         )
     }
