@@ -129,7 +129,7 @@ export default class AddSupply extends Component {
       description: this.state.description,
     };
 
-    console.log(this.state.date);
+    console.log(this.state.supplierName);
 
     this.validateItemName();
     this.validateSupplier();
@@ -167,13 +167,21 @@ export default class AddSupply extends Component {
                 </div>
                 <div className="form-group">
                   <label>Supplier Name</label>
-                  <input
-                    type="text"
-                    required
-                    className="form-control"
-                    value={this.state.supplierName}
-                    onChange={this.onChangeSupplierName}
-                  />
+                  <div className="form-row">
+                    <select
+                      class="form-control form-control-lg col-md-6"
+                      value={this.state.supplierName}
+                      onChange={this.onChangeSupplierName}
+                    >
+                      <option value=""></option>
+                      <option value="hello">Hello</option>
+                      <option value="2">1</option>
+                      <option value="1">1</option>
+                    </select>
+                    <button className="btn btn-primary">
+                      Add a new supplier
+                    </button>
+                  </div>
                   <p className="validateMsg">
                     {this.state.validSupplierName
                       ? ""

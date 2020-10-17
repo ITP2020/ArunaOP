@@ -140,8 +140,6 @@ export default class EditSupply extends Component {
       description: this.state.description,
     };
 
-    console.log(this.state.date);
-
     this.validateItemName();
     this.validateSupplier();
     this.validatePrice();
