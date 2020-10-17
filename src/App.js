@@ -67,7 +67,6 @@ import Reports from './components/reports.component';
 
 //Supply Management
 import AddSupply from './components/add-supply.component'
-import EditSupply from './components/edit-supply.component'
 
 
 function App() {
@@ -137,7 +136,6 @@ function App() {
     <Route path="/report" component={Reports}/>
 
     <Route path="/addSupply" component={AddSupply}/>
-    <Route path="/editSupply" component={EditSupply}/>
       
 
       </div>
