@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import { CardContent } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 
 
 const Repair = props => (
@@ -10,7 +12,7 @@ const Repair = props => (
         <td>{props.repairs.fault}</td>
         <td>{props.repairs.date.substring(0,10)}</td>
         <td>
-        <Link to={"/repedit/"+props.repairs._id}>edit</Link> || <a href="#" onClick={() => { props.deleteRepair(props.repairs._id) }}>delete</a>
+        <button className = 'edit'><Link to={"/repedit/"+props.repairs._id} className="link">Edit</Link></button>  <button className = 'delete' onClick={() => { props.deleteRepair(props.repairs._id) }}>Delete</button>
       </td>
     </tr>
   )
@@ -58,16 +60,26 @@ export default class RepairList extends Component {
     render() {
         return (
             <div>
-            <h1><b>Repair List</b></h1>
-            <h3><i>You can edit or delete repair equipmets from here</i></h3>
-            <table className="table">
-              <thead className="thead-light">
+
+<Card className = "addcard">
+                <table className = "topic">
+                    <tr>
+                        <th><h2><b>Equipment Repair List</b></h2>
+                        <h5><i>You can edit or delete repair equipmets from here</i></h5></th>
+                        <td><button className = "add" ><Link to = {"/repair" } className = "linkaddE">Add Equipemnt Repair</Link></button>
+                        </td>
+                    </tr>
+                    </table>
+
+            <CardContent>
+            <table className="tbtransaction">
+              <thead >
                 <tr>
-                  <th><b>Supervisor</b></th>
-                  <th><b>Model</b></th>
-                  <th><b>Fault</b></th>
-                  <th><b>Date</b></th>
-                  <th><b>Edit or Delete</b></th>
+                  <th className = "tbhead">Supervisor</th>
+                  <th className = "tbhead">Model</th>
+                  <th className = "tbhead">Fault</th>
+                  <th className = "tbhead">Date</th>
+                  <th className = "tbhead">Edit or Delete</th>
                 
                 </tr>
               </thead>
@@ -75,6 +87,8 @@ export default class RepairList extends Component {
                 { this.repairList() }
               </tbody>
             </table>
+            </CardContent>
+            </Card>
           </div>
         )
     }

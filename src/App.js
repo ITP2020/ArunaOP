@@ -25,7 +25,7 @@ import CreateLeave from "./components/create-leave.component";
 import CreateSalary from "./components/create-salary.component";
 import SalaryList from "./components/salary-list.component";
 import EditSalary from './components/edit-salary.component';
-//Employee Managemnt
+
 import EmployeeList from "./components/employee-list.component";
 import EditEmployee from "./components/edit-employee.component";
 import CreateEmployee from "./components/add-employee.component";
@@ -65,6 +65,9 @@ import EditRepair from './components/edit-repair.component';
 //import LeftSideBar from './animations/LeftSideBar';
 import Reports from './components/reports.component';
 
+//Supply Management
+import AddSupply from './components/add-supply.component'
+import EditSupply from './components/edit-supply.component'
 
 
 function App() {
@@ -90,7 +93,7 @@ function App() {
 
       <Route path="/leaves" exact component={LeaveList} />
       <Route path="/edit/:id" component={EditLeave} />
-      <Route path="/create" component={CreateLeave} />
+      <Route path="/createLeave" component={CreateLeave} />
     
       <Route path="/createSalary" component={CreateSalary} />
       <Route path="/salary"exact component={SalaryList} />
@@ -127,11 +130,14 @@ function App() {
       <Route path="/equipment" exact component ={EquipmentList}/>
     <Route path="/editEquipment/:id" component ={EditEquipment}/>
     <Route path="/repedit/:id" component={EditRepair}/>
-    <Route path="/create" component={CreateEquipment}/>
+    <Route path="/createEquipment" component={CreateEquipment}/>
     <Route path="/user" component={Createuser}/>
     <Route path="/repair" component={CreateRepair}/>
     <Route path="/replist" component={RepairList}/>
     <Route path="/report" component={Reports}/>
+
+    <Route path="/addSupply" component={AddSupply}/>
+    <Route path="/editSupply" component={EditSupply}/>
       
 
       </div>

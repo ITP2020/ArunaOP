@@ -3,6 +3,9 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios'
 
+import { CardContent } from '@material-ui/core';
+import { Card } from '@material-ui/core';
+
 export default class CreateRepair extends Component {
 
     constructor(props){
@@ -66,6 +69,12 @@ export default class CreateRepair extends Component {
             date:date
         });
     }
+    demoClicked(){
+      this.setState({
+          model : "Ca",
+          fault : "Not"
+      })
+  }
 
     onSubmit(e){
 
@@ -80,18 +89,32 @@ export default class CreateRepair extends Component {
         }
 
         console.log(repair);
+        if (this.state.model.length <= 2 ){
+          this.setState({modelError : "Model must longer than 2 characters"})
+        }
+        else if (this.state.fault.length <= 5 ){
+          this.setState({faultError : "Fault must be in brief more than 5 characters"})
+        }
+        else if(this.state.model.length > 2 && this.state.fault.length > 3){
 
         axios.post('http://localhost:5000/repairs/add',repair)
         .then(res => console.log(res.data));
 
         window.location ='/replist'
+        }
     }
     
     render() {
         return (
             <div>
-    <h1><b>Add To Repair</b></h1>
-    <h3><i>You can add repairs from here</i></h3>
+            
+            <Card className = "addcard" >
+            
+                <div className = "formdiv">
+                <CardContent>
+            
+    <h2 className = "billheading"><b>Add To Repair</b></h2>
+    <h5><i>You can add repairs from here</i></h5>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Supervisor: </label>
@@ -118,15 +141,18 @@ export default class CreateRepair extends Component {
               value={this.state.model}
               onChange={this.onChangeModel}
               />
+              <p className = "validateMsg">{this.state.modelError}</p>
         </div>
         <div className="form-group">
           <label>Fault:</label>
           <input 
               type="text" 
+              required
               className="form-control"
               value={this.state.fault}
               onChange={this.onChangeFault}
               />
+              <p className = "validateMsg">{this.state.faultError}</p>
         </div>
         <div className="form-group">
           <label>Date: </label>
@@ -139,9 +165,16 @@ export default class CreateRepair extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Add to repair equipment" className="btn btn-primary" />
+          <input type="submit" value="Add Repair Details" className="btn-bill" />
+        </div>
+
+        <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
         </div>
       </form>
+      </CardContent>
+      </div>
+      </Card>
             </div>
         )
     }

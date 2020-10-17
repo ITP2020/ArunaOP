@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
+import { CardContent } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 
 export default class CreateEquipment extends Component {
 
@@ -67,6 +69,13 @@ export default class CreateEquipment extends Component {
         });
     }
 
+    demoClicked(){
+      this.setState({
+          model : "Ca",
+          country : "Ru"
+      })
+  }
+
     onSubmit(e){
 
         e.preventDefault();
@@ -81,17 +90,35 @@ export default class CreateEquipment extends Component {
 
         console.log(equipment);
 
+        if (this.state.model.length <= 2 ){
+          this.setState({modelError : "Model must longer than 2 characters"})
+        }
+        else if (this.state.country.length <= 3 ){
+          this.setState({countryError : "Country must longer than 3 characters"})
+        }
+        else if(this.state.model.length > 2 && this.state.country.length > 3){
+
         axios.post('http://localhost:5000/equipments/add',equipment)
         .then(res => console.log(res.data));
 
-        window.location ='/'
+
+        window.location ='/equipment'
+        }
+      
+        
     }
     
     render() {
         return (
             <div>
-    <h1><b>Add New Equipment</b></h1>
-    <h3><i>You can add equipments from here</i></h3>
+              <Card className = "addcard" >
+            
+            <div className = "formdiv">
+            <CardContent >
+
+    <h2 className = "billheading"><b>Add New Equipment</b></h2>
+    <h5><i>You can add equipments from here</i></h5>
+
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Supervisor: </label>
@@ -118,15 +145,19 @@ export default class CreateEquipment extends Component {
               value={this.state.model}
               onChange={this.onChangeModel}
               />
+              <p className = "validateMsg">{this.state.modelError}</p>
         </div>
         <div className="form-group">
           <label>Country:</label>
           <input 
               type="text" 
+              required
               className="form-control"
               value={this.state.country}
               onChange={this.onChangeCountry}
               />
+              <p className = "validateMsg">{this.state.countryError}</p>
+        
         </div>
         <div className="form-group">
           <label>Date: </label>
@@ -139,9 +170,16 @@ export default class CreateEquipment extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Add this equipment" className="btn btn-primary" />
+          <input type="submit" value="Add this equipment" className="btn-bill" />
+        </div>
+
+        <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
         </div>
       </form>
+      </CardContent>
+      </div>
+      </Card>
             </div>
         )
     }
