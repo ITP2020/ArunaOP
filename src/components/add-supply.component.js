@@ -140,6 +140,8 @@ export default class AddSupply extends Component {
         .then((res) => console.log(res.data));
 
       window.location = "/supplyView";*/
+
+      window.location = "/viewSupply"
   }
 
   render() {
