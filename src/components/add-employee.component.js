@@ -109,8 +109,8 @@ export default class CreateEmployee extends Component {
             designation : "Labour",
             section : "Equipment",
             address : "Gampaha",
-            contactNo : 0775642134,
-            emergency : 0761243212,
+            contactNo : "0775642134",
+            emergency : "0761243212",
     
             
         })
