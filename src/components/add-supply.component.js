@@ -118,6 +118,10 @@ export default class AddSupply extends Component {
     }
   }
 
+  onAddNewSupplier() {
+    window.location = "./addSupplier"
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -180,7 +184,7 @@ export default class AddSupply extends Component {
                       <option value="2">1</option>
                       <option value="1">1</option>
                     </select>
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary" onClick={this.onAddNewSupplier}>
                       Add a new supplier
                     </button>
                   </div>
