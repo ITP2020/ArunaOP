@@ -69,6 +69,12 @@ export default class CreateRepair extends Component {
             date:date
         });
     }
+    demoClicked(){
+      this.setState({
+          model : "Ca",
+          fault : "Not"
+      })
+  }
 
     onSubmit(e){
 
@@ -83,11 +89,19 @@ export default class CreateRepair extends Component {
         }
 
         console.log(repair);
+        if (this.state.model.length <= 2 ){
+          this.setState({modelError : "Model must longer than 2 characters"})
+        }
+        else if (this.state.fault.length <= 5 ){
+          this.setState({faultError : "Fault must be in brief more than 5 characters"})
+        }
+        else if(this.state.model.length > 2 && this.state.fault.length > 3){
 
         axios.post('http://localhost:5000/repairs/add',repair)
         .then(res => console.log(res.data));
 
         window.location ='/replist'
+        }
     }
     
     render() {
@@ -127,15 +141,18 @@ export default class CreateRepair extends Component {
               value={this.state.model}
               onChange={this.onChangeModel}
               />
+              <p className = "validateMsg">{this.state.modelError}</p>
         </div>
         <div className="form-group">
           <label>Fault:</label>
           <input 
               type="text" 
+              required
               className="form-control"
               value={this.state.fault}
               onChange={this.onChangeFault}
               />
+              <p className = "validateMsg">{this.state.faultError}</p>
         </div>
         <div className="form-group">
           <label>Date: </label>
@@ -149,6 +166,10 @@ export default class CreateRepair extends Component {
 
         <div className="form-group">
           <input type="submit" value="Add Repair Details" className="btn-bill" />
+        </div>
+
+        <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
         </div>
       </form>
       </CardContent>
