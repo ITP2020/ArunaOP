@@ -118,6 +118,10 @@ export default class AddSupply extends Component {
     }
   }
 
+  onClickAddSupplier() {
+    window.location = "./addSupplier"
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -135,13 +139,18 @@ export default class AddSupply extends Component {
     this.validateSupplier();
     this.validatePrice();
 
+
+    if (window.confirm("Are you sure to submit this? ") ) {
+      window.location = "/viewSupply"
+    }
+
     /*axios
         .post("http://localhost:5000/supply/add", supply)
         .then((res) => console.log(res.data));
 
       window.location = "/supplyView";*/
 
-      window.location = "/viewSupply"
+      
   }
 
   render() {
@@ -180,7 +189,7 @@ export default class AddSupply extends Component {
                       <option value="2">1</option>
                       <option value="1">1</option>
                     </select>
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary" onClick={this.onClickAddSupplier}>
                       Add a new supplier
                     </button>
                   </div>
