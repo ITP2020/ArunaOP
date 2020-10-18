@@ -1,115 +1,123 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import axios from "axios"
 
-export default function InsertVehicleForm() {
+export default function AssignVehicleForm(props) {
 
-    const [plateNo, setPlateNo] = useState(null);
-    const [vehicle, setVehicle] = useState(null);
-    const [brand, setBrand] = useState(null);
-    const [year, setYear] = useState(null);
-    const [type, setType] = useState(null);
-    const [purchaseDate, setPurchaseDate] = useState(null);
+    const [OrderId, setOrderId] = useState(null);
+    const [CustomerName, setCustomerName] = useState(null);
+    const [ContactNo, setContactNo] = useState(null);
+    const [Quantity, setQuantity] = useState(null);
+    const [Location, setLocation] = useState(null);
+    const [Driver, setDriver] = useState(null);
+    const [Vehicle, setVehicle] = useState(null);
+    const [DeleveryDate, setDeleveryDate] = useState(null);
+    const [DeleveryTime, setDeleveryTime] = useState(null);
+
+    useEffect(()=>{
+
+        if(!props.location.data){
+            window.location="/Upcoming"
+        }
+
+        const propsOrderID = props.location.data;
+
+        console.log(propsOrderID)
+
+        axios.get('http://localhost:5000/order/search/' +propsOrderID)
+        .then(responseOrder => {
+
+            console.log("Orders"+ responseOrder.data);
+            setOrderId(responseOrder.data.orderNumber);
+            setCustomerName(responseOrder.data.customerName);
+            setContactNo(responseOrder.data.contactNo);
+            setQuantity(responseOrder.data.quantity);
+            setLocation(responseOrder.data.address);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    },[])
 
     async function onFormSubmit(e) {
-
         e.preventDefault();
-
-        const VehicleDetails = {
-            plateNo,
-            vehicle,
-            brand,
-            year,
-            type,
-            purchaseDate
+        const AssignDetails = {
+            OrderId,
+            CustomerName,
+            ContactNo,
+            Quantity,
+            Location,
+            Driver, 
+            Vehicle,
+            DeleveryDate,
+            DeleveryTime
         }
-        await axios.post("http://localhost:5000/vehicle/add", VehicleDetails).then((res) => {
+        await axios.post("http://localhost:5000/deliveryQueue/add", AssignDetails).then((res) => {
             alert("Insert Success");
         }).catch((err) => {
             console.log(err);
         })
+        window.location = "/Deliveries"
     }
 
-
     return (
-        <div className="container" style={{ marginTop: "20px" }}>
-            <div class="card" style={{ boxShadow: "14px 10px 22px 0px rgba(0,0,0,0.75)" }}>
+    <div className="container" style={{ marginTop: "20px" }}>
+        <div class="card" style={{ boxShadow: "14px 10px 22px 0px rgba(0,0,0,0.75)" }}>
+        <div class="card-body">
+            <h5 class="card-title">Delivery Details</h5>
+            <form onSubmit={onFormSubmit}>
 
-                <div class="card-body">
-                    <h5 class="card-title">Delivery Details</h5>
-                    <form onSubmit={onFormSubmit}>
-
-                        <div class="form-group">
-                            <label for="plateNo">Customer Name</label>
-                            <input type="text" class="form-control" id="customername" aria-describedby="emailHelp" placeholder="" onChange={(e) => setPlateNo(e.target.value)} />
-
-                        </div>
-                        <div class="form-group">
-                            <label for="vehicle">Phone</label>
-                            <input type="text" class="form-control" id="phone" placeholder="" onChange={(e) => setVehicle(e.target.value)} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">Quantity</label>
-                            <input type="text" class="form-control" id="quantity" placeholder="" onChange={(e) => setBrand(e.target.value)} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">House No.</label>
-                            <input type="text" class="form-control" id="houseno" placeholder="" onChange={(e) => setYear(e.target.value)} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">Street</label>
-                            <input type="text" class="form-control" id="street" placeholder="" onChange={(e) => setType(e.target.value)} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">City</label>
-                            <input type="text" class="form-control" id="city" placeholder="" onChange={(e) => setPurchaseDate(e.target.value)} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="selectoption">Select Driver</label><br />
-
-                            <select name="driver" id="selectoption" lass="form-control" class="form-control">
-                                <option value="driver 01">Driver 01</option>
-                                <option value="driver 02">Driver 02</option>
-                                <option value="driver 03">Driver 03</option>
-                                <option value="driver 04">Driver 04</option>
-                                <option value="driver 05">Driver 05</option>
-                            </select>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="selectoption">Select Vehicle</label><br />
-
-                            <select name="vehicle" id="selectoption" lass="form-control" class="form-control">
-                                <option value="vehicle 01">Vehicle 01</option>
-                                <option value="vehicle 02">Vehicle 02</option>
-                                <option value="vehicle 03">Vehicle 03</option>
-                                <option value="vehicle 04">Vehicle 04</option>
-                                <option value="vehicle 05">Vehicle 05</option>
-                            </select>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">Select Time</label>
-                            <input type="time" class="form-control" id="city" placeholder="" onChange={(e) => setPurchaseDate(e.target.value)} />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="brand">Select Date</label>
-                            <input type="date" class="form-control" id="city" placeholder="" onChange={(e) => setPurchaseDate(e.target.value)} />
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-
-                    </form>
-                </div>
+            <div class="form-group">
+                <label for="plateNo">Order Number</label>
+                <input type="text" class="form-control" id="customername" aria-describedby="emailHelp" value={OrderId} readonly />
             </div>
-        </div>
 
-    )
+            <div class="form-group">
+                <label for="plateNo">Customer Name</label>
+                <input type="text" class="form-control" id="customername" aria-describedby="emailHelp" value={CustomerName} readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="vehicle">Phone</label>
+                <input type="text" class="form-control" id="phone" value={ContactNo} readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Quantity</label>
+                <input type="text" class="form-control" id="quantity" value={Quantity} readonly/>
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Location</label>
+                <input type="text" class="form-control" id="location" value={Location} readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="selectoption">Select Driver</label>
+                <br />
+                <input type="text" class="form-control" id="location" placeholder="Enter a Driver" onChange={(e) => setDriver(e.target.value)} />
+            </div>
+
+            <div class="form-group">
+                <label for="selectoption">Select Vehicle</label>
+                <br />
+                <input type="text" class="form-control" id="location" placeholder="Enter a Vehicle" onChange={(e) => setVehicle(e.target.value)} />
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Select Time</label>
+                <input type="time" class="form-control" id="city" placeholder="" onChange={(e) => setDeleveryTime(e.target.value)}/>
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Select Date</label>
+                <input type="date" class="form-control" id="city" placeholder="" onChange={(e) => setDeleveryDate(e.target.value)} />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+        </div>
+        </div>
+    </div>
+    );
 }

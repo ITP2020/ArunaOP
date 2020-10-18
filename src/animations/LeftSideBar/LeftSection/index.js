@@ -67,11 +67,8 @@ const LeftSection = () => {
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item href="/Deliveries">Delivery Queue</Dropdown.Item>
     <Dropdown.Item href="/Upcoming">Upcoming Deliveries</Dropdown.Item>
-    <Dropdown.Item href="/Ongoing">Ongoing Deliveries</Dropdown.Item>
-    <Dropdown.Item href="/Completed">Completed Deliveries</Dropdown.Item>
-    <Dropdown.Item href="/AssignDriver">Assign Driver</Dropdown.Item>
+    <Dropdown.Item href="/Deliveries">Delivery Queue</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
 
@@ -82,8 +79,6 @@ const LeftSection = () => {
 
   <Dropdown.Menu>
     <Dropdown.Item href="VehicleManagement">Vehicle Management</Dropdown.Item>
-    <Dropdown.Item href="InsertVehicle">Insert Vehicle</Dropdown.Item>
-    <Dropdown.Item href="UpdateVehicle">Update Vehicle</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
 

@@ -15,24 +15,24 @@ router.route('/add').post((req, res) => {
     const OrderId = (req.body.OrderId);
     const CustomerName = (req.body.CustomerName);
     const ContactNo = Number(req.body.ContactNo);
-    const Item = (req.body.Item);
     const Quantity = Number(req.body.Quantity);
     const Location = (req.body.Location);
     const Driver = (req.body.Driver);
     const Vehicle = (req.body.Vehicle);
     const DeleveryDate = Date(req.body.DeleveryDate);
+    const DeleveryTime = (req.body.DeleveryTime);
 
 
     const newDeliveryQueue = new DeliveryQueue({
         OrderId,
         CustomerName,
         ContactNo,
-        Item,
         Quantity,
         Location,
         Driver,
         Vehicle,
         DeleveryDate,
+        DeleveryTime,
     });
     newDeliveryQueue.save()
         .then(() => res.json('Delivery Queue Added!'))
@@ -42,7 +42,7 @@ router.route('/add').post((req, res) => {
 //Return one specific row
 
 router.route('/:id').get((req, res) => {
-    DeliveryQueue.findById(req.params.id)
+    DeliveryQueue.findOne({OrderId:req.params.id})
         .then(deliveryqueue => res.json(deliveryqueue))
         .catch(err => res.status(400).json('Error : ' + err));
 });
@@ -50,7 +50,7 @@ router.route('/:id').get((req, res) => {
 //Delete one specific record
 
 router.route('/:id').delete((req, res) => {
-    DeliveryQueue.findByIdAndDelete(req.params.id)
+    DeliveryQueue.findOneAndDelete({OrderId:req.params.id})
         .then(() => res.json('Delivery Queue has been deleted!'))
         .catch(err => res.status(400).json('Error : ' + err));
 });
@@ -63,12 +63,12 @@ router.route('/update/:id').post((req, res) => {
             deliveryqueue.OrderId = (req.body.OrderId);
             deliveryqueue.CustomerName = (req.body.CustomerName);
             deliveryqueue.ContactNo = Number(req.body.ContactNo);
-            deliveryqueue.Item = (req.body.Item);
             deliveryqueue.Quantity = Number(req.body.Quantity);
             deliveryqueue.Location = (req.body.Location);
             deliveryqueue.Driver = (req.body.Driver);
             deliveryqueue.Vehicle = (req.body.Vehicle);
             deliveryqueue.DeleveryDate = Date(req.body.DeleveryDate);
+            deliveryqueue.DeleveryTime = Date(req.body.DeleveryTime);
 
             deliveryqueue.save()
                 .then(() => res.json('Delivery Queue updated'))

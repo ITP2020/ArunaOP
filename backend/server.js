@@ -29,6 +29,7 @@ const orderRouter = require('./routes/order');
 const vehicleRouter = require('./routes/vehicle');
 const finishedproductRouter = require('./routes/finishedproduct');
 const rawmaterialRouter = require('./routes/rawmaterial');
+const deliveryQueueRouter = require('./routes/deliveryQueue');
 
 
 const usersRouter = require('./routes/users');
@@ -49,6 +50,7 @@ app.use('/salary' , salaryRouter);
 app.use('/employee', employeeRouter);
 app.use('/order', orderRouter);
 app.use('/vehicle', vehicleRouter);
+app.use('/deliveryQueue', deliveryQueueRouter);
 
 app.use('/users',usersRouter);
 app.use('/equipments',equipmentRouter);

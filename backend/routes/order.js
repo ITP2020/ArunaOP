@@ -41,6 +41,7 @@ router.route('/:id').get((req,res) => {
         .catch(err => res.status(400).json('Error : ' +err));
 });
 
+
 router.route('/:id').delete((req,res) => {
     Order.findByIdAndDelete(req.params.id)
         .then(() => res.json('Order deleted'))
@@ -75,5 +76,10 @@ router.route('/').get((req,res) => {
         .catch(err => res.status(400).json('Error : ' +err));
 });
 
+router.route('/search/:id').get((req,res) => {
+    Order.findOne({orderNumber:req.params.id})
+        .then(order => res.json(order))
+        .catch(err => res.status(400).json('Error : ' +err));
+});
 
 module.exports = router;

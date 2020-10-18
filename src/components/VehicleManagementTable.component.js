@@ -10,13 +10,12 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
 
-
 export default class VehicleManagement extends Component {
 constructor(props) {
     super(props);
     this.state = {
     vehicle: [],
-    searchVehicle:""
+    searchVehicle: "",
     };
 }
 
@@ -36,13 +35,12 @@ searchVehicleList(){
 
     return this.state.vehicle.map((currentvehicle) => {
         if (
-            this.state.searchVehicle ==
-            currentvehicle.brand
+            currentvehicle.brand.toLowerCase().includes(this.state.searchVehicle.toLowerCase())
         ){
             return (
                 <tr>
                 <td style={{ width: "12.5%" }}>{currentvehicle.plateNo}</td>
-                <td style={{ width: "12.5%" }}>{currentvehicle.plateNo}</td>
+                <td style={{ width: "12.5%" }}>{currentvehicle.brand}</td>
                 <td style={{ width: "12.5%" }}>{currentvehicle.vehicle}</td>
                 <td style={{ width: "12.5%" }}>{currentvehicle.year}</td>
                 <td style={{ width: "12.5%" }}>{currentvehicle.type}</td>
@@ -161,7 +159,6 @@ vehicleList() {
 exportVehicle = () => {
     console.log( "SSSSSSSSSS" )
 
-
     const unit = "pt";
     const size = "A3"; 
     const orientation = "portrait"; 
@@ -171,7 +168,7 @@ exportVehicle = () => {
     const title = "Vehicle Report ";
     const headers = [["Plate No.","Brand","Model","Year","Type","Purchase Date"]];
 
-    const elec = this.state.vehicle.map(
+    const vehi = this.state.vehicle.map(
         Vehicle=>[
             Vehicle.plateNo,
             Vehicle.brand,
@@ -185,7 +182,7 @@ exportVehicle = () => {
     let content = {
         startY: 50,
         head: headers,
-        body:elec
+        body:vehi
     };
     doc.setFontSize( 20 );
     doc.text( title, marginLeft, 40 );

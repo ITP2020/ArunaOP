@@ -13,16 +13,14 @@ export default function UpdateVehicleForm(props) {
     useEffect(()=>{
 
         axios.get("http://localhost:5000/vehicle/" +props.match.params.id).then((res)=>{
-
-                console.log(res)
-                setObjectID(res.data._id);
-                setPlateNo(res.data.plateNo);
-                setVehicle(res.data.vehicle);
-                setBrand(res.data.brand);
-                setYear(res.data.year);
-                setType(res.data.type);
-                setPurchaseDate(res.data.purchaseDate.substring(0, 10));
-
+        console.log(res);
+        setObjectID(res.data._id);
+        setPlateNo(res.data.plateNo);
+        setVehicle(res.data.vehicle);
+        setBrand(res.data.brand);
+        setYear(res.data.year);
+        setType(res.data.type);
+        setPurchaseDate(res.data.purchaseDate.substring(0, 10));
         }).catch(err=>{
             alert(err)
         })

@@ -52,8 +52,6 @@ import OrderManagement from "./components/order-management.component";
 //Delivery Management
 import DeliveryQueueTable from "./components/DeliveryQueueTable.component";
 import UpcomingDeliveriesTable from "./components/UpcomingDeliveriesTable.component";
-import CompletedDeliveriesTable from "./components/CompletedDeliveriesTable.component";
-import OngoingDeliveryTable from "./components/OngoingDeliveryTable.component";
 import AssignDriverForm from "./components/AssignDriverForm.component";
 
 //Vehicle Management
@@ -132,8 +130,6 @@ function App() {
       
       <Route path="/Deliveries" exact component={DeliveryQueueTable} />
       <Route path="/Upcoming" exact component={UpcomingDeliveriesTable} />
-      <Route path="/Completed" exact component={CompletedDeliveriesTable} />
-      <Route path="/Ongoing" exact component={OngoingDeliveryTable} />
       <Route path="/AssignDriver" exact component={AssignDriverForm} />
 
 
