@@ -16,7 +16,7 @@ const Water = props => (
         <td>{props.waterExpenses.month}</td>
         <td>{props.waterExpenses.amount}</td>
         <td>
-            <button className = 'edit'><Link to = {"/editwater/"+props.waterExpenses._id } className="link">Edit</Link></button> | <button className = 'delete' onClick ={() => {props.deleteWater(props.waterExpenses._id)}}>Delete</button>
+            <button className = 'edit'><Link to = {"/editwater/"+props.waterExpenses._id } className="link">Edit</Link></button>  <button className = 'delete' onClick ={() => {props.deleteWater(props.waterExpenses._id)}}>Delete</button>
         </td>
     </tr>
 )
@@ -29,7 +29,8 @@ export default class WaterExpensesList extends Component {
 
         this.deleteWater = this.deleteWater.bind(this);
 
-        this.state = {waterExpenses : []};
+        this.state = {waterExpenses : [],
+        searchWater : ""};
     }
 
 
@@ -55,6 +56,68 @@ export default class WaterExpensesList extends Component {
             return this.state.waterExpenses.map(currentwater => {
                 return <Water waterExpenses = {currentwater} deleteWater = {this.deleteWater} key = {currentwater._id}/>;
             })
+        }
+
+        searchWaterList(){
+
+            return this.state.waterExpenses.map((currentwater) => {
+                if (
+                    this.state.searchWater ==
+                    currentwater.year
+                ){
+                    return (
+                        <tr>
+                        <td>{currentwater.year}</td>
+                        <td>{currentwater.month}</td>
+                        <td>{currentwater.amount}</td>
+                        
+                        <td style={{ width: "20%" }}>
+                            {
+                            <button className="edit">
+                                <Link
+                                to={"/editwater/" + currentwater._id}
+                                className="link"
+                                >
+                                Edit
+                                </Link>
+                            </button>
+                            }
+                            {"  "}
+                            {
+                            <button
+                                className="delete"
+                                onClick={() => {
+                                  //Delete the selected record
+                                axios
+                                    .delete(
+                                    "http://localhost:5000/waterExpenses/" + currentwater._id
+                                    )
+                                    .then(() => {
+                                    alert("Delete Success");
+                                      //Get data again after delete
+                                    axios
+                                        .get("http://localhost:5000/waterExpenses")
+                                        .then((res) => {
+                                        console.log(res.data);
+                                        this.setState({
+                                            waterExpenses: res.data,
+                                        });
+                                        })
+                                        .catch((err) => console.log(err));
+                                    })
+                                    .catch((err) => {
+                                    alert(err);
+                                    });
+                                }}
+                            >
+                                Delete
+                            </button>
+                            }
+                        </td>
+                        </tr>
+                    );
+                }
+            });
         }
 
         exportWater = () => {
@@ -102,7 +165,21 @@ export default class WaterExpensesList extends Component {
                         <td><button className = "add" ><Link to = {"/createwater" } className = "linkaddE">Add Water Bill</Link></button>
                         <button className = "download" onClick={() => this.exportWater()}>Download Report Here</button></td>
                     </tr>
-
+                    <tr>
+                    <div className="col-md-9">
+                    <input style={{ width: "200px", marginTop:"10px"}}
+                    class="form-control"
+                    type="text"
+                    placeholder="Search by Year"
+                    aria-label="Search"
+                    onChange={(e) => {
+                        this.setState({
+                        searchWater: e.target.value
+                        });
+                    }}
+                    />
+            </div>
+                    </tr>
                     
                 </table>
             
@@ -118,7 +195,7 @@ export default class WaterExpensesList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    { this.waterList() }
+                    {  this.state.searchWater == "" ? this.waterList() : this.searchWaterList() }
                 </tbody>
             </table>
             </CardContent>

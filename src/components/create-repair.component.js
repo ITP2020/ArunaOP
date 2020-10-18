@@ -157,7 +157,7 @@ export default class CreateRepair extends Component {
         <div className="form-group">
           <label>Date: </label>
           <div>
-            <DatePicker
+            <DatePicker className = "date-control"
               selected={this.state.date}
               onChange={this.onChangeDate}
             />

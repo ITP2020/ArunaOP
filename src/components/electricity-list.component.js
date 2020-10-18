@@ -16,7 +16,7 @@ const Electricity = props => (
         <td>{props.electricityExpenses.month}</td>
         <td>{props.electricityExpenses.amount}</td>
         <td>
-            <button className = 'edit'><Link to = {"/editelectricity/"+props.electricityExpenses._id } className="link">Edit</Link></button> | <button className = 'delete' onClick ={() => {props.deleteElectricity(props.electricityExpenses._id)}}>Delete</button>
+            <button className = 'edit'><Link to = {"/editelectricity/"+props.electricityExpenses._id } className="link">Edit</Link></button>  <button className = 'delete' onClick ={() => {props.deleteElectricity(props.electricityExpenses._id)}}>Delete</button>
         </td>
     </tr>
 )
@@ -29,7 +29,8 @@ export default class ElectricityExpensesList extends Component {
 
         this.deleteElectricity = this.deleteElectricity.bind(this);
 
-        this.state = {electricityExpenses : []};
+        this.state = {electricityExpenses : [],
+        searchElectricity : ""};
     }
 
 
@@ -57,6 +58,69 @@ export default class ElectricityExpensesList extends Component {
                 return <Electricity electricityExpenses = {currentelectricity} deleteElectricity = {this.deleteElectricity} key = {currentelectricity._id}/>;
             })
         }
+
+        searchElectricityList(){
+
+            return this.state.electricityExpenses.map((currentelectricity) => {
+                if (
+                    this.state.searchElectricity ==
+                    currentelectricity.year
+                ){
+                    return (
+                        <tr>
+                        <td>{currentelectricity.year}</td>
+                        <td>{currentelectricity.month}</td>
+                        <td>{currentelectricity.amount}</td>
+                        
+                        <td style={{ width: "20%" }}>
+                            {
+                            <button className="edit">
+                                <Link
+                                to={"/editelectricity/" + currentelectricity._id}
+                                className="link"
+                                >
+                                Edit
+                                </Link>
+                            </button>
+                            }
+                            {"  "}
+                            {
+                            <button
+                                className="delete"
+                                onClick={() => {
+                                  //Delete the selected record
+                                axios
+                                    .delete(
+                                    "http://localhost:5000/electricityExpenses/" + currentelectricity._id
+                                    )
+                                    .then(() => {
+                                    alert("Delete Success");
+                                      //Get data again after delete
+                                    axios
+                                        .get("http://localhost:5000/electricityExpenses")
+                                        .then((res) => {
+                                        console.log(res.data);
+                                        this.setState({
+                                            electricityExpenses: res.data,
+                                        });
+                                        })
+                                        .catch((err) => console.log(err));
+                                    })
+                                    .catch((err) => {
+                                    alert(err);
+                                    });
+                                }}
+                            >
+                                Delete
+                            </button>
+                            }
+                        </td>
+                        </tr>
+                    );
+                }
+            });
+        }
+
 
         exportElectricity = () => {
             console.log( "SSSSSSSSSS" )
@@ -124,14 +188,21 @@ export default class ElectricityExpensesList extends Component {
                         <button className = "download" onClick={() => this.exportElectricity()}>Download Report Here</button></td>
                     </tr>
                     
-                            <div className = "searchBar">
-                            <input
-                            className = "form-control"
-                            type = "search"
-                            placeholder = "Search"
-                            name = "searchTerm"
-                            onChange = {this.handleTextSearch}>
-                            </input></div>
+                           <tr>
+                           <div className="col-md-9">
+                    <input style={{ width: "200px", marginTop:"10px"}}
+                    class="form-control"
+                    type="text"
+                    placeholder="Search by Year"
+                    aria-label="Search"
+                    onChange={(e) => {
+                        this.setState({
+                        searchElectricity: e.target.value
+                        });
+                    }}
+                    />
+            </div>
+                           </tr>
                     
                 </table>
 
@@ -149,7 +220,7 @@ export default class ElectricityExpensesList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    { this.electricityList() }
+                    { this.state.searchElectricity == "" ? this.electricityList() : this.searchElectricityList() }
                 </tbody>
             </table>
 

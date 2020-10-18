@@ -136,7 +136,7 @@ export default class CreateLeave extends Component {
         <div className="form-group">
           <label>Starting Date: </label>
           <div>
-            <DatePicker
+            <DatePicker className = "date-control"
               required
               selected={this.state.startDate}
               onChange={this.onChangeStartDate}
@@ -147,7 +147,7 @@ export default class CreateLeave extends Component {
         <div className="form-group">
           <label>Ending Date: </label>
           <div>
-            <DatePicker
+            <DatePicker className = "date-control"
               required
               selected={this.state.endDate}
               onChange={this.onChangeEndDate}

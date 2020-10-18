@@ -15,7 +15,7 @@ const Salary = props => (
     <td>{props.salary.basicSalary}</td>
     <td>{props.salary.otRate}</td>    
     <td>
-      <button className = 'edit'><Link to={"/update/"+props.salary._id} className="link">Edit</Link></button>  <button className = 'delete' onClick={() => { props.deleteSalary(props.salary._id) }}>Delete</button>
+      <button className = 'edit'><Link to={"/updateSalary/"+props.salary._id} className="link">Edit</Link></button>  <button className = 'delete' onClick={() => { props.deleteSalary(props.salary._id) }}>Delete</button>
     </td>
   </tr>
 )
@@ -26,7 +26,8 @@ export default class SalaryList extends Component {
 
     this.deleteSalary = this.deleteSalary.bind(this)
 
-    this.state = {salary: []};
+    this.state = {salary: [],
+    searchSalary : ""};
   }
 
   componentDidMount() {
@@ -53,6 +54,70 @@ export default class SalaryList extends Component {
       return <Salary salary={currentsalary} deleteSalary={this.deleteSalary} key={currentsalary._id}/>;
     })
   }
+
+  searchSalaryList(){
+
+    return this.state.salary.map((currentsalary) => {
+        if (
+            this.state.searchSalary ==
+            currentsalary.empId
+        ){
+            return (
+                <tr>
+                <td style={{ width: "25.5%" }}>{currentsalary.empId}</td>
+                <td style={{ width: "25.5%" }}>{currentsalary.basicSalary}</td>
+                <td style={{ width: "25.5%" }}>{currentsalary.otRate}</td>
+                
+                
+                <td style={{ width: "20%" }}>
+                    {
+                    <button className="edit">
+                        <Link
+                        to={"/updateSalary/" + currentsalary._id}
+                        className="link"
+                        >
+                        Edit
+                        </Link>
+                    </button>
+                    }
+                    {"  "}
+                    {
+                    <button
+                        className="delete"
+                        onClick={() => {
+                          //Delete the selected record
+                        axios
+                            .delete(
+                            "http://localhost:5000/salary/" + currentsalary._id
+                            )
+                            .then(() => {
+                            alert("Delete Success");
+                              //Get data again after delete
+                            axios
+                                .get("http://localhost:5000/salary")
+                                .then((res) => {
+                                console.log(res.data);
+                                this.setState({
+                                  salary: res.data,
+                                });
+                                })
+                                .catch((err) => console.log(err));
+                            })
+                            .catch((err) => {
+                            alert(err);
+                            });
+                        }}
+                    >
+                        Delete
+                    </button>
+                    }
+                </td>
+                </tr>
+            );
+        }
+    });
+}
+
 
   exportSalary = () => {
     console.log( "SSSSSSSSSS" )
@@ -97,6 +162,19 @@ export default class SalaryList extends Component {
                         <td><button className = "add" ><Link to = {"/createSalary" } className = "linkaddE">Add Salary</Link></button>
                         <button className = "download" onClick={() => this.exportSalary()}>Download Report Here</button></td>
                     </tr>
+                    <div className="col-md-9">
+                    <input style={{ width: "250px", marginTop:"10px"}}
+                    class="form-control"
+                    type="text"
+                    placeholder="Search by Employee ID"
+                    aria-label="Search"
+                    onChange={(e) => {
+                        this.setState({
+                        searchSalary: e.target.value
+                        });
+                    }}
+                    />
+            </div>
                 </table>
             
             
@@ -112,7 +190,7 @@ export default class SalaryList extends Component {
             </tr>
           </thead>
           <tbody>
-            { this.salaryList() }
+            { this.state.searchSalary == "" ? this.salaryList() : this.searchSalaryList() }
           </tbody>
         </table>
         </CardContent>

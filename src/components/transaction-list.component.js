@@ -18,7 +18,7 @@ const Transaction = props => (
         <td>{props.transactionExpenses.amount}</td>
         <td>{props.transactionExpenses.issuedPerson}</td>
         <td>
-            <button className = 'edit'><Link to = {"/edittransaction/"+props.transactionExpenses._id } className="link">Edit</Link></button> | <button className = 'delete' onClick ={() => {props.deleteTransaction(props.transactionExpenses._id)}}>Delete</button>
+            <button className = 'edit'><Link to = {"/edittransaction/"+props.transactionExpenses._id } className="link">Edit</Link></button>  <button className = 'delete' onClick ={() => {props.deleteTransaction(props.transactionExpenses._id)}}>Delete</button>
         </td>
     </tr>
 )
@@ -34,7 +34,8 @@ export default class TransactionExpensesList extends Component {
 
         this.deleteTransaction = this.deleteTransaction.bind(this);
 
-        this.state = {transactionExpenses : []};
+        this.state = {transactionExpenses : [],
+        searchTransaction : ""};
 
         
     }
@@ -65,6 +66,72 @@ export default class TransactionExpensesList extends Component {
                 return <Transaction transactionExpenses = {currenttransaction} deleteTransaction = {this.deleteTransaction} key = {currenttransaction._id}/>;
             })
         }
+
+        searchTransactionList(){
+
+            return this.state.transactionExpenses.map((currenttransaction) => {
+                if (
+                    this.state.searchTransaction ==
+                    currenttransaction.year
+                ){
+                    return (
+                        <tr>
+                        <td style={{ width: "12.5%" }}>{currenttransaction.year}</td>
+                        <td style={{ width: "12.5%" }}>{currenttransaction.month}</td>
+                        <td style={{ width: "12.5%" }}>{currenttransaction.day}</td>
+                        <td style={{ width: "12.5%" }}>{currenttransaction.reason}</td>
+                        <td style={{ width: "12.5%" }}>{currenttransaction.amount}</td>
+                        <td style={{ width: "12.5%" }}>{currenttransaction.issuedPerson}</td>
+                        
+                        <td style={{ width: "20%" }}>
+                            {
+                            <button className="edit">
+                                <Link
+                                to={"/edittransaction/" + currenttransaction._id}
+                                className="link"
+                                >
+                                Edit
+                                </Link>
+                            </button>
+                            }
+                            {" "}
+                            {
+                            <button
+                                className="delete"
+                                onClick={() => {
+                                  //Delete the selected record
+                                axios
+                                    .delete(
+                                    "http://localhost:5000/transactionExpenses/" + currenttransaction._id
+                                    )
+                                    .then(() => {
+                                    alert("Delete Success");
+                                      //Get data again after delete
+                                    axios
+                                        .get("http://localhost:5000/transactionExpenses")
+                                        .then((res) => {
+                                        console.log(res.data);
+                                        this.setState({
+                                            transactionExpenses: res.data,
+                                        });
+                                        })
+                                        .catch((err) => console.log(err));
+                                    })
+                                    .catch((err) => {
+                                    alert(err);
+                                    });
+                                }}
+                            >
+                                Delete
+                            </button>
+                            }
+                        </td>
+                        </tr>
+                    );
+                }
+            });
+        }
+
 
         exportTransaction = () => {
             console.log( "SSSSSSSSSS" )
@@ -126,14 +193,21 @@ export default class TransactionExpensesList extends Component {
                     </tr>
 
                    
-                    <div className = "searchBar">
-                            <input
-                            className = "form-control"
-                            type = "search"
-                            placeholder = "Search"
-                            name = "searchTerm"
-                            onChange = {this.handleTextSearch}>
-                            </input></div>
+                   
+                    <div className="col-md-9">
+                    <input style={{ width: "200px", marginTop:"10px"}}
+                    class="form-control"
+                    type="text"
+                    placeholder="Search by Year"
+                    aria-label="Search"
+                    onChange={(e) => {
+                        this.setState({
+                        searchTransaction: e.target.value
+                        });
+                    }}
+                    />
+            </div>
+                    
                 </table>
             
             
@@ -152,7 +226,7 @@ export default class TransactionExpensesList extends Component {
                     </tr>
                 
                 <tbody>
-                    { this.transactionList() }
+                    { this.state.searchTransaction == "" ? this.transactionList() : this.searchTransactionList() }
                 </tbody>
             </table>
             </CardContent>
