@@ -13,6 +13,6 @@ const supplierSchema = new Schema({
     
 });
 
-const supplier = mongoose.model('supplier', supplierSchema);
+const Supplier = mongoose.model('Supplier', supplierSchema);
 
-module.exports = supplier;
+module.exports = Supplier;

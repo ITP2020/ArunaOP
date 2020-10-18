@@ -38,7 +38,7 @@ const repairRouter = require('./routes/repairs');
 const reportRouter = require('./routes/reports');
 
 const supplyRouter = require('./routes/supply');
-const supplierRouter = require('./routes/supplier')
+const supplierRouter = require('./routes/supplier');
 
 
 
