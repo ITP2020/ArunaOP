@@ -224,7 +224,7 @@ export default class EditOrder extends Component {
                     </div>
 
                     <div className = "form-group">
-                        <label>Printinh Materials : </label>
+                        <label>Printing Materials : </label>
                         <input type = "text"
                         required
                         className = "form-control"
@@ -235,22 +235,33 @@ export default class EditOrder extends Component {
 
                     <div className = "form-group">
                         <label>Order Type: </label>
-                        <input type = "text"
-                        required
+                        <select
                         className = "form-control"
                         value = {this.state.orderType}
+                        name = "OrderType"
                         onChange = {this.onChangeOrdertype}
-                        />
+                        >
+                            <option value=""></option>
+                            <option value="Normal">Normal</option>
+                            <option value="Delivery">Delivery</option>
+                        </select>
+
                     </div>
 
                     <div className = "form-group">
                         <label>Order Status : </label>
-                        <input type = "text"
-                        required
+                        <select
                         className = "form-control"
                         value = {this.state.orderStatus}
+                        name = "OrderStatus"
                         onChange = {this.onChangeOrderStatus}
-                        />
+                        >
+                            <option value="Pending">Pending...</option>
+                            <option value="Processing">Processing...</option>
+                            <option value="Completed">Completed</option>
+
+                        </select>
+
                     </div>
 
                     <div className = "form-group">
