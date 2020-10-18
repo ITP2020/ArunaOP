@@ -34,6 +34,14 @@ import OrderList from "./components/order-list.component";
 import EditOrder from "./components/edit-order.component";
 import CreateOrder from "./components/create-order.component";
 
+//Stock Management
+
+import FinishedProductList from "./components/finishedproduct-list.component";
+import CreateFinishedProduct from "./components/add-finishedproduct.component";
+import EditFinishedProduct from "./components/edit-finishedproduct.component"
+import RawMaterialList from "./components/rawmaterial-list.component";
+import CreateRawMaterial from "./components/add-rawmaterial.component";
+import EditRawMaterial from "./components/edit-rawmaterial.component";
 
 
 import FinanceManagement from "./components/finance-management.component";
@@ -114,7 +122,14 @@ function App() {
       <Route path = "/leavemanagement" component = {LeaveManagement}/>
       <Route path = "/employeemanagement" component = {EmployeeManagement}/>
       <Route path = "/ordermanagement" component = {OrderManagement}/>
+      
 
+      <Route path = "/finishedproduct" exact component = {FinishedProductList}/>
+      <Route path = "/createFinishedproduct" component = {CreateFinishedProduct}/>
+      <Route path = "/editFinishedproduct/:id" component = {EditFinishedProduct}/>
+      <Route path = "/rawmaterial" exact component = {RawMaterialList}/>
+      <Route path = "/createRawmaterial" component = {CreateRawMaterial}/>
+      <Route path = "/editRawmaterial/:id" component = {EditRawMaterial}/>
       
       <Route path="/Deliveries" exact component={DeliveryQueueTable} />
       <Route path="/Upcoming" exact component={UpcomingDeliveriesTable} />

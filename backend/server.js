@@ -28,6 +28,8 @@ const employeeRouter = require('./routes/employee');
 const orderRouter = require('./routes/order');
 const vehicleRouter = require('./routes/vehicle');
 const vehiclerepair = require('./routes/vehiclerepair')
+const finishedproductRouter = require('./routes/finishedproduct');
+const rawmaterialRouter = require('./routes/rawmaterial');
 
 
 const usersRouter = require('./routes/users');
@@ -53,6 +55,8 @@ app.use('/users',usersRouter);
 app.use('/equipments',equipmentRouter);
 app.use('/repairs',repairRouter);
 app.use('/reports',reportRouter);
+app.use('/finishedproduct', finishedproductRouter);
+app.use('/rawmaterial', rawmaterialRouter);
 
 app.use('/supply',supplyRouter);
 
