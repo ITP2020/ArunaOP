@@ -63,8 +63,7 @@ export default class LeaveList extends Component {
 
     return this.state.leave.map((currentleave) => {
         if (
-            this.state.searchLeave ==
-            currentleave.numOfDays
+            currentleave.leaveType.toLowerCase().includes(this.state.searchLeave.toLowerCase())
         ){
             return (
                 <tr>
@@ -173,7 +172,7 @@ export default class LeaveList extends Component {
                     <input style={{ width: "250px", marginTop:"10px"}}
                     class="form-control"
                     type="text"
-                    placeholder="Search by Number of Days"
+                    placeholder="Search by Leave Type"
                     aria-label="Search"
                     onChange={(e) => {
                         this.setState({

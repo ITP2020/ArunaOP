@@ -154,25 +154,7 @@ export default class ElectricityExpensesList extends Component {
             doc.autoTable( content );
             doc.save( "ElectricityExpenses.pdf" )
         }
-
-        filterContent(electricityExpenses, searchTerm){
-            const result = electricityExpenses.filter((electricityExpense) => electricityExpense.title.includes(searchTerm));
-            this.setState({electricityExpenses : result})
-        }
-
-        handleTextSearch = (e) =>{
-            console.log(e.currentTarget.value);
-            const searchTerm = e.currentTarget.value;
-
-            axios.get('http://localhost:5000/electricityExpenses/')
-        .then(res => {
-            if(res.data.success){
-                this.filterContent(res.data,searchTerm)
-            }
-        
-    })
-        }
-
+    
        
 
     render() {

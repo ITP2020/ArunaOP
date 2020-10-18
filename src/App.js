@@ -101,12 +101,13 @@ function App() {
       <Route path = "/createtransaction" component = {CreateTransaction}/>
 
       <Route path="/leaves" exact component={LeaveList} />
-      <Route path="/edit/:id" component={EditLeave} />
+      <Route path="/editleave/:id" component={EditLeave} />
       <Route path="/createLeave" component={CreateLeave} />
     
       <Route path="/createSalary" component={CreateSalary} />
       <Route path="/salary"exact component={SalaryList} />
-      <Route path="/update/:id" component={EditSalary} />
+      
+      <Route path="/updateSalary/:id" component={EditSalary} />
 
       <Route path = "/employee" exact component = {EmployeeList}/>
       <Route path = "/editemployee/:id" component = {EditEmployee}/>

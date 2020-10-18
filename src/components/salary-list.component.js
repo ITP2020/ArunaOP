@@ -59,8 +59,7 @@ export default class SalaryList extends Component {
 
     return this.state.salary.map((currentsalary) => {
         if (
-            this.state.searchSalary ==
-            currentsalary.empId
+          currentsalary.empId.toLowerCase().includes(this.state.searchSalary.toLowerCase())
         ){
             return (
                 <tr>
