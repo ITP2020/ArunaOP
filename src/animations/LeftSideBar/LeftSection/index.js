@@ -31,7 +31,7 @@ const LeftSection = () => {
     setAnchorEl(null);
   };
 
-  
+
 
   return (
     <center>
@@ -41,12 +41,12 @@ const LeftSection = () => {
           onClick={() => setIsShowSidebar(false)}
         />
 
-        
+
       </div>
 
-      
-      
-      
+
+
+
 
       <Dropdown>
   <Dropdown.Toggle variant="danger" className = "menulist">
@@ -54,9 +54,10 @@ const LeftSection = () => {
   </Dropdown.Toggle>
 
   <Dropdown.Menu className = "ditem">
+    <Dropdown.Item href="/createOrder">Add Order</Dropdown.Item>
     <Dropdown.Item href="/order"  >Order Details</Dropdown.Item>
-    <Dropdown.Item href="#/action-2">Customer Details</Dropdown.Item>
-    
+
+
   </Dropdown.Menu>
 </Dropdown>
 
@@ -105,11 +106,11 @@ const LeftSection = () => {
   <Dropdown.Menu>
     <Dropdown.Item href="/user">Add User</Dropdown.Item>
     <Dropdown.Item href="/equipment">Equipment Details</Dropdown.Item>
-    
+
     <Dropdown.Item href="/replist">Repair Details</Dropdown.Item>
-    
+
     <Dropdown.Item href="/report">Generate Report</Dropdown.Item>
-    
+
   </Dropdown.Menu>
 </Dropdown>
 
@@ -148,7 +149,7 @@ const LeftSection = () => {
   </Dropdown.Menu>
 </Dropdown>
 
-      
+
       <Dropdown>
   <Dropdown.Toggle variant="danger" className = "menulist">
     Finance Management
@@ -160,15 +161,15 @@ const LeftSection = () => {
     <Dropdown.Item href="/transaction">Money Transactions</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
-        
-      
-      
 
 
-      
+
+
+
+
 
       <button className = "logout">Log Out</button>
-      
+
     </div>
     </center>
   );

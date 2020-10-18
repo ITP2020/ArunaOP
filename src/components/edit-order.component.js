@@ -13,25 +13,27 @@ export default class EditOrder extends Component {
 
         this.onChangeOrderNumber = this.onChangeOrderNumber.bind(this);
         this.onChangeCustomerName = this.onChangeCustomerName.bind(this);
+        this.onChangeAddress = this.onChangeAddress.bind(this);
+        this.onChangeContactno = this.onChangeContactno.bind(this);
         this.onChangeDesign = this.onChangeDesign.bind(this);
-        this.onChangeLength = this.onChangeLength.bind(this);
-        this.onChangeHeight = this.onChangeHeight.bind(this);
+        this.onChangeSize = this.onChangeSize.bind(this);
         this.onChangeQuantity = this.onChangeQuantity.bind(this);
         this.onChangePrintingMaterials = this.onChangePrintingMaterials.bind(this);
-        this.onChangeSpecialNotes = this.onChangeSpecialNotes.bind(this);
+        this.onChangeOrdertype = this.onChangeOrdertype.bind(this);
         this.onChangeOrderStatus = this.onChangeOrderStatus.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             orderNumber : 0,
             customerName : '',
+            address : '',
+            contactNo : '',
             design : '',
-            length : 0,
-            height : 0,
+            size : '',
             quantity : 0,
             printingMaterials : '',
-            specialNotes : '',
-            orderStatus : '',
+            orderType : '',
+            orderStatus : ''
 
         }
     }
@@ -42,12 +44,13 @@ export default class EditOrder extends Component {
             this.setState({
             orderNumber : Number(response.data.orderNumber),
             customerName : response.data.customerName,
+            address :response.data.address,
+            contactNo : response.data.contactNo,
             design : response.data.design,
-            length : response.data.length,
-            height : response.data.height,
+            size : response.data.size,
             quantity : response.data.quantity,
             printingMaterials : response.data.printingMaterials,
-            specialNotes : response.data.specialNotes,
+            orderType : response.data.orderType,
             orderStatus : response.data.orderStatus,
                 })
             })
@@ -68,6 +71,17 @@ export default class EditOrder extends Component {
             customerName : e.target.value
         });
     }
+    onChangeAddress(e){
+        this.setState({
+            address : e.target.value
+        });
+    }
+
+    onChangeContactno(e){
+        this.setState({
+            contactNo : e.target.value
+        });
+    }
 
     onChangeDesign(e){
         this.setState({
@@ -75,15 +89,9 @@ export default class EditOrder extends Component {
         });
     }
 
-    onChangeLength(e){
+    onChangeSize(e){
         this.setState({
-            length : e.target.value
-        });
-    }
-
-    onChangeHeight(e){
-        this.setState({
-            height : e.target.value
+            size : e.target.value
         });
     }
 
@@ -99,9 +107,9 @@ export default class EditOrder extends Component {
         });
     }
 
-    onChangeSpecialNotes(e){
+    onChangeOrdertype(e){
         this.setState({
-            specialNotes : e.target.value
+            orderType : e.target.value
         });
     }
 
@@ -117,12 +125,13 @@ export default class EditOrder extends Component {
         const order = {
             orderNumber : this.state.orderNumber,
             customerName : this.state.customerName,
+            address : this.state.address,
+            contactNo : this.state.contactNo,
             design : this.state.design,
-            length : this.state.length,
-            height : this.state.height,
+            size : this.state.size,
             quantity : this.state.quantity,
             printingMaterials : this.state.printingMaterials,
-            specialNotes : this.state.specialNotes,
+            orderType : this.state.orderType,
             orderStatus : this.state.orderStatus,
         }
 
@@ -141,7 +150,7 @@ export default class EditOrder extends Component {
                 <div className = "formdiv">
                 <CardContent >
             <h3 className = "billheading">Edit New Order</h3>
-            
+
                 <form onSubmit = {this.onSubmit}>
 
                     <div className = "form-group">
@@ -165,6 +174,26 @@ export default class EditOrder extends Component {
                     </div>
 
                     <div className = "form-group">
+                        <label>Address : </label>
+                        <input type = "text"
+                        required
+                        className = "form-control"
+                        value = {this.state.address}
+                        onChange = {this.onChangeAddress}
+                        />
+                    </div>
+
+                    <div className = "form-group">
+                        <label>Contact Number : </label>
+                        <input type = "text"
+                        required
+                        className = "form-control"
+                        value = {this.state.contactNo}
+                        onChange = {this.onChangeContactno}
+                        />
+                    </div>
+
+                    <div className = "form-group">
                         <label>Design : </label>
                         <input type = "text"
                         required
@@ -175,22 +204,12 @@ export default class EditOrder extends Component {
                     </div>
 
                     <div className = "form-group">
-                        <label>Length : </label>
-                        <input type = "number"
+                        <label>Size : </label>
+                        <input type = "text"
                         required
                         className = "form-control"
-                        value = {this.state.length}
-                        onChange = {this.onChangeLength}
-                        />
-                    </div>
-
-                    <div className = "form-group">
-                        <label>Height : </label>
-                        <input type = "number"
-                        required
-                        className = "form-control"
-                        value = {this.state.height}
-                        onChange = {this.onChangeHeight}
+                        value = {this.state.size}
+                        onChange = {this.onChangeSize}
                         />
                     </div>
 
@@ -215,12 +234,12 @@ export default class EditOrder extends Component {
                     </div>
 
                     <div className = "form-group">
-                        <label>Special Notes : </label>
+                        <label>Order Type: </label>
                         <input type = "text"
                         required
                         className = "form-control"
-                        value = {this.state.specialNotes}
-                        onChange = {this.onChangeSpecialNotes}
+                        value = {this.state.orderType}
+                        onChange = {this.onChangeOrdertype}
                         />
                     </div>
 

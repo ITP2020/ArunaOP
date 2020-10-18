@@ -4,23 +4,25 @@ let Order = require('../models/order.model');
 router.post('/add', async(req, res) => {
     const orderNumber = Number(req.body.orderNumber);
     const customerName = req.body.customerName;
+    const address = req.body.address;
+    const contactNo = req.body.contactNo;
     const design = req.body.design;
-    const length = Number(req.body.length);
-    const height = Number(req.body.height);
+    const size = req.body.size;
     const quantity = Number(req.body.quantity);
     const printingMaterials = req.body.printingMaterials;
-    const specialNotes = req.body.specialNotes;
-    const orderStatus = req.body.orderSatatus;
+    const orderType = req.body.orderType;
+    const orderStatus = req.body.orderStatus;
 
     const order = {
         orderNumber: orderNumber,
         customerName: customerName,
+        address: address,
+        contactNo: contactNo,
         design: design,
-        length: length,
-        height: height,
+        size : size,
         quantity: quantity,
         printingMaterials: printingMaterials,
-        specialNotes: specialNotes,
+        orderType: orderType,
         orderStatus: orderStatus
     }
 
@@ -30,7 +32,7 @@ router.post('/add', async(req, res) => {
         .catch((error) => {
             console.log(error.message)
         });
-}) 
+})
 
 
 router.route('/:id').get((req,res) => {
@@ -50,12 +52,13 @@ router.route('/update/:id').post((req,res) => {
         .then(order => {
             order.orderNumber = Number(req.body.orderNumber);
             order.customerName = req.body.customerName;
+            order.address = req.body.address;
+            order.$isDefaultcontactNo = req.body.contactNo;
             order.design = req.body.design;
-            order.length = Number(req.body.length);
-            order.height = Number(req.body.height);
+            order.size = req.body.size;
             order.quantity = Number(req.body.quantity);
             order.printingMaterials = req.body.printingMaterials;
-            order.specialNotes = req.body.specialNotes;
+            order.orderType = req.body.orderType;
             order.orderStatus = req.body.orderStatus;
 
             order.save()
