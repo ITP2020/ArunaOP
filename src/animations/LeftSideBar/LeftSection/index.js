@@ -168,7 +168,7 @@ const LeftSection = () => {
 
 
 
-      <button className = "logout">Log Out</button>
+  
 
     </div>
     </center>
