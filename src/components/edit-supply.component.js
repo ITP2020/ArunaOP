@@ -30,13 +30,36 @@ export default class EditSupply extends Component {
       validQuantity: true,
       validDescrption: true,
     };
+  }
 
-    this.supplyReset = {
-      itemName: this.state.itemName,
-    };
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/supply/" + props.match.params.id)
+      .then((res) => {
+        this.setState({
+          id: res.data._id,
+          itemName: res.data.itemName,
+          supplierName: res.data.supplierName,
+          date: res.data.date,
+          price: res.data.price,
+          quantity: res.data.quantity,
+          description: res.data.description
+        });
+
+        this.supplyReset = {
+          id: res.data._id,
+          itemName: res.data.itemName,
+          supplierName: res.data.supplierName,
+          date: res.data.date,
+          price: res.data.price,
+          quantity: res.data.quantity,
+          description: res.data.description
+        }
+      });
   }
 
   supplyReset = {
+    id: "",
     itemName: "",
     supplierName: "",
     date: "",
@@ -158,7 +181,11 @@ export default class EditSupply extends Component {
   onClickDelete(e) {
     e.preventDefault();
 
-    window.confirm("Are you sure to delete this record");
+    if (window.confirm("Are you sure to delete this record")){
+      axios.delete('http://localhost:5000/supply/'+this.state.id).then((res)=> {
+        console.log("delete successfull")
+      }).catch((err) => console.log(err));
+    }
   }
 
   onSubmit(e) {

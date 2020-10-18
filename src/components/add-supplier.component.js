@@ -131,17 +131,22 @@ export default class AddSupplier extends Component {
     this.validateContact();
     this.validateEmail();
 
-    if (this.state.validEmail || this.state.validContact) {
-      window.confirm(
-        "Are you sure to submit the for without filling all the fields"
-      );
-    }
-
-    /*axios
+    if (
+      this.state.validSupplierName == true &&
+      this.state.validAddress == true
+    ) {
+      axios
         .post("http://localhost:5000/supply/add", supply)
-        .then((res) => console.log(res.data));
-
-      window.location = "/supplyView";*/
+        .then((res) => {
+          alert("Insert Success");
+          window.location = "/viewSupply";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      window.alert("hello");
+    }
   }
 
   render() {
