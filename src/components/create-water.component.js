@@ -90,7 +90,7 @@ export default class CreateWater extends Component {
         else if(this.state.amount === "0"){
             this.setState({amountError : "Amount can not be 0."})
         }
-        else if(this.state.year.length === 4  && this.state.month < "12"  && this.state.amount !== "0"){
+        else if(this.state.year.length === 4  && this.state.month <= "12"  && this.state.amount !== "0"){
         
             axios.post('http://localhost:5000/waterExpenses/add', waterExpenses)
             .then(res => console.log(res.data));
