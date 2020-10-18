@@ -63,8 +63,7 @@ export default class RepairList extends Component {
 
         return this.state.repairs.map((currentRepairs) => {
             if (
-                this.state.searchRepair ==
-                currentRepairs.model
+              (currentRepairs.model.toLowerCase().includes(this.state.searchRepair.toLowerCase()))
             ){
                 return (
                     <tr>

@@ -63,8 +63,7 @@ export default class EquipmentList extends Component {
 
         return this.state.equipments.map((currentEquipments) => {
             if (
-                this.state.searchEquipment ==
-                currentEquipments.username
+              (currentEquipments.username.toLowerCase().includes(this.state.searchEquipment.toLowerCase()))
             ){
                 return (
                     <tr>
@@ -129,7 +128,7 @@ export default class EquipmentList extends Component {
             <table className = "topic">
                     <tr>
                         <th><h1><b>Equipment List</b></h1>
-            <h3><i>You can edit or delete equipmets from here</i></h3></th>
+            <h3><i>You can edit or delete equipments from here</i></h3></th>
                         <td><button className = "add" ><Link to = {"/createEquipment" } className = "linkaddE">Add Equipment</Link></button>
                         </td>
                         </tr>
