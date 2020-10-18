@@ -32,7 +32,11 @@ export default class CreateOrder extends Component {
                 quantity : 0,
                 printingMaterials : '',
                 orderType : '',
-                orderStatus : ''
+                orderStatus : '',
+                orderNumberError: '',
+                nameError : '',
+                contactError: '',
+                quantityError : ''
 
             }
         }
@@ -97,6 +101,22 @@ export default class CreateOrder extends Component {
             });
         }
 
+        demoClicked(){
+            this.setState({
+                orderNumber : 5643,
+                customerName : 'Ajith',
+                address : 'Kaluthara',
+                contactNo : '0785643108',
+                design : 'Design 1',
+                size : 'A4',
+                quantity : 30,
+                printingMaterials : 'Material 1',
+                orderType : 'Normal',
+                orderStatus : 'Completed',
+
+            })
+        }
+
         async onSubmit(e){
             e.preventDefault();
 
@@ -115,12 +135,26 @@ export default class CreateOrder extends Component {
 
             console.log(order);
 
+            if(this.state.orderNumber.length !== 4){
+                this.setState({orderNumberError : "Order number should be in 4 characters."})
+            }
+            else if(this.state.customerName.length <=5){
+                this.setState({nameError : "Name should be more than 5 characters long."})
+            }
+            else if(this.state.contactNo.length !== 10){
+                this.setState({contactError : "Invalid contact number."})
+            }
+            else if(this.state.quantity <= 0){
+                this.setState({quantityError : "Invalid Quantity number."})
+            }
+            else if(this.state.orderNumber.length === 4 && this.state.customerName.length >5 && this.state.contactNo.length === 10 && this.state.quantity > 0){
             await axios.post('http://localhost:5000/order/add', order)
             .then(res => console.log(res.data)).catch((error) => {
                 console.log(error.message)
             })
 
             window.location = '/order';
+        }
         }
         render() {
         return (
@@ -139,6 +173,7 @@ export default class CreateOrder extends Component {
                         value = {this.state.orderNumber}
                         onChange = {this.onChangeOrderNumber}
                         />
+                        <p className = "validateMsg">{this.state.orderNumberError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -146,9 +181,10 @@ export default class CreateOrder extends Component {
                         <input type = "text"
                         required
                         className = "form-control"
-                        value = {this.state.customerNumber}
+                        value = {this.state.customerName}
                         onChange = {this.onChangeCustomerName}
                         />
+                        <p className = "validateMsg">{this.state.nameError}</p>
                     </div>
                     <div className = "form-group">
                         <label>Address : </label>
@@ -167,6 +203,7 @@ export default class CreateOrder extends Component {
                         value = {this.state.contactNo}
                         onChange = {this.onChangeContactno}
                         />
+                        <p className = "validateMsg">{this.state.contactError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -197,6 +234,7 @@ export default class CreateOrder extends Component {
                         value = {this.state.quantity}
                         onChange = {this.onChangeQuantity}
                         />
+                        <p className = "validateMsg">{this.state.quantityError}</p>
                     </div>
 
                     <div className = "form-group">
@@ -233,6 +271,10 @@ export default class CreateOrder extends Component {
                         <input type = "submit" value = "Submit" className = "btn-bill" />
                     </div>
                 </form>
+
+                <div className = "form-group">
+                    <button className = "demo"onClick={() => this.demoClicked()}>Demo</button>
+                    </div>
 
 </CardContent>
 </div>
