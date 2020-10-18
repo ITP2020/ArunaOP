@@ -12,7 +12,7 @@ const CompletedDeliveriesSchema = new Schema(
     Location: { type: String, required: true },
     Driver: { type: String, required: true },
     Vehicle: { type: String, required: true },
-    Date: { type: Date, required: true },
+    DeleveryDate: { type: Date, required: true },
 },
 {
     timestamps: true,
