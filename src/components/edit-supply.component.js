@@ -34,7 +34,7 @@ export default class EditSupply extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/supply/" + props.match.params.id)
+      .get("http://localhost:5000/supply/" + this.props.match.params.id)
       .then((res) => {
         this.setState({
           id: res.data._id,
