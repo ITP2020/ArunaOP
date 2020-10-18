@@ -14,7 +14,6 @@ const VehicleSchema = new Schema({
     timestamps: true,
 
 });
-//utilityBillSchema.index({ year: 1, month: 1 }, { unique: true })
 
 const Vehicle = mongoose.model('Vehicle', VehicleSchema);
 

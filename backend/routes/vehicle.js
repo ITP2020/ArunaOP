@@ -62,7 +62,7 @@ router.route('/update/:id').post((req, res) => {
             vehicle.purchaseDate = Date(req.body.purchaseDate);
 
             vehicle.save()
-                .then(() => res.json('Water Bill updated'))
+                .then(() => res.json('Vehicle updated'))
                 .catch(err => res.status(400).json('Error : ' + err));
         })
 

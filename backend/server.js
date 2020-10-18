@@ -27,7 +27,6 @@ const salaryRouter = require('./routes/salary');
 const employeeRouter = require('./routes/employee');
 const orderRouter = require('./routes/order');
 const vehicleRouter = require('./routes/vehicle');
-const vehiclerepair = require('./routes/vehiclerepair')
 const finishedproductRouter = require('./routes/finishedproduct');
 const rawmaterialRouter = require('./routes/rawmaterial');
 
