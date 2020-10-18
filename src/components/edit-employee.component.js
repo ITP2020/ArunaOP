@@ -121,6 +121,7 @@ export default class EditEmployee extends Component {
         const employee = {
             fullName : this.state.fullName,
             nic : this.state.nic,
+            empID : this.state.empID,
             dob : this.state.dob,
             designation : this.state.designation,
             section : this.state.section,
@@ -130,11 +131,11 @@ export default class EditEmployee extends Component {
         }
 
         console.log(employee);
+        
 
         axios.post('http://localhost:5000/employee/update/' +this.props.match.params.id, employee)
-        .then(res => console.log(res.data));
-
-        window.location = '/employee';
+        .then(res => console.log(res.data),
+        window.location = '/employee');
     }
 
     render() {
