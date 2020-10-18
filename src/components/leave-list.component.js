@@ -19,7 +19,7 @@ const Leave = props => (
     <td>{props.leave.description}</td>
     
     <td>
-    <button className = 'edit'><Link to={"/edit/"+props.leave._id} className="link">Edit</Link></button>  <button className = 'delete' onClick={() => { props.deleteLeave(props.leave._id) }}>Delete</button>
+    <button className = 'edit'><Link to={"/editleave/"+props.leave._id} className="link">Edit</Link></button>  <button className = 'delete' onClick={() => { props.deleteLeave(props.leave._id) }}>Delete</button>
     </td>
   </tr>
 )
@@ -30,7 +30,8 @@ export default class LeaveList extends Component {
 
     this.deleteLeave = this.deleteLeave.bind(this)
 
-    this.state = {leave: []};
+    this.state = {leave: [],
+    searchLeave: ""};
   }
 
   componentDidMount() {
@@ -57,6 +58,70 @@ export default class LeaveList extends Component {
       return <Leave leave={currentleave} deleteLeave={this.deleteLeave} key={currentleave._id}/>;
     })
   }
+
+  searchLeaveList(){
+
+    return this.state.leave.map((currentleave) => {
+        if (
+            this.state.searchLeave ==
+            currentleave.numOfDays
+        ){
+            return (
+                <tr>
+                <td style={{ width: "12.5%" }}>{currentleave.leaveType}</td>
+                <td style={{ width: "12.5%" }}>{currentleave.numOfDays}</td>
+                <td style={{ width: "12.5%" }}>{currentleave.startDate.substring(0,10)}</td>
+                <td style={{ width: "12.5%" }}>{currentleave.endDate.substring(0,10)}</td>
+                <td style={{ width: "12.5%" }}>{currentleave.description}</td>
+                
+                <td style={{ width: "20%" }}>
+                    {
+                    <button className="edit">
+                        <Link
+                        to={"/editleave/" + currentleave._id}
+                        className="link"
+                        >
+                        Edit
+                        </Link>
+                    </button>
+                    }
+                    {"  "}
+                    {
+                    <button
+                        className="delete"
+                        onClick={() => {
+                          //Delete the selected record
+                        axios
+                            .delete(
+                            "http://localhost:5000/leave/" + currentleave._id
+                            )
+                            .then(() => {
+                            alert("Delete Success");
+                              //Get data again after delete
+                            axios
+                                .get("http://localhost:5000/leave")
+                                .then((res) => {
+                                console.log(res.data);
+                                this.setState({
+                                  leave: res.data,
+                                });
+                                })
+                                .catch((err) => console.log(err));
+                            })
+                            .catch((err) => {
+                            alert(err);
+                            });
+                        }}
+                    >
+                        Delete
+                    </button>
+                    }
+                </td>
+                </tr>
+            );
+        }
+    });
+}
 
   exportLeave = () => {
     console.log( "SSSSSSSSSS" )
@@ -103,6 +168,20 @@ export default class LeaveList extends Component {
                         <td><button className = "add" ><Link to = {"/createLeave" } className = "linkaddE">Add Leave Request</Link></button>
                         <button className = "download" onClick={() => this.exportLeave()}>Download Report Here</button></td>
                     </tr>
+
+                    <div className="col-md-9">
+                    <input style={{ width: "250px", marginTop:"10px"}}
+                    class="form-control"
+                    type="text"
+                    placeholder="Search by Number of Days"
+                    aria-label="Search"
+                    onChange={(e) => {
+                        this.setState({
+                        searchLeave: e.target.value
+                        });
+                    }}
+                    />
+            </div>
                 </table>
             
             
@@ -121,7 +200,7 @@ export default class LeaveList extends Component {
             </tr>
           </thead>
           <tbody>
-            { this.leaveList() }
+            { this.state.searchLeave == "" ? this.leaveList() : this.searchLeaveList() }
           </tbody>
         </table>
         </CardContent>

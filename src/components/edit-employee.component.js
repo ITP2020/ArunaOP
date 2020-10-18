@@ -87,7 +87,7 @@ export default class EditEmployee extends Component {
     
         onChangedesignation(e){
             this.setState({
-                nic : e.target.value
+                designation : e.target.value
             });
         }
     

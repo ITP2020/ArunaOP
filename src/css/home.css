@@ -60,6 +60,13 @@
     border : 2px solid;
     border-color: #ff000033;
 }
+.date-control{
+    border : 2px solid;
+    border-color: #ff000033;
+    width: 400px;
+    height: 37px;
+    border-radius: 5px;
+}
 .btn-bill{
     align-self: center;
     margin-left : 40%;
