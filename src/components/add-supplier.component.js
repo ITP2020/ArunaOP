@@ -28,7 +28,7 @@ export default class AddSupplier extends Component {
 
   onChangeAddress(e) {
     this.setState({
-      itemName: e.target.value,
+      address: e.target.value,
     });
   }
 
@@ -136,7 +136,7 @@ export default class AddSupplier extends Component {
       this.state.validAddress == true
     ) {
       axios
-        .post("http://localhost:5000/supply/add", supplier)
+        .post("http://localhost:5000/supplier/add", supplier)
         .then((res) => {
           alert("Insert Success");
           window.location = "/viewSupply";

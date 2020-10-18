@@ -38,6 +38,7 @@ const repairRouter = require('./routes/repairs');
 const reportRouter = require('./routes/reports');
 
 const supplyRouter = require('./routes/supply');
+const supplierRouter = require('./routes/supplier')
 
 
 
@@ -59,6 +60,7 @@ app.use('/finishedproduct', finishedproductRouter);
 app.use('/rawmaterial', rawmaterialRouter);
 
 app.use('/supply',supplyRouter);
+app.use('/supplier',supplierRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port:-${port}`);
