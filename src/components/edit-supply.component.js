@@ -16,8 +16,6 @@ export default class EditSupply extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeQuantity = this.onChangeQuantity.bind(this);
 
-    console.log(this.props.match.params.id);
-
     this.state = {
       itemName: "",
       supplierName: "",
@@ -31,43 +29,40 @@ export default class EditSupply extends Component {
       validPrice: true,
       validQuantity: true,
       validDescrption: true,
+      suppliers: [],
     };
   }
 
   componentDidMount() {
-    axios
-      .get("http://localhost:5000/supply/" + this.props.match.params.id)
-      .then((res) => {
-        this.setState({
-          id: res.data._id,
-          itemName: res.data.itemName,
-          supplierName: res.data.supplierName,
-          date: res.data.date,
-          price: res.data.price,
-          quantity: res.data.quantity,
-          description: res.data.description
+    if (!this.props.location.data) {
+      window.location = "/viewSupply";
+    } else {
+      axios
+        .get("http://localhost:5000/supply/" + this.props.location.data)
+        .then((res) => {
+          this.setState({
+            id: res.data._id,
+            itemName: res.data.itemName,
+            supplierName: res.data.supplierName,
+            date: res.data.date,
+            price: res.data.price,
+            quantity: res.data.quantity,
+            description: res.data.description,
+          });
         });
 
-        this.supplyReset = {
-          id: res.data._id,
-          itemName: res.data.itemName,
-          supplierName: res.data.supplierName,
-          date: res.data.date,
-          price: res.data.price,
-          quantity: res.data.quantity,
-          description: res.data.description
-        }
-      });
+      axios
+        .get("http://localhost:5000/supplier/")
+        .then((res) => {
+          console.log(res.data);
+          this.setState({
+            suppliers: res.data,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
   }
 
-  supplyReset = {
-    id: "",
-    itemName: "",
-    supplierName: "",
-    date: "",
-    price: "",
-    description: "",
-  };
 
   onChangeItemName(e) {
     this.setState({
@@ -176,17 +171,16 @@ export default class EditSupply extends Component {
     }
   }
 
-  onClickReset(e) {
-    e.preventDefault();
-  }
-
   onClickDelete(e) {
     e.preventDefault();
 
-    if (window.confirm("Are you sure to delete this record")){
-      axios.delete('http://localhost:5000/supply/'+this.state.id).then((res)=> {
-        console.log("delete successfull")
-      }).catch((err) => console.log(err));
+    if (window.confirm("Are you sure to delete this record")) {
+      axios
+        .delete("http://localhost:5000/supply/" + this.state.id)
+        .then((res) => {
+          console.log("delete successfull");
+        })
+        .catch((err) => console.log(err));
     }
   }
 
@@ -218,7 +212,10 @@ export default class EditSupply extends Component {
       this.state.validItemName == true &&
       this.state.validSupplierName == true
     ) {
-      window.alert("hello");
+      axios
+        .post("http://localhost:5000/supply/update/"+ this.state.id, supply)
+        .then((res) => console.log(res.data),
+        window.location="/viewSupply");
     }
   }
 
@@ -252,10 +249,13 @@ export default class EditSupply extends Component {
                     value={this.state.supplierName}
                     onChange={this.onChangeSupplierName}
                   >
-                    <option value=""></option>
-                    <option value="hello">Hello</option>
-                    <option value="2">1</option>
-                    <option value="1">1</option>
+                    {this.state.suppliers.map((supplier) => {
+                      return (
+                        <option value={supplier.supplierName}>
+                          {supplier.supplierName}
+                        </option>
+                      );
+                    })}
                   </select>
                   <p className="validateMsg">
                     {this.state.validSupplierName
@@ -333,31 +333,14 @@ export default class EditSupply extends Component {
                 >
                   <button
                     style={{
-                      display: "inline-block",
-                      margin: "10px",
-                      float: "left",
+                      display: "block",
+                      margin: "10px"
                     }}
                     type="button"
                     className="btn btn-primary"
                     onClick={this.onSubmit}
                   >
                     Submit
-                  </button>
-                  <button
-                    style={{ display: "inline-block", margin: "10px" }}
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={this.onClickDelete}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    style={{ display: "inline-block", margin: "10px" }}
-                    type="button"
-                    className="btn btn-warning"
-                    onClick={this.onClickReset}
-                  >
-                    Reset
                   </button>
                 </div>
               </form>

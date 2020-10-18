@@ -15,6 +15,7 @@ export default class EditSupplier extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
+      id: "",
       supplierName: "",
       address: "",
       contactNumber: "",
@@ -24,6 +25,24 @@ export default class EditSupplier extends Component {
       validContact: true,
       validEmail: true,
     };
+  }
+
+  componentDidMount() {
+    if (!this.props.location.data) {
+      window.location = "/viewSuppliers";
+    } else {
+      axios
+        .get("http://localhost:5000/supplier/" + this.props.location.data)
+        .then((res) => {
+          this.setState({
+            id: res.data._id,
+            supplierName: res.data.supplierName,
+            address: res.data.address,
+            contactNumber: res.data.contactNumber,
+            email: res.data.email,
+          });
+        });
+    }
   }
 
   onChangeAddress(e) {
@@ -114,11 +133,6 @@ export default class EditSupplier extends Component {
     }
   }
 
-  onClickReset(e) {
-    e.preventDefault();
-
-  }
-
   onClickDelete(e) {
     e.preventDefault();
 
@@ -142,17 +156,17 @@ export default class EditSupplier extends Component {
     this.validateContact();
     this.validateEmail();
 
-    if (!this.state.validEmail || !this.state.validContact) {
-      window.confirm(
-        "Are you sure to submit the for without filling all the fields"
-      );
+    if (this.state.validEmail == true || !this.state.validContact == true) {
+      axios
+        .post(
+          "http://localhost:5000/supplier/update/" + this.state.id,
+          supplier
+        )
+        .then(
+          (res) => console.log(res.data),
+          (window.location = "/viewSuppliers")
+        );
     }
-
-    /*axios
-        .post("http://localhost:5000/supply/add", supply)
-        .then((res) => console.log(res.data));
-
-      window.location = "/supplyView";*/
   }
 
   render() {
@@ -225,30 +239,24 @@ export default class EditSupplier extends Component {
                   </p>
                 </div>
 
-                <div style={{ display: "block", margin: "0px auto",width:"fit-content" }} className="Row">
+                <div
+                  style={{
+                    display: "block",
+                    margin: "0px auto",
+                    width: "fit-content",
+                  }}
+                  className="Row"
+                >
                   <button
-                    style={{ display: "inline-block", margin: "10px",float:"left"}}
+                    style={{
+                      display: "inline-block",
+                      margin: "10px"
+                    }}
                     type="button"
                     className="btn btn-primary"
                     onClick={this.onSubmit}
                   >
                     Submit
-                  </button>
-                  <button
-                    style={{ display: "inline-block", margin: "10px" }}
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={this.onClickDelete}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    style={{ display: "inline-block", margin: "10px" }}
-                    type="button"
-                    className="btn btn-warning"
-                    onClick={this.onClickReset}
-                  >
-                    Reset
                   </button>
                 </div>
               </form>

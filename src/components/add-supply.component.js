@@ -29,7 +29,20 @@ export default class AddSupply extends Component {
       validPrice: true,
       validQuantity: true,
       validDescrption: true,
+      suppliers: [],
     };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/supplier/")
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          suppliers: res.data,
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   onChangeItemName(e) {
@@ -90,7 +103,7 @@ export default class AddSupply extends Component {
         validItemName: true,
       });
     }
-    console.log(this.state.validItemName)
+    console.log(this.state.validItemName);
   }
 
   validateSupplier() {
@@ -103,7 +116,7 @@ export default class AddSupply extends Component {
         validSupplierName: true,
       });
     }
-    console.log(this.state.validSupplierName)
+    console.log(this.state.validSupplierName);
   }
 
   validateQuantity() {
@@ -116,7 +129,7 @@ export default class AddSupply extends Component {
         validQuantity: true,
       });
     }
-    console.log(this.state.validItemName)
+    console.log(this.state.validItemName);
   }
 
   validatePrice() {
@@ -129,7 +142,7 @@ export default class AddSupply extends Component {
         validPrice: true,
       });
     }
-    console.log(this.state.validPrice)
+    console.log(this.state.validPrice);
   }
 
   validateDate() {
@@ -142,7 +155,7 @@ export default class AddSupply extends Component {
         validSupplierName: true,
       });
     }
-    console.log(this.state.validDate)
+    console.log(this.state.validDate);
   }
 
   onAddNewSupplier() {
@@ -167,9 +180,15 @@ export default class AddSupply extends Component {
     this.validateQuantity();
     this.validateDate();
 
-    if (this.state.validPrice == true && this.state.validDate == true && this.state.validDescrption == true && this.state.validItemName == true && this.state.validSupplierName == true) {
+    if (
+      this.state.validPrice == true &&
+      this.state.validDate == true &&
+      this.state.validDescrption == true &&
+      this.state.validItemName == true &&
+      this.state.validSupplierName == true
+    ) {
       axios
-        .post('http://localhost:5000/supply/add', supply)
+        .post("http://localhost:5000/supply/add", supply)
         .then((res) => {
           alert("Insert Success");
           window.location = "/viewSupply";
@@ -179,7 +198,7 @@ export default class AddSupply extends Component {
         });
     } else {
       window.alert("hello");
-      console.log(this.state.validDate,this.state.validItemName);
+      console.log(this.state.validDate, this.state.validItemName);
     }
   }
 
@@ -214,10 +233,11 @@ export default class AddSupply extends Component {
                       value={this.state.supplierName}
                       onChange={this.onChangeSupplierName}
                     >
-                      <option value=""></option>
-                      <option value="hello">Hello</option>
-                      <option value="Supplier">Supplier</option>
-                      <option value="1">1</option>
+                      {this.state.suppliers.map((supplier) => {
+                        return <option value={supplier.supplierName}>{supplier.supplierName}</option>;
+                      })}
+
+                   
                     </select>
                     <button
                       className="btn btn-primary"

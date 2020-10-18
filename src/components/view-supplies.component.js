@@ -9,7 +9,12 @@ import "jspdf-autotable";
 export default class ViewSupplies extends Component {
   constructor(props) {
     super(props);
-    this.state = { supplies: [] };
+    this.onChangeSearch = this.onChangeSearch.bind(this);
+
+    this.state = {
+      supplies: [],
+      search: "",
+    };
   }
 
   componentDidMount() {
@@ -22,6 +27,106 @@ export default class ViewSupplies extends Component {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  onChangeSearch(e) {
+    this.setState({
+      search: e.target.value,
+    });
+  }
+
+  supplyRender() {
+    return this.state.supplies.map((supply) => {
+      return (
+        <tr>
+          <td>{supply.itemName}</td>
+          <td>{supply.supplierName}</td>
+          <td>{supply.price}</td>
+          <td>{supply.date}</td>
+          <td>{supply.description}</td>
+          <td>
+            <Link to={{ pathname: "/editSupply", data: supply._id }}>
+              <button className="btn btn-secondary">Edit</button>
+            </Link>{" "}
+            |{" "}
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                axios
+                  .delete("http://localhost:5000/supply/" + supply._id)
+                  .then(() => {
+                    alert("Delete Success");
+                    //Get data again after delete
+                    axios
+                      .get("http://localhost:5000/supply")
+                      .then((res) => {
+                        console.log(res.data);
+                        this.setState({
+                          supplies: res.data,
+                        });
+                      })
+                      .catch((err) => console.log(err));
+                  })
+                  .catch((err) => {
+                    alert(err);
+                  });
+              }}
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      );
+    });
+  }
+
+  searchSupplyRender() {
+    return this.state.supplies.map((supply) => {
+      if (
+        supply.itemName.toLowerCase().includes(this.state.search.toLowerCase())
+      ) {
+        return (
+          <tr>
+            <td>{supply.itemName}</td>
+            <td>{supply.supplierName}</td>
+            <td>{supply.price}</td>
+            <td>{supply.date}</td>
+            <td>{supply.description}</td>
+            <td>
+              <Link to={{ pathname: "/editSupply", data: supply._id }}>
+                <button className="btn btn-secondary">Edit</button>
+              </Link>{" "}
+              |{" "}
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  axios
+                    .delete("http://localhost:5000/supply/" + supply._id)
+                    .then(() => {
+                      alert("Delete Success");
+                      //Get data again after delete
+                      axios
+                        .get("http://localhost:5000/supply")
+                        .then((res) => {
+                          console.log(res.data);
+                          this.setState({
+                            supplies: res.data,
+                          });
+                        })
+                        .catch((err) => console.log(err));
+                    })
+                    .catch((err) => {
+                      alert(err);
+                    });
+                }}
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        );
+      }
+    });
   }
 
   exportSupplies = () => {
@@ -80,7 +185,17 @@ export default class ViewSupplies extends Component {
               </td>
             </tr>
           </table>
-
+          <div className="form-group col-md-4">
+            <input
+              type="text"
+              required
+              placeholder="Search by item name"
+              aria-label="Search"
+              className="form-control "
+              value={this.state.search}
+              onChange={this.onChangeSearch}
+            ></input>
+          </div>
           <CardContent>
             <table
               className="table table-hover"
@@ -97,48 +212,9 @@ export default class ViewSupplies extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.supplies.map((supply) => {
-                  return (
-                    <tr>
-                      <td>{supply.itemName}</td>
-                      <td>{supply.supplierName}</td>
-                      <td>{supply.price}</td>
-                      <td>{supply.date}</td>
-                      <td>{supply.description}</td>
-                      <td>
-                        <Link to={"/editSupply/" + supply._id}>
-                          <button className="btn btn-secondary">Edit</button>
-                        </Link>{" "}
-                        |{" "}
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => {
-                            axios
-                              .delete(
-                                "http://localhost:5000/supply/" + supply._id
-                              )
-                              .then(() => {
-                                alert("Delete Success");
-                                //Get data again after delete
-                                axios
-                                  .get("http://localhost:5000/supply")
-                                  .then((res) => {
-                                    console.log(res.data);
-                                    this.setState({
-                                      supplies: res.data,
-                                    });
-                                  })
-                                  .catch((err) => console.log(err));
-                              })
-                              .catch((err) => {
-                                alert(err);
-                              });
-                          }}
-                        >Delete</button>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {this.state.search == ""
+                  ? this.supplyRender()
+                  : this.searchSupplyRender()}
               </tbody>
             </table>
           </CardContent>
