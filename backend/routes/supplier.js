@@ -1,8 +1,8 @@
 const router = require("express").Router();
-let Supplier = require("../models/supply.model");
+let supplier = require("../models/supplier.model");
 
 router.route("/").get((req, res) => {
-  Supplier
+  supplier
     .find()
     .then((suppliers) => res.json(suppliers))
     .catch((err) => res.status(400).json("Error : " + err));
@@ -11,10 +11,10 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
   const supplierName = (req.body.supplierName);
   const address = (req.body.address);
-  const contactNumber = (req.body.contactNumber);
+  const contactNumber = Number(req.body.contactNumber);
   const email = (req.body.email);
 
-  const newSuppliers = new Supplier({
+  const newSuppliers = new supplier({
     supplierName,
     address,
     contactNumber,
@@ -26,7 +26,7 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error : " + err));
 });
 router.route("/:id").get((req, res) => {
-  Supplier.findById(req.params.id)
+  supplier.findById(req.params.id)
     .then((supplier) => res.json(supplier))
     .catch((err) => res.status(400).json("Error : " + err));
 });
@@ -38,7 +38,7 @@ router.route("/:id").delete((req, res) => {
 });
 
 router.route("/update/:id").post((req, res) => {
-  Supplier.findById(req.params.id)
+  supplier.findById(req.params.id)
     .then((supplieirs) => {
         suppliers.supplierName = (req.body.supplierName);
         suppliers.address = (req.body.address);

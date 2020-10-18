@@ -42,7 +42,6 @@ export default class AddSupplier extends Component {
     this.setState({
       contactNumber: e.target.value,
     });
-    console.log(e.target.value);
   }
 
   onChangePrice(e) {
@@ -118,13 +117,11 @@ export default class AddSupplier extends Component {
     e.preventDefault();
 
     const supplier = {
-      address: this.state.address,
       supplierName: this.state.supplierName,
+      address: this.state.address,
       contactNumber: this.state.contactNumber,
       email: this.state.email,
     };
-
-    console.log(this.state.supplierName);
 
     this.validateAddress();
     this.validateSupplier();
@@ -139,7 +136,7 @@ export default class AddSupplier extends Component {
         .post("http://localhost:5000/supplier/add", supplier)
         .then((res) => {
           alert("Insert Success");
-          window.location = "/viewSupply";
+          window.location = "/viewSuppliers";
         })
         .catch((err) => {
           console.log(err);
