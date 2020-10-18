@@ -90,6 +90,7 @@ export default class AddSupply extends Component {
         validItemName: true,
       });
     }
+    console.log(this.state.validItemName)
   }
 
   validateSupplier() {
@@ -102,6 +103,7 @@ export default class AddSupply extends Component {
         validSupplierName: true,
       });
     }
+    console.log(this.state.validSupplierName)
   }
 
   validateQuantity() {
@@ -114,6 +116,7 @@ export default class AddSupply extends Component {
         validQuantity: true,
       });
     }
+    console.log(this.state.validItemName)
   }
 
   validatePrice() {
@@ -126,6 +129,7 @@ export default class AddSupply extends Component {
         validPrice: true,
       });
     }
+    console.log(this.state.validPrice)
   }
 
   validateDate() {
@@ -138,6 +142,7 @@ export default class AddSupply extends Component {
         validSupplierName: true,
       });
     }
+    console.log(this.state.validDate)
   }
 
   onAddNewSupplier() {
@@ -162,13 +167,9 @@ export default class AddSupply extends Component {
     this.validateQuantity();
     this.validateDate();
 
-    if (
-      this.state.validPrice == true && this.state.validDate == true && this.state.validDescrption == true && this.state.validItemName == true && this.state.validSupplierName == true) {
-      window.alert("hello");
-      console.log(this.state.validDate,this.state.validItemName);
-    } else {
+    if (this.state.validPrice == true && this.state.validDate == true && this.state.validDescrption == true && this.state.validItemName == true && this.state.validSupplierName == true) {
       axios
-        .post("http://localhost:5000/supply/add", supply)
+        .post('http://localhost:5000/supply/add', supply)
         .then((res) => {
           alert("Insert Success");
           window.location = "/viewSupply";
@@ -176,6 +177,9 @@ export default class AddSupply extends Component {
         .catch((err) => {
           console.log(err);
         });
+    } else {
+      window.alert("hello");
+      console.log(this.state.validDate,this.state.validItemName);
     }
   }
 

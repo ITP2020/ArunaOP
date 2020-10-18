@@ -12,7 +12,6 @@ const supplierSchema = new Schema({
         timestamps : true,
     
 });
-//utilityBillSchema.index({ year: 1, month: 1 }, { unique: true })
 
 const supplier = mongoose.model('supplier', supplierSchema);
 

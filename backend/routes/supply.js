@@ -44,12 +44,12 @@ router.route("/:id").delete((req, res) => {
 router.route("/update/:id").post((req, res) => {
   supply.findById(req.params.id)
     .then((supplies) => {
-        supplies.itemName = String(req.body.itemName);
-        supplies.supplierName = String(req.body.supplierName);
-        supplies.price = String(req.body.price);
-        supplies.quantity = String(req.body.quantity);
-        supplies.date = String(req.body.date);
-        supplies.description = String(req.body.description);
+        supplies.itemName = (req.body.itemName);
+        supplies.supplierName = (req.body.supplierName);
+        supplies.price = (req.body.price);
+        supplies.quantity = (req.body.quantity);
+        supplies.date = (req.body.date);
+        supplies.description = (req.body.description);
 
       supplies
         .save()
