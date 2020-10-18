@@ -24,7 +24,8 @@ export default class EquipmentList extends Component {
 
         this.deleteEquipment = this.deleteEquipment.bind(this);
 
-        this.state = {equipments:[]};
+        this.state = {equipments:[],
+        searchEquipment : ""};
 
     }
 
@@ -57,6 +58,69 @@ export default class EquipmentList extends Component {
           return <Equipment equipments={currentEquipments} deleteEquipment={this.deleteEquipment} key={currentEquipments._id}/>;
         })
       }
+
+      searchEquipmentList(){
+
+        return this.state.equipments.map((currentEquipments) => {
+            if (
+                this.state.searchEquipment ==
+                currentEquipments.username
+            ){
+                return (
+                    <tr>
+                    <td style={{ width: "20%" }}>{currentEquipments.username}</td>
+                    <td style={{ width: "20%" }}>{currentEquipments.model}</td>
+                    <td style={{ width: "20%" }}>{currentEquipments.country}</td>
+                    <td style={{ width: "20%" }}>{currentEquipments.date.substring(0,10)}</td>
+                    
+                    <td style={{ width: "20%" }}>
+                        {
+                        <button className="edit">
+                            <Link
+                            to={"/editEquipment/" + currentEquipments._id}
+                            className="link"
+                            >
+                            Edit
+                            </Link>
+                        </button>
+                        }
+                        {"  "}
+                        {
+                        <button
+                            className="delete"
+                            onClick={() => {
+                              //Delete the selected record
+                            axios
+                                .delete(
+                                "http://localhost:5000/equipments/" + currentEquipments._id
+                                )
+                                .then(() => {
+                                alert("Delete Success");
+                                  //Get data again after delete
+                                axios
+                                    .get("http://localhost:5000/equipments")
+                                    .then((res) => {
+                                    console.log(res.data);
+                                    this.setState({
+                                      equipments: res.data,
+                                    });
+                                    })
+                                    .catch((err) => console.log(err));
+                                })
+                                .catch((err) => {
+                                alert(err);
+                                });
+                            }}
+                        >
+                            Delete
+                        </button>
+                        }
+                    </td>
+                    </tr>
+                );
+            }
+        });
+    }
     render() {
         return (
             <div>
@@ -68,6 +132,22 @@ export default class EquipmentList extends Component {
             <h3><i>You can edit or delete equipmets from here</i></h3></th>
                         <td><button className = "add" ><Link to = {"/createEquipment" } className = "linkaddE">Add Equipment</Link></button>
                         </td>
+                        </tr>
+                        <tr>
+
+                        <div className="col-md-9">
+                    <input style={{ width: "250px", marginTop:"10px"}}
+                    class="form-control"
+                    type="text"
+                    placeholder="Search by Supervisor name"
+                    aria-label="Search"
+                    onChange={(e) => {
+                        this.setState({
+                        searchEquipment: e.target.value
+                        });
+                    }}
+                    />
+            </div>
                     </tr>
 </table>
 <CardContent>
@@ -75,7 +155,7 @@ export default class EquipmentList extends Component {
               <thead>
                 <tr>
                   <th className = "tbhead">Supervisor</th>
-                  <th className = "tbhead">Model</th>
+                  <th className = "tbhead">Brand & Model</th>
                   <th className = "tbhead">Country</th>
                   <th className = "tbhead">Date</th>
                   <th className = "tbhead">Edit or Delete</th>
@@ -83,7 +163,7 @@ export default class EquipmentList extends Component {
                 </tr>
               </thead>
               <tbody>
-                { this.equipmentList() }
+                { this.state.searchEquipment == "" ? this.equipmentList() : this.searchEquipmentList() }
               </tbody>
             </table>
             </CardContent>

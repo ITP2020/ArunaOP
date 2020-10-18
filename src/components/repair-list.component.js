@@ -24,7 +24,8 @@ export default class RepairList extends Component {
 
         this.deleteRepair = this.deleteRepair.bind(this);
 
-        this.state = {repairs:[]};
+        this.state = {repairs:[],
+        searchRepair : ""};
 
     }
 
@@ -57,6 +58,70 @@ export default class RepairList extends Component {
           return <Repair repairs={currentRepairs} deleteRepair={this.deleteRepair} key={currentRepairs._id}/>;
         })
       }
+
+      searchRepairList(){
+
+        return this.state.repairs.map((currentRepairs) => {
+            if (
+                this.state.searchRepair ==
+                currentRepairs.model
+            ){
+                return (
+                    <tr>
+                    <td style={{ width: "20%" }}>{currentRepairs.username}</td>
+                    <td style={{ width: "20%" }}>{currentRepairs.model}</td>
+                    <td style={{ width: "20%" }}>{currentRepairs.fault}</td>
+                    <td style={{ width: "20%" }}>{currentRepairs.date.substring(0,10)}</td>
+                    
+                    <td style={{ width: "20%" }}>
+                        {
+                        <button className="edit">
+                            <Link
+                            to={"/repedit/" + currentRepairs._id}
+                            className="link"
+                            >
+                            Edit
+                            </Link>
+                        </button>
+                        }
+                        {"  "}
+                        {
+                        <button
+                            className="delete"
+                            onClick={() => {
+                              //Delete the selected record
+                            axios
+                                .delete(
+                                "http://localhost:5000/repairs/" + currentRepairs._id
+                                )
+                                .then(() => {
+                                alert("Delete Success");
+                                  //Get data again after delete
+                                axios
+                                    .get("http://localhost:5000/repairs")
+                                    .then((res) => {
+                                    console.log(res.data);
+                                    this.setState({
+                                      repairs: res.data,
+                                    });
+                                    })
+                                    .catch((err) => console.log(err));
+                                })
+                                .catch((err) => {
+                                alert(err);
+                                });
+                            }}
+                        >
+                            Delete
+                        </button>
+                        }
+                    </td>
+                    </tr>
+                );
+            }
+        });
+    }
+
     render() {
         return (
             <div>
@@ -65,9 +130,25 @@ export default class RepairList extends Component {
                 <table className = "topic">
                     <tr>
                         <th><h2><b>Equipment Repair List</b></h2>
-                        <h5><i>You can edit or delete repair equipmets from here</i></h5></th>
-                        <td><button className = "add" ><Link to = {"/repair" } className = "linkaddE">Add Equipemnt Repair</Link></button>
+                        <h5><i>You can edit or delete repair equipments from here</i></h5></th>
+                        <td><button className = "add" ><Link to = {"/repair" } className = "linkaddE">Add Repair</Link></button>
                         </td>
+                    </tr>
+                    <tr>
+
+                    <div className="col-md-9">
+                    <input style={{ width: "200px", marginTop:"10px"}}
+                    class="form-control"
+                    type="text"
+                    placeholder="Search by model"
+                    aria-label="Search"
+                    onChange={(e) => {
+                        this.setState({
+                        searchRepair: e.target.value
+                        });
+                    }}
+                    />
+            </div>
                     </tr>
                     </table>
 
@@ -76,7 +157,7 @@ export default class RepairList extends Component {
               <thead >
                 <tr>
                   <th className = "tbhead">Supervisor</th>
-                  <th className = "tbhead">Model</th>
+                  <th className = "tbhead">Brand & Model</th>
                   <th className = "tbhead">Fault</th>
                   <th className = "tbhead">Date</th>
                   <th className = "tbhead">Edit or Delete</th>
@@ -84,7 +165,7 @@ export default class RepairList extends Component {
                 </tr>
               </thead>
               <tbody>
-                { this.repairList() }
+                { this.state.searchRepair == "" ? this.repairList() : this.searchRepairList() }
               </tbody>
             </table>
             </CardContent>
