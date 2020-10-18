@@ -16,6 +16,8 @@ export default class EditSupply extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeQuantity = this.onChangeQuantity.bind(this);
 
+    console.log(this.props.match.params.id);
+
     this.state = {
       itemName: "",
       supplierName: "",

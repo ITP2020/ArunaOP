@@ -10,14 +10,15 @@ export default class ViewSupplies extends Component {
   constructor(props) {
     super(props);
     this.deleteSupply = this.deleteSupply.bind(this);
-    this.state = { supplies: [] };
+    this.state = { suppliers: [] };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/supplies/")
+      .get("http://localhost:5000/supplier/")
       .then((response) => {
-        this.setState({ supplies: response.data });
+        this.setState({ suppliers: response.data });
+        console.log(this.state.supplies);
       })
       .catch((error) => {
         console.log(error);
@@ -102,50 +103,40 @@ export default class ViewSupplies extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>supply.supplierName</td>
-                  <td>supply.address</td>
-                  <td>supply.contactNumber</td>
-                  <td>supply.email</td>
-                  <td>
-                    <button
-                      style={{ display: "inline-block" }}
-                      className="btn btn-secondary btn-sm"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      style={{ display: "inline-block" }}
-                      className="btn btn-danger btn-sm"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-                {this.state.supplies.map((supply) => {
-                  return (
-                    <tr>
-                      <td>{supply.supplierName}</td>
-                      <td>{supply.address}</td>
-                      <td>{supply.contactNumber}</td>
-                      <td>{supply.email}</td>
-                      <td>
-                        <button
-                          style={{ display: "inline-block" }}
-                          className="btn btn-secondary btn-sm"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          style={{ display: "inline-block" }}
-                          className="btn btn-danger btn-sm"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {
+                  this.state.suppliers.map((supplier)=> {
+                    return(
+                      <tr>
+                        <td>{supplier.supplierName}</td>
+                        <td>{supplier.address}</td>
+                        <td>{supplier.contactNumber}</td>
+                        <td>{supplier.email}</td>
+                        <td><Link to={"/editSupplier/"+supplier._id}><button className="btn btn-secondary">Edit</button></Link> | <button className="btn btn-danger" onClick={() => {
+                          axios
+                          .delete(
+                            "http://localhost:5000/supplier/" + supplier._id
+                          )
+                          .then(() => {
+                            alert("Delete Success");
+                            //Get data again after delete
+                            axios
+                              .get("http://localhost:5000/supplier/")
+                              .then((res) => {
+                                console.log(res.data);
+                                this.setState({
+                                  suppliers: res.data,
+                                });
+                              })
+                              .catch((err) => console.log(err));
+                          })
+                          .catch((err) => {
+                            alert(err);
+                          });
+                        }}>Delete</button></td>
+                      </tr>
+                    )
+                  })
+                }
               </tbody>
             </table>
           </CardContent>

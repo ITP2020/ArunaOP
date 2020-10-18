@@ -9,28 +9,19 @@ import "jspdf-autotable";
 export default class ViewSupplies extends Component {
   constructor(props) {
     super(props);
-    this.deleteSupply = this.deleteSupply.bind(this);
     this.state = { supplies: [] };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/supplies/")
+      .get("http://localhost:5000/supply/")
       .then((response) => {
         this.setState({ supplies: response.data });
+        console.log(this.state.supplies);
       })
       .catch((error) => {
         console.log(error);
       });
-  }
-
-  deleteSupply(id) {
-    axios
-      .delete("http://localhost:5000/supplies/" + id)
-      .then((res) => console.log(res.data));
-    this.setState({
-      supplies: this.state.supplies.filter((el) => el._id !== id),
-    });
   }
 
   exportSupplies = () => {
@@ -91,7 +82,10 @@ export default class ViewSupplies extends Component {
           </table>
 
           <CardContent>
-            <table className="table table-hover" style={{tableLayout:"fixed"}}>
+            <table
+              className="table table-hover"
+              style={{ tableLayout: "fixed" }}
+            >
               <thead className="thead-dark">
                 <tr>
                   <th scope="col">Item Name</th>
@@ -106,14 +100,41 @@ export default class ViewSupplies extends Component {
                 {this.state.supplies.map((supply) => {
                   return (
                     <tr>
-                      <td scope="row">{supply.itemName}</td>
+                      <td>{supply.itemName}</td>
                       <td>{supply.supplierName}</td>
                       <td>{supply.price}</td>
                       <td>{supply.date}</td>
                       <td>{supply.description}</td>
                       <td>
-                          <button style={{display:"inline-block"}} className="btn btn-secondary btn-sm">Edit</button>
-                          <button style={{display:"inline-block"}} className="btn btn-danger btn-sm" onClick={this.deleteSupply(supply.id)}>Delete</button>
+                        <Link to={"/editSupply/" + supply._id}>
+                          <button className="btn btn-secondary">Edit</button>
+                        </Link>{" "}
+                        |{" "}
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => {
+                            axios
+                              .delete(
+                                "http://localhost:5000/supply/" + supply._id
+                              )
+                              .then(() => {
+                                alert("Delete Success");
+                                //Get data again after delete
+                                axios
+                                  .get("http://localhost:5000/supply")
+                                  .then((res) => {
+                                    console.log(res.data);
+                                    this.setState({
+                                      supplies: res.data,
+                                    });
+                                  })
+                                  .catch((err) => console.log(err));
+                              })
+                              .catch((err) => {
+                                alert(err);
+                              });
+                          }}
+                        >Delete</button>
                       </td>
                     </tr>
                   );
