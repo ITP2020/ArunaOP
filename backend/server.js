@@ -50,7 +50,6 @@ app.use('/salary' , salaryRouter);
 app.use('/employee', employeeRouter);
 app.use('/order', orderRouter);
 app.use('/vehicle', vehicleRouter);
-app.use('/vehiclerepair', vehiclerepair);
 
 app.use('/users',usersRouter);
 app.use('/equipments',equipmentRouter);

@@ -60,8 +60,6 @@ import AssignDriverForm from "./components/AssignDriverForm.component";
 import InsertVehicleForm from "./components/InsertVehicleForm.component"
 import UpdateVehicleForm from "./components/UpdateVehicleForm.component"
 import VehicleManagementTable from "./components/VehicleManagementTable.component";
-import RepairVehicleForm from "./components/VehicleRepairForm.component";
-import VehicleDeleteForm from "./components/VehicleDeleteForm.component";
 
 import EquipmentList from "./components/equipment-list.component";
 import EditEquipment from "./components/edit-equipment.component";
@@ -141,11 +139,9 @@ function App() {
       <Route path="/InsertVehicle"  component={InsertVehicleForm} />
       <Route path="/UpdateVehicle/:id"  component={UpdateVehicleForm} />
       <Route path="/VehicleManagement" exact component={VehicleManagementTable} />
-      <Route path="/VehicleRepair" exact component={RepairVehicleForm} />
-      <Route path="/VehicleDelete" exact component={VehicleDeleteForm} />
 
 
-      <Route path="/equipment" exact component ={EquipmentList}/>
+    <Route path="/equipment" exact component ={EquipmentList}/>
     <Route path="/editEquipment/:id" component ={EditEquipment}/>
     <Route path="/repedit/:id" component={EditRepair}/>
     <Route path="/createEquipment" component={CreateEquipment}/>
