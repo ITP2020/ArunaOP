@@ -47,7 +47,7 @@ export default class EditSupplier extends Component {
 
   onChangeAddress(e) {
     this.setState({
-      itemName: e.target.value,
+      address: e.target.value,
     });
   }
 
@@ -175,7 +175,7 @@ export default class EditSupplier extends Component {
         <Card className="addcard">
           <div className="formdiv">
             <CardContent>
-              <h3>Add Supplier</h3>
+              <h3>Edit Supplier</h3>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <label>Supplier name</label>

@@ -49,6 +49,7 @@ export default function InsertVehicleForm() {
                 id="plateNo"
                 aria-describedby="emailHelp"
                 placeholder="Enter Plate No"
+                value={plateNo}
                 onChange={(e) => setPlateNo(e.target.value)}
                 />
             </div>
@@ -59,6 +60,7 @@ export default function InsertVehicleForm() {
                 class="form-control"
                 id="vehicle"
                 placeholder="Enter Model"
+                value={vehicle}
                 onChange={(e) => setVehicle(e.target.value)}
                 />
             </div>
@@ -70,6 +72,7 @@ export default function InsertVehicleForm() {
                 class="form-control"
                 id="vehicle"
                 placeholder="Enter Brand"
+                value={brand}
                 onChange={(e) => setBrand(e.target.value)}
                 />
             </div>
@@ -81,6 +84,7 @@ export default function InsertVehicleForm() {
                 class="form-control"
                 id="vehicle"
                 placeholder="Enter Year"
+                value={year}
                 onChange={(e) => setYear(e.target.value)}
                 />
             </div>
@@ -89,6 +93,7 @@ export default function InsertVehicleForm() {
                 <label for="brand">Type</label>
                 <select
                 class="form-control"
+                value={type}
                 onChange={(e) => setType(e.target.value)}
                 >
                 <option value="Car">Car</option>
@@ -104,6 +109,7 @@ export default function InsertVehicleForm() {
                 class="form-control"
                 id="vehicle"
                 placeholder="Enter Purchase Date"
+                value={purchaseDate}
                 onChange={(e) => setPurchaseDate(e.target.value)}
                 />
             </div>
@@ -113,7 +119,15 @@ export default function InsertVehicleForm() {
             </button>
 
             <div className="form-group">
-                <button className="demo" onClick={() => this.demoClicked()}>
+                <button className="demo" onClick={(e) => {
+                    e.preventDefault();
+                    setPlateNo("AAA-3825");
+                    setBrand("Toyota");
+                    setVehicle("Dolphin");
+                    setPurchaseDate("2015-03-13");
+                    setType("Van");
+                    setYear("2012");
+                }}>
                 Demo
                 </button>
             </div>
