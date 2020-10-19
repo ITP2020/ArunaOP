@@ -94,26 +94,37 @@ export default function AssignVehicleForm(props) {
             <div class="form-group">
                 <label for="selectoption">Select Driver</label>
                 <br />
-                <input type="text" class="form-control" id="location" placeholder="Enter a Driver" onChange={(e) => setDriver(e.target.value)} />
+                <input type="text" class="form-control" id="location" placeholder="Enter a Driver" value={Driver} onChange={(e) => setDriver(e.target.value)} />
             </div>
 
             <div class="form-group">
                 <label for="selectoption">Select Vehicle</label>
                 <br />
-                <input type="text" class="form-control" id="location" placeholder="Enter a Vehicle" onChange={(e) => setVehicle(e.target.value)} />
+                <input type="text" class="form-control" id="location" placeholder="Enter a Vehicle" value={Vehicle} onChange={(e) => setVehicle(e.target.value)} />
             </div>
 
             <div class="form-group">
                 <label for="brand">Select Time</label>
-                <input type="time" class="form-control" id="city" placeholder="" onChange={(e) => setDeleveryTime(e.target.value)}/>
+                <input type="time" class="form-control" id="city" placeholder="" value={DeleveryTime} onChange={(e) => setDeleveryTime(e.target.value)}/>
             </div>
 
             <div class="form-group">
                 <label for="brand">Select Date</label>
-                <input type="date" class="form-control" id="city" placeholder="" onChange={(e) => setDeleveryDate(e.target.value)} />
+                <input type="date" class="form-control" id="city" placeholder="" value={DeleveryDate} onChange={(e) => setDeleveryDate(e.target.value)} />
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
+            <div className="form-group">
+                <button className="demo" onClick={(e) => {
+                    e.preventDefault();
+                    setVehicle("Dolphin");
+                    setDriver("Rehan Fernando")
+                    setDeleveryDate("2015-03-13");
+                    setDeleveryTime("05:30 PM")
+                }}>
+                Demo
+                </button>
+            </div>
 
             </form>
         </div>
